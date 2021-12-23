@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class PeriodTest {
     @Test
-    public void When_MakePeriodValid_Expect_ReturnValidInstance() {
+    public void When_CreateValidPeriod_Expect_ReturnValidInstance() {
         Period period;
 
         period = Period.createPeriodOrNull(UnitOfTime.HOUR, 1);
@@ -30,25 +30,7 @@ public class PeriodTest {
 
 
     @Test
-    public void When_MakeTooLongPeriod_Expect_ReturnNull() {
-        Period period;
-
-        period = Period.createPeriodOrNull(UnitOfTime.HOUR, Integer.MAX_VALUE);
-        assert period == null;
-
-        period = Period.createPeriodOrNull(UnitOfTime.DAY, Integer.MAX_VALUE);
-        assert period == null;
-
-        period = Period.createPeriodOrNull(UnitOfTime.WEEK, Integer.MAX_VALUE);
-        assert period == null;
-
-        period = Period.createPeriodOrNull(UnitOfTime.MONTH, Integer.MAX_VALUE);
-        assert period == null;
-    }
-
-
-    @Test
-    public void When_MakePeriodWithNotPositiveTimes_Expect_Return() {
+    public void When_MakePeriodWithNotPositiveTimes_Expect_ReturnNull() {
         Period period;
 
         period = Period.createPeriodOrNull(UnitOfTime.HOUR, 0);
