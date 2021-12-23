@@ -4,7 +4,7 @@ public enum UnitOfTime {
     HOUR(3600),
     DAY(86400),
     WEEK(604800),
-    MONTH(18144000);    // 30일 기준으로 환산함
+    MONTH(2592000);    // 30일 기준으로 환산함
 
     private final int seconds;
 
