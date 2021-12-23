@@ -16,7 +16,7 @@ public class Period {
          * 2) getPeriodInMillis 함수 호출 시 오버플로우가 발생하는 경우
          */
 
-        if (times <= 0 || unitOfTime.getSeconds() > Long.MAX_VALUE / (times * 1000)) {
+        if (times <= 0 || unitOfTime.getSeconds() > Long.MAX_VALUE / (times * (long) UnitOfTime.MILLIS_PER_SECOND)) {
             return null;
         }
 
@@ -24,10 +24,10 @@ public class Period {
     }
 
     public long getPeriodInSeconds() {
-        return unitOfTime.getSeconds() * times;
+        return (long) unitOfTime.getSeconds() * times;
     }
 
     public long getPeriodInMillis() {
-        return unitOfTime.getSeconds() * UnitOfTime.MILLIS_PER_SECOND * times;
+        return (long) unitOfTime.getSeconds() * UnitOfTime.MILLIS_PER_SECOND * times;
     }
 }

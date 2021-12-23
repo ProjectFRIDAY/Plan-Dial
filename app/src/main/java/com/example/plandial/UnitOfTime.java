@@ -16,7 +16,7 @@ public enum UnitOfTime {
     }
 
     public long getMillis() {
-        return this.seconds * MILLIS_PER_SECOND;
+        return (long) this.seconds * MILLIS_PER_SECOND;
     }
 
     public int getSeconds() {
