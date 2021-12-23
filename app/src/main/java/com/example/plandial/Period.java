@@ -12,7 +12,7 @@ public class Period {
     public static Period createPeriodOrNull(UnitOfTime unitOfTime, int times) {
         /*
          * 다음의 경우에 유효하지 않은 객체 생성으로 판단하고 null을 반환함
-         * 1) times가 0보다 작은 경우
+         * 1) times가 0 이하인 경우
          * 2) getPeriodInMillis 함수 호출 시 오버플로우가 발생하는 경우
          */
 
