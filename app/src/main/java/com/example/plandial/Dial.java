@@ -1,7 +1,5 @@
 package com.example.plandial;
 
-import android.graphics.drawable.Icon;
-
 import java.time.OffsetDateTime;
 
 public class Dial {
