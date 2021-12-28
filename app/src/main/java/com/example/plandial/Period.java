@@ -30,4 +30,28 @@ public class Period {
     public long getPeriodInMillis() {
         return (long) unitOfTime.getSeconds() * UnitOfTime.MILLIS_PER_SECOND * times;
     }
+
+    @Override
+    public int hashCode() {
+        // { unitOfTime, times } 에서 { HOUR, 24 } 와 { DAY, 1 } 은 다름.
+        int result = 17;
+        result = 31 * result + unitOfTime.getSeconds();
+        result = 31 * result + times;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || !(obj instanceof Period) || this.hashCode() != obj.hashCode()) {
+            return false;
+        }
+
+        Period other = (Period) obj;
+        return this.unitOfTime == other.unitOfTime && this.times == other.times;
+    }
+
 }
