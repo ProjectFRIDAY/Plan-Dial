@@ -6,7 +6,7 @@ import java.time.OffsetDateTime;
 
 public class Dial {
     private String name;
-    private Icon icon;
+    private String iconPath;
     private Period period;
     private OffsetDateTime startDateTime;
 
@@ -16,7 +16,7 @@ public class Dial {
         assert startDateTime != null;
 
         this.name = name;
-        this.icon = null;   // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
+        this.iconPath = "icon/outline_shopping_cart_black_24dp.png";  // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
         this.period = period;
         this.startDateTime = startDateTime;
     }
@@ -35,8 +35,8 @@ public class Dial {
         // 아이콘 자동 선택을 통해 아이콘 변경
     }
 
-    public Icon getIcon() {
-        return this.icon;
+    public String getIconPath() {
+        return this.iconPath;
     }
 
     public void setPeriod(final Period period) {
@@ -53,5 +53,32 @@ public class Dial {
 
     public OffsetDateTime getEndDateTime() {
         return startDateTime.plusSeconds(period.getPeriodInSeconds());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + iconPath.hashCode();
+        result = 31 * result + period.hashCode();
+        result = 31 * result + startDateTime.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || !(obj instanceof Dial) || this.hashCode() != obj.hashCode()) {
+            return false;
+        }
+
+        Dial other = (Dial) obj;
+        return this.name.equals(other.name)
+                && this.iconPath.equals(other.iconPath)
+                && this.period.equals(other.period)
+                && this.startDateTime.equals(other.startDateTime);
     }
 }
