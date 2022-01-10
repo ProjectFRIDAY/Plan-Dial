@@ -72,7 +72,7 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
                 mCurrentDegree = lastDegree;
 
                 Vibrator vibrator = (Vibrator) this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                vibrator.vibrate(5); // 0.005초간 진동
+                vibrator.vibrate(4); // 0.004초간 진동
 
                 break;
             }
