@@ -1,6 +1,7 @@
 package com.example.plandial;
 
 import android.content.Context;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.Pair;
 import android.view.MotionEvent;
@@ -70,11 +71,11 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
                 rotate(mCurrentDegree, lastDegree, MAGNET_STRENGTH);
                 mCurrentDegree = lastDegree;
 
+                Vibrator vibrator = (Vibrator) this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(5); // 0.005초간 진동
+
                 break;
             }
-            default:
-                assert (false);
-                break;
         }
 
         lastTouchLocation = new Pair<>(x, y);
