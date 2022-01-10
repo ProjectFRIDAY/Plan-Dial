@@ -23,7 +23,8 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
         super(context, attrs);
     }
 
-    public void reset() {
+    public void reset(final long duration) {
+        rotate(mCurrentDegree, INITIAL_DEGREE, duration);
         this.mCurrentDegree = INITIAL_DEGREE;
     }
 
@@ -59,7 +60,7 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
         return true;
     }
 
-    private void rotate(double fromDegree, double toDegree) {
+    private void rotate(final double fromDegree, final double toDegree, final long duration) {
         final RotateAnimation rotateAnimation = new RotateAnimation(
                 (float) fromDegree,
                 (float) toDegree,
@@ -68,7 +69,7 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
                 Animation.RELATIVE_TO_SELF,
                 0.5f);
 
-        rotateAnimation.setDuration(0);
+        rotateAnimation.setDuration(duration);
         rotateAnimation.setFillAfter(true);
 
         this.startAnimation(rotateAnimation);
