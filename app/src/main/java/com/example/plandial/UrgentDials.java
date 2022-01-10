@@ -9,7 +9,7 @@ public class UrgentDials {
     private static final ArrayList<Category> categories = new ArrayList<>();
 
     private UrgentDials() {
-        //category, dial 불러옴.
+        //category, dial를 DB에서 불러옴.
     }
 
     public void getUrgentDials(){
