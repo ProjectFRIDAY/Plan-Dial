@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class UrgentDials {
-    private static final int URGENT_BOUND = 3600;
+    private static final int URGENT_BOUND = 3601;
 
     public UrgentDials() {}
     
