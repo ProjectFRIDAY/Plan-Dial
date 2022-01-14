@@ -29,19 +29,21 @@ public class IconRecommendation {
     private static final ArrayList<String> iconFileNames = new ArrayList<>();
     private static final ArrayList<ArrayList<Double>> iconVectors = new ArrayList<>();
 
+    private static final String WORD_VECTOR_FILE = "datas/word_vectors.csv";
+    private static final String ICON_VECTOR_FILE = "datas/icon_vectors.json";
+    private static final String UNKNOWN_IMAGE = "unknown";
+    private static final String IMAGE_EXTENSION = ".png";
+
+
     public IconRecommendation(Context context) {
         // 최초 1회 -> 파일 준비
-        if (!isReady) {
-            if (getIconVectors(context) && getWordVectors(context)) {
-                isReady = true;
-            }
-        }
+        if (!isReady && getIconVectors(context) && getWordVectors(context)) isReady = true;
     }
 
     private boolean getWordVectors(Context context) {
         // Word2Vec 모델 준비
         try {
-            InputStream inputStream = context.getAssets().open("jsons/word_vectors.csv");
+            InputStream inputStream = context.getAssets().open(WORD_VECTOR_FILE);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             CSVReader read = new CSVReader(reader);
 
@@ -61,7 +63,7 @@ public class IconRecommendation {
     private boolean getIconVectors(Context context) {
         // 아이콘 벡터값 준비
         try {
-            InputStream inputStream = context.getAssets().open("jsons/icon_vectors.json");
+            InputStream inputStream = context.getAssets().open(ICON_VECTOR_FILE);
             int fileSize = inputStream.available();
 
             byte[] buffer = new byte[fileSize];
@@ -74,7 +76,7 @@ public class IconRecommendation {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject iconObject = jsonArray.getJSONObject(i);
-                iconFileNames.add(iconObject.getString("icon") + ".png");
+                iconFileNames.add(iconObject.getString("icon") + IMAGE_EXTENSION);
 
                 ArrayList<Double> vectorValues = new ArrayList<>();
                 JSONArray vectorArray = iconObject.getJSONArray("vector");
@@ -138,7 +140,7 @@ public class IconRecommendation {
             return iconFileNames.get(targetIndex);
 
         } catch (Exception e) {
-            return "unknown.png";
+            return UNKNOWN_IMAGE + IMAGE_EXTENSION;
         }
     }
 
