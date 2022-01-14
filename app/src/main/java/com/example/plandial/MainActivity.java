@@ -6,26 +6,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import java.time.OffsetDateTime;
-
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView= findViewById(R.id.recyclerview);
-    SpinnableImageView spinnableImageView;
-
-
+    RecyclerView mRecyclerView;
+    SpinnableImageView mSpinnableImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spinnableImageView = findViewById(R.id.main_dial);
+        mSpinnableImageView = (SpinnableImageView) findViewById(R.id.main_dial);
+        mRecyclerView = (RecyclerView) findViewById(R.id.urgent_dials);
 
+        {
+            // urgent dial 표시 설정
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            mRecyclerView.setLayoutManager(layoutManager);
 
-
+            UrgentDialAdapter adapter = new UrgentDialAdapter();
+            mRecyclerView.setAdapter(adapter);
+        }
     }
 }

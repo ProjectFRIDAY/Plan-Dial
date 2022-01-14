@@ -3,6 +3,7 @@ package com.example.plandial;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,34 +14,27 @@ import java.util.ArrayList;
 
 
 public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.ItemViewHolder> {
-
-    private ArrayList<Dial> urgentDialList = new ArrayList<>();
+    private static final int URGENT_BOUND = 3600;
+    private ArrayList<Dial> urgentDialList;
+    private DialManager mDialManager = DialManager.getInstance();
 
     public UrgentDialAdapter() {
-        DialManager dm = DialManager.getInstance();
-
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 12, 18, 00, 00, 0, ZoneOffset.ofHours(9)));
-
-        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 12, 18, 01, 00, 0, ZoneOffset.ofHours(9)));
-
+        //region test code
+        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 02, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 01, 00, 0, ZoneOffset.ofHours(9)));
         Category category = new Category("큐 테스트");
-
         category.addDial(dial1);
-
         category.addDial(dial2);
+        mDialManager.addCategory(category);
+        //endregion
 
-        dm.addCategory(category);
-
-        this.urgentDialList = dm.getUrgentDials(3600);
-
+        this.urgentDialList = mDialManager.getUrgentDials(URGENT_BOUND);
     }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // LayoutInflater를 이용하여 전 단계에서 만들었던 item.xml을 inflate 시킵니다.
-        // return 인자는 ViewHolder 입니다.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_urgentdial, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.urgent_dial, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -52,32 +46,29 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
 
     @Override
     public int getItemCount() {
-        // RecyclerView의 총 개수 입니다.
         return urgentDialList.size();
     }
 
-    void addItem(Dial dial) {
-        // 외부에서 dial을 추가시킬 함수입니다. 사용할 일이 없을 것입니다.
-        urgentDialList.add(dial);
+    public void syncDials() {
+        // urgentDial을 DialManager와 동기화하는 함수 (개선 필요)
+        this.urgentDialList = mDialManager.getUrgentDials(URGENT_BOUND);
     }
 
-    // RecyclerView의 핵심인 ViewHolder 입니다.
-    // 여기서 subView를 setting 해줍니다.
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textView1;
-        private TextView textView2;
+        private ImageButton dialIcon;
+        private TextView dialName;
 
         ItemViewHolder(View itemView) {
             super(itemView);
 
-            textView1 = itemView.findViewById(R.id.textView1);
-            textView2 = itemView.findViewById(R.id.textView2);
+            dialIcon = itemView.findViewById(R.id.dial_icon);
+            dialName = itemView.findViewById(R.id.dial_name);
         }
 
         void onBind(Dial dial) {
-            textView1.setText(dial.getName());
-            textView2.setText(dial.getName());
+            dialIcon.setImageResource(R.drawable.ic_launcher_foreground);
+            dialName.setText(dial.getName());
         }
     }
 }

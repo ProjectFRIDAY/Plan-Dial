@@ -8,9 +8,6 @@ import java.util.Comparator;
 import android.util.Log;
 import android.util.Pair;
 
-import com.example.plandial.Category;
-import com.example.plandial.Dial;
-
 public class DialManager {
     private static final DialManager dialManager = new DialManager();
     private static final ArrayList<Category> categories = new ArrayList<>();
@@ -78,50 +75,50 @@ public class DialManager {
     }
 
     public ArrayList<Dial> getUrgentDials(long urgentBound) {
-            ArrayList<Pair<Long, Dial>> urgentDials = new ArrayList<>();
+        ArrayList<Pair<Long, Dial>> urgentDials = new ArrayList<>();
 
-            DialManager dm = DialManager.getInstance();
-            int categoryCount = dm.getCategoryCount();
+        DialManager dm = DialManager.getInstance();
+        int categoryCount = dm.getCategoryCount();
 
-            for (int i = 0; i < categoryCount; ++i) {
-                Category category = dm.getCategoryByIndex(i);
-                int dialCount = category.getDialCount();
+        for (int i = 0; i < categoryCount; ++i) {
+            Category category = dm.getCategoryByIndex(i);
+            int dialCount = category.getDialCount();
 
-                for (int j = 0; j < dialCount; ++j) {
-                    Dial dial = category.getDialByIndex(j);
+            for (int j = 0; j < dialCount; ++j) {
+                Dial dial = category.getDialByIndex(j);
 
-                    // 남은 시간 구하기
-                    OffsetDateTime endDateTime = dial.getEndDateTime();
-                    long leftTime = OffsetDateTime.now().until(endDateTime, ChronoUnit.SECONDS);
-                    Log.d("queue test", String.format("left time : %d", leftTime));
+                // 남은 시간 구하기
+                OffsetDateTime endDateTime = dial.getEndDateTime();
+                long leftTime = OffsetDateTime.now().until(endDateTime, ChronoUnit.SECONDS);
+                Log.d("queue test", String.format("left time : %d", leftTime));
 
-                    if (leftTime < urgentBound) {
-                        urgentDials.add(new Pair<>(leftTime, dial));
-                    }
+                if (0 <= leftTime && leftTime < urgentBound) {
+                    urgentDials.add(new Pair<>(leftTime, dial));
                 }
             }
-
-            urgentDials.sort(new Comparator<Pair<Long, Dial>>() {
-                @Override
-                public int compare(Pair<Long, Dial> lhs, Pair<Long, Dial> rhs) {
-                    if (lhs.first < rhs.first) {
-                        return -1;
-                    } else if (lhs.first > rhs.first) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                }
-            });
-
-            ArrayList<Dial> result = new ArrayList<Dial>();
-
-            for (int i = 0; i < urgentDials.size(); ++i) {
-                result.add(urgentDials.get(i).second);
-            }
-
-            return result;
         }
+
+        urgentDials.sort(new Comparator<Pair<Long, Dial>>() {
+            @Override
+            public int compare(Pair<Long, Dial> lhs, Pair<Long, Dial> rhs) {
+                if (lhs.first < rhs.first) {
+                    return -1;
+                } else if (lhs.first > rhs.first) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        ArrayList<Dial> result = new ArrayList<Dial>();
+
+        for (int i = 0; i < urgentDials.size(); ++i) {
+            result.add(urgentDials.get(i).second);
+        }
+
+        return result;
+    }
 
     private static void saveContent() {
         // 현재 정보를 로컬 DB에 저장하도록 구현해야 함.
