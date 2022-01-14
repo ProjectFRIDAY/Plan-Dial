@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,11 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
 
     public UrgentDialAdapter() {
         //region test code
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 02, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 01, 00, 0, ZoneOffset.ofHours(9)));
+        Dial diall1 = new Dial("빨래", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 14, 21, 00, 00, 0, ZoneOffset.ofHours(9)));
+        Dial diall2= new Dial("청소", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 14, 21, 00, 00, 0, ZoneOffset.ofHours(9)));
         Category category = new Category("큐 테스트");
-        category.addDial(dial1);
-        category.addDial(dial2);
+        category.addDial(diall1);
+        category.addDial(diall2);
         mDialManager.addCategory(category);
         //endregion
 
