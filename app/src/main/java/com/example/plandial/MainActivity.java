@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
             GridLayoutManager gridlayoutManager = new GridLayoutManager(this,3);
             categoryDialView.setLayoutManager(gridlayoutManager);
 
-            CategoryDialAdapter gridadapter = new CategoryDialAdapter();
-            categoryDialView.setAdapter(gridadapter);
+            CategoryDialAdapter gridAdapter = new CategoryDialAdapter();
+            categoryDialView.setAdapter(gridAdapter);
 
         }
     }
