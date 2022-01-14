@@ -34,6 +34,10 @@ public class IconRecommendation {
     private static final String UNKNOWN_IMAGE = "unknown";
     private static final String IMAGE_EXTENSION = ".png";
 
+    private static final String JSON_ENTIRE_KEY = "data";
+    private static final String JSON_ICON_KEY = "icon";
+    private static final String JSON_VECTOR_KEY = "vector";
+
 
     public IconRecommendation(Context context) {
         // 최초 1회 -> 파일 준비
@@ -72,14 +76,14 @@ public class IconRecommendation {
 
             String json = new String(buffer, StandardCharsets.UTF_8);
             JSONObject jsonObject = new JSONObject(json);
-            JSONArray jsonArray = jsonObject.getJSONArray("data");
+            JSONArray jsonArray = jsonObject.getJSONArray(JSON_ENTIRE_KEY);
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject iconObject = jsonArray.getJSONObject(i);
-                iconFileNames.add(iconObject.getString("icon") + IMAGE_EXTENSION);
+                iconFileNames.add(iconObject.getString(JSON_ICON_KEY) + IMAGE_EXTENSION);
 
                 ArrayList<Double> vectorValues = new ArrayList<>();
-                JSONArray vectorArray = iconObject.getJSONArray("vector");
+                JSONArray vectorArray = iconObject.getJSONArray(JSON_VECTOR_KEY);
                 for (int j = 0; j < vectorArray.length(); j++) {
                     Double value = vectorArray.getDouble(j);
                     vectorValues.add(value);
