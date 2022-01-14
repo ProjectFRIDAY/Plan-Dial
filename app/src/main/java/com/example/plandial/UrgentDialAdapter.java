@@ -21,8 +21,8 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
 
     public UrgentDialAdapter() {
         //region test code
-        Dial diall1 = new Dial("빨래", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 14, 21, 00, 00, 0, ZoneOffset.ofHours(9)));
-        Dial diall2= new Dial("청소", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 14, 21, 00, 00, 0, ZoneOffset.ofHours(9)));
+        Dial diall1 = new Dial("빨래", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 14, 22, 00, 00, 0, ZoneOffset.ofHours(9)));
+        Dial diall2= new Dial("청소", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 14, 22, 00, 00, 0, ZoneOffset.ofHours(9)));
         Category category = new Category("큐 테스트");
         category.addDial(diall1);
         category.addDial(diall2);
