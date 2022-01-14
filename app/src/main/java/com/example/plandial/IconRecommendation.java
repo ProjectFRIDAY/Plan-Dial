@@ -1,7 +1,6 @@
 package com.example.plandial;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.opencsv.CSVReader;
 
@@ -25,16 +24,16 @@ if(IconRecommendation.isReady()) String result = IconRecommendation.getIconByNam
  */
 
 public class IconRecommendation {
-    private static boolean sIsReady = false;
-    private static final HashMap<String, ArrayList<String>> sWordVectors = new HashMap<>();
-    private static final ArrayList<String> sIconFileNames = new ArrayList<>();
-    private static final ArrayList<ArrayList<Double>> sIconVectors = new ArrayList<>();
+    private static boolean isReady = false;
+    private static final HashMap<String, ArrayList<String>> wordVectors = new HashMap<>();
+    private static final ArrayList<String> iconFileNames = new ArrayList<>();
+    private static final ArrayList<ArrayList<Double>> iconVectors = new ArrayList<>();
 
     public IconRecommendation(Context context) {
         // 최초 1회 -> 파일 준비
-        if (!sIsReady) {
+        if (!isReady) {
             if (getIconVectors(context) && getWordVectors(context)) {
-                sIsReady = true;
+                isReady = true;
             }
         }
     }
@@ -50,7 +49,7 @@ public class IconRecommendation {
             ArrayList<String> tmp;
             while ((record = read.readNext()) != null) {
                 tmp = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(record, 1, record.length)));
-                sWordVectors.put(record[0], tmp);
+                wordVectors.put(record[0], tmp);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,7 +74,7 @@ public class IconRecommendation {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject iconObject = jsonArray.getJSONObject(i);
-                sIconFileNames.add(iconObject.getString("icon") + ".png");
+                iconFileNames.add(iconObject.getString("icon") + ".png");
 
                 ArrayList<Double> vectorValues = new ArrayList<>();
                 JSONArray vectorArray = iconObject.getJSONArray("vector");
@@ -83,7 +82,7 @@ public class IconRecommendation {
                     Double value = vectorArray.getDouble(j);
                     vectorValues.add(value);
                 }
-                sIconVectors.add(vectorValues);
+                iconVectors.add(vectorValues);
             }
 
         } catch (IOException | JSONException e) {
@@ -96,7 +95,7 @@ public class IconRecommendation {
     private double dotOperation(final ArrayList<String> wordVector, final ArrayList<Double> iconVector) {
         // 내적
         double result = 0.0d;
-        for (int i = 0; i < sIconVectors.size(); i++) {
+        for (int i = 0; i < iconVectors.size(); i++) {
             result += Double.parseDouble(wordVector.get(i)) * iconVector.get(i);
         }
         return result;
@@ -105,7 +104,7 @@ public class IconRecommendation {
     private double normOperationString(final ArrayList<String> wordVector) {
         // 노름
         double result = 0.0d;
-        for (int i = 0; i < sIconVectors.size(); i++) {
+        for (int i = 0; i < iconVectors.size(); i++) {
             double value = Double.parseDouble(wordVector.get(i));
             result += value * value;
         }
@@ -115,7 +114,7 @@ public class IconRecommendation {
     private double normOperation(final ArrayList<Double> iconVector) {
         // 노름
         double result = 0.0d;
-        for (int i = 0; i < sIconVectors.size(); i++) {
+        for (int i = 0; i < iconVectors.size(); i++) {
             result += iconVector.get(i) * iconVector.get(i);
         }
         return result;
@@ -123,12 +122,12 @@ public class IconRecommendation {
 
     public String getIconByName(String keyword) {
         try {
-            ArrayList<String> wordVector = sWordVectors.get(keyword);
+            ArrayList<String> wordVector = wordVectors.get(keyword);
             int targetIndex = -1;
             double targetValue = -1;
 
-            for (int i = 0; i < sIconVectors.size(); i++) {
-                ArrayList<Double> iconVector = sIconVectors.get(i);
+            for (int i = 0; i < iconVectors.size(); i++) {
+                ArrayList<Double> iconVector = iconVectors.get(i);
                 double value = dotOperation(wordVector, iconVector) / (Math.sqrt(normOperationString(wordVector)) * Math.sqrt(normOperation(iconVector)));
 
                 if (value > targetValue) {
@@ -136,7 +135,7 @@ public class IconRecommendation {
                     targetIndex = i;
                 }
             }
-            return sIconFileNames.get(targetIndex);
+            return iconFileNames.get(targetIndex);
 
         } catch (Exception e) {
             return "unknown.png";
@@ -144,6 +143,6 @@ public class IconRecommendation {
     }
 
     public boolean getIsReady() {
-        return sIsReady;
+        return isReady;
     }
 }
