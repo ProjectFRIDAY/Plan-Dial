@@ -19,8 +19,9 @@ import java.util.HashMap;
 
 /*
 사용법
-IconRecommendation IconRecommendation = new IconRecommendation(getApplicationContext());
-if(IconRecommendation.isReady()) String result = IconRecommendation.getIconByName(kword);
+Context ctx = getApplicationContext();
+IconRecommendation IconRecommendation = new IconRecommendation(ctx);
+if(IconRecommendation.getIsReady()) int result = IconRecommendation.getIconByName(ctx, kword);
  */
 
 public class IconRecommendation {
@@ -31,8 +32,8 @@ public class IconRecommendation {
 
     private static final String WORD_VECTOR_FILE = "datas/word_vectors.csv";
     private static final String ICON_VECTOR_FILE = "datas/icon_vectors.json";
-    private static final String UNKNOWN_IMAGE = "unknown";
-    private static final String IMAGE_EXTENSION = ".png";
+    private static final int UNKNOWN_IMAGE = R.drawable.baseline_question_mark_black;
+    private static final String IMAGE_EXTENSION = ""; // 예비용
 
     private static final String JSON_ENTIRE_KEY = "data";
     private static final String JSON_ICON_KEY = "icon";
@@ -126,7 +127,7 @@ public class IconRecommendation {
         return result;
     }
 
-    public String getIconByName(String keyword) {
+    public int getIconByName(Context context, String keyword) {
         try {
             ArrayList<String> wordVector = wordVectors.get(keyword);
             int targetIndex = -1;
@@ -141,10 +142,12 @@ public class IconRecommendation {
                     targetIndex = i;
                 }
             }
-            return iconFileNames.get(targetIndex);
+
+            String iconName = iconFileNames.get(targetIndex);
+            return context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
 
         } catch (Exception e) {
-            return UNKNOWN_IMAGE + IMAGE_EXTENSION;
+            return UNKNOWN_IMAGE;
         }
     }
 

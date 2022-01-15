@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 
 public class Dial {
     private String name;
-    private String iconPath;
+    private int icon;
     private Period period;
     private OffsetDateTime startDateTime;
 
@@ -14,7 +14,7 @@ public class Dial {
         assert startDateTime != null;
 
         this.name = name;
-        this.iconPath = "icon/outline_shopping_cart_black_24dp.png";  // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
+        this.icon = R.drawable.baseline_question_mark_black;  // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
         this.period = period;
         this.startDateTime = startDateTime;
     }
@@ -33,8 +33,8 @@ public class Dial {
         // 아이콘 자동 선택을 통해 아이콘 변경
     }
 
-    public String getIconPath() {
-        return this.iconPath;
+    public int getIcon() {
+        return this.icon;
     }
 
     public void setPeriod(final Period period) {
@@ -57,7 +57,7 @@ public class Dial {
     public int hashCode() {
         int result = 17;
         result = 31 * result + name.hashCode();
-        result = 31 * result + iconPath.hashCode();
+        result = 31 * result + icon;
         result = 31 * result + period.hashCode();
         result = 31 * result + startDateTime.hashCode();
         return result;
@@ -75,7 +75,7 @@ public class Dial {
 
         Dial other = (Dial) obj;
         return this.name.equals(other.name)
-                && this.iconPath.equals(other.iconPath)
+                && this.icon == other.icon
                 && this.period.equals(other.period)
                 && this.startDateTime.equals(other.startDateTime);
     }
