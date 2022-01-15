@@ -44,6 +44,8 @@ public class SpinnableDialView extends SpinnableImageView {
                     + (int) ((currentDegree % DEGREE_BETWEEN_CATEGORY) / (DEGREE_BETWEEN_CATEGORY / 2));
 
             this.selectedCategoryIndex = (categoryIndex - (int) (INITIAL_DEGREE / DEGREE_BETWEEN_CATEGORY) + 12) % 12;
+            CategoryDialAdapter.setCategory(dialManager.getCategoryByIndex(this.selectedCategoryIndex));
+
             double lastDegree = categoryIndex * DEGREE_BETWEEN_CATEGORY;
             super.rotate(currentDegree, lastDegree, MAGNET_STRENGTH);
             currentDegree = lastDegree;

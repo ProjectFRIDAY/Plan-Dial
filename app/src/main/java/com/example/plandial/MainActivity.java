@@ -10,6 +10,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +25,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //region test code
+        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 02, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 01, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial3 = new Dial("공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 02, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial4 = new Dial("코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 02, 00, 0, ZoneOffset.ofHours(9)));
+        Category category1 = new Category("나는 바보다");
+        category1.addDial(dial1);
+        category1.addDial(dial2);
+        category1.addDial(dial3);
+        category1.addDial(dial4);
+        Category category2 = new Category("나는 바보다2");
+        category1.addDial(dial1);
+        category1.addDial(dial2);
+        DialManager.getInstance().addCategory(category1);
+        DialManager.getInstance().addCategory(category2);
+        //endregion
 
         urgentDialView = findViewById(R.id.urgent_dials);
         categoryDialView = findViewById(R.id.category_dials);

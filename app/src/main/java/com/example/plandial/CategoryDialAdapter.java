@@ -18,7 +18,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 
 public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapter.ItemViewHolder> {
-    private Category category;
+    private static Category category;
     private DialManager mDialManager = DialManager.getInstance();
 
     public CategoryDialAdapter() {
@@ -46,8 +46,11 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
     }
 
     //카테고리 받는 메서드 선언
-    public void setCategory(Category category) {
-        this.category = category;
+    public static void setCategory(Category category) {
+        if (category != null) {
+            CategoryDialAdapter.category = category;
+            Log.d("test", category.getName());
+        }
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
