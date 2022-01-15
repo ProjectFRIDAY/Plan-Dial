@@ -16,6 +16,12 @@ public class CategoryTable {
 
     private String categoryColor;  //카테고리 color code 저장
 
+    // 인스턴스 생성할 때 값도 같이 입력
+    public CategoryTable(String categoryName, String categoryToTemplate, String categoryColor) {
+        this.categoryName = categoryName;
+        this.categoryToTemplate = categoryToTemplate;
+        this.categoryColor = categoryColor;
+    }
 
     //getter & setter
     public int getId() {

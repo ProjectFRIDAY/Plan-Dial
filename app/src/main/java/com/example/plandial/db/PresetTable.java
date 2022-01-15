@@ -18,8 +18,16 @@ public class PresetTable {
 
     private String presetTime; //프리셋의 기간을 저장
 
-    private String presetIcon; //❗데이터베이스에 아이콘 연결 방법 조사후 수정
+    private String presetIcon; // 아이콘의 아이디를 저장함. (아이디의 자료형은 아직 미정)
 
+    // 인스턴스 생성할 때 값도 같이 입력
+    public PresetTable(String presetName, String templateId, String presetTimeUnit, String presetTime, String presetIcon) {
+        this.presetName = presetName;
+        this.templateId = templateId;
+        this.presetTimeUnit = presetTimeUnit;
+        this.presetTime = presetTime;
+        this.presetIcon = presetIcon;
+    }
 
     //getter & setter
     public int getId() {
