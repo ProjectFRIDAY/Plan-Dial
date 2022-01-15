@@ -51,7 +51,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/urgent_dials" />
 
-    <ImageView
+    <com.example.plandial.SpinnableDialView
         android:id="@+id/main_dial_slider"
         android:layout_width="205dp"
         android:layout_height="205dp"
