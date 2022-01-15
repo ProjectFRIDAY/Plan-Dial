@@ -60,7 +60,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/main_dial_layout"
-        app:srcCompat="@drawable/main_dial_slider" />
+        app:srcCompat="@drawable/main_dial" />
 
     <ImageView
         android:id="@+id/category_circle_0"
