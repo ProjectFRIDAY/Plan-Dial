@@ -22,20 +22,6 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
     private DialManager mDialManager = DialManager.getInstance();
 
     public CategoryDialAdapter() {
-        //region test code
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 02, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 01, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial("공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 02, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial("코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 13, 14, 02, 00, 0, ZoneOffset.ofHours(9)));
-        Category category1 = new Category("나는 바보다");
-        category1.addDial(dial1);
-        category1.addDial(dial2);
-        category1.addDial(dial3);
-        category1.addDial(dial4);
-        mDialManager.addCategory(category1);
-
-        //endregion
-        this.category = mDialManager.getCategoryByName("나는 바보다");
     }
 
     @NonNull
@@ -53,13 +39,10 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
 
     @Override
     public int getItemCount() {
-        return category.getDialCount();
+        if(category==null){
+            return 0;
+        }return category.getDialCount();
     }
-
-    /*public void syncDials() {
-        // urgentDial을 DialManager와 동기화하는 함수 (개선 필요)
-        this.category = mDialManager.getUrgentDials(URGENT_BOUND);
-    }*/
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
