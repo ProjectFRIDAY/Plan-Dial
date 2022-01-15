@@ -11,7 +11,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/ic_logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +20,7 @@
         android:id="@+id/add_button"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="25dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_plus_category"

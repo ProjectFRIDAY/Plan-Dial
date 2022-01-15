@@ -7,8 +7,8 @@
 
     <ImageButton
         android:id="@+id/dial_icon"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
 
     <TextView
         android:id="@+id/dial_name"
@@ -17,6 +17,6 @@
         android:includeFontPadding="false"
         android:text="name"
         android:textColor="@android:color/darker_gray"
-        android:textSize="13sp" />
+        android:textSize="11sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
