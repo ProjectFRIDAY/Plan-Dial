@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+  
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/urgent_dials"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_dial_layout"
@@ -135,5 +144,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_dials"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
