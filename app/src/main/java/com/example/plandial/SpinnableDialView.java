@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 
 public class SpinnableDialView extends SpinnableImageView {
+
     private static final double DEGREE_BETWEEN_CATEGORY = 30;
     private static final int MAGNET_STRENGTH = 50;
     private static final int VIBRATE_STRENGTH = 4;

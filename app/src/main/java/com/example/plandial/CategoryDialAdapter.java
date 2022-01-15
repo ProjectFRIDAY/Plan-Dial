@@ -39,9 +39,15 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
 
     @Override
     public int getItemCount() {
-        if(category==null){
+        if (category == null) {
             return 0;
-        }return category.getDialCount();
+        }
+        return category.getDialCount();
+    }
+
+    //카테고리 받는 메서드 선언
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
