@@ -10,39 +10,42 @@
         android:id="@+id/imageView"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
         android:src="@drawable/ic_logo"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageButton
         android:id="@+id/imageView2"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginStart="329dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="25dp"
         android:src="@drawable/ic_plus_category"
         android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <View
         android:id="@+id/view"
-        android:layout_width="329dp"
+        android:layout_width="380dp"
         android:layout_height="84dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="153dp"
+        android:foregroundGravity="center"
+        android:layout_marginTop="80dp"
         android:background="@drawable/bg_header_custom"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="205dp"
         android:layout_height="205dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="262dp"
+        android:layout_marginTop="180dp"
         android:src="@drawable/ic_dial_soleplate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -52,7 +55,7 @@
         android:layout_width="205dp"
         android:layout_height="205dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="262dp"
+        android:layout_marginTop="180dp"
         android:src="@drawable/ic_dial_rotate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -60,9 +63,9 @@
     <View
         android:id="@+id/view2"
         android:layout_width="329dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_marginStart="39dp"
-        android:layout_marginTop="495dp"
+        android:layout_marginTop="400dp"
         android:background="@drawable/bg_header_custom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
