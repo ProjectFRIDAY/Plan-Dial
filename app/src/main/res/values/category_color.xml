@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources name="theme_0">
+    <color name="category_color_0">#FFBB86FC</color>
+    <color name="category_color_1">#FF6200EE</color>
+    <color name="category_color_2">#FF3700B3</color>
+    <color name="category_color_3">#FF03DAC5</color>
+    <color name="category_color_4">#FF018786</color>
+    <color name="category_color_5">#FF00FF00</color>
+    <color name="category_color_6">#FFFF00FF</color>
+    <color name="category_color_7">#FF000FF0</color>
+    <color name="category_color_8">#FFFF0000</color>
+    <color name="category_color_9">#FF0FF000</color>
+    <color name="empty_color">#FF303030</color>
+</resources>
