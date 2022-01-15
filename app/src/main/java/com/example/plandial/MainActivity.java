@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import android.widget.GridView;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -24,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-  
-        urgentDialView = (RecyclerView) findViewById(R.id.urgent_dials);
-        categoryDialView = (RecyclerView) findViewById(R.id.category_dials);
+
+        urgentDialView = findViewById(R.id.urgent_dials);
+        categoryDialView = findViewById(R.id.category_dials);
         mainDialSlider = findViewById(R.id.main_dial_slider);
         mainDialLayout = findViewById(R.id.main_dial_layout);
 
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             urgentDialView.setAdapter(adapter);
 
             // category dial 표시 설정
-            GridLayoutManager gridlayoutManager = new GridLayoutManager(this,3);
+            GridLayoutManager gridlayoutManager = new GridLayoutManager(this, 3);
             categoryDialView.setLayoutManager(gridlayoutManager);
 
             CategoryDialAdapter gridAdapter = new CategoryDialAdapter();
