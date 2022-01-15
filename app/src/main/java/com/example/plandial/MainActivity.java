@@ -10,18 +10,19 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    SpinnableDialView mSpinnableDialView;
-    ConstraintLayout mMainDial;
+    SpinnableDialView mainDialSlider;
+    ConstraintLayout mainDialLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSpinnableDialView = findViewById(R.id.main_dial_board);
-        mMainDial = findViewById(R.id.main_dial);
+        mainDialSlider = findViewById(R.id.main_dial_slider);
+        mainDialLayout = findViewById(R.id.main_dial_layout);
 
         {
+            // 메인다이얼 슬라이더 설정 (객체 내부에서 ImageView 등록하도록 개선 필요)
             ArrayList<ImageView> circles = new ArrayList<>();
             circles.add(findViewById(R.id.category_circle_0));
             circles.add(findViewById(R.id.category_circle_1));
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             circles.add(findViewById(R.id.category_circle_7));
             circles.add(findViewById(R.id.category_circle_8));
             circles.add(findViewById(R.id.category_circle_9));
-            mSpinnableDialView.setCircles(this, circles);
+            mainDialSlider.setCircles(this, circles);
         }
     }
 }

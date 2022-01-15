@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImageView {
     protected static final double INITIAL_DEGREE = 180;
 
-    protected double mCurrentDegree = 0;
-    protected Pair<Double, Double> mLastTouchLocation = new Pair<>(0.0, 0.0);
+    protected double currentDegree = 0;
+    protected Pair<Double, Double> lastTouchLocation = new Pair<>(0.0, 0.0);
 
     public SpinnableImageView(Context context) {
         super(context);
@@ -26,8 +26,8 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
     }
 
     public void reset(final long duration) {
-        rotate(mCurrentDegree, INITIAL_DEGREE, duration);
-        this.mCurrentDegree = INITIAL_DEGREE;
+        rotate(currentDegree, INITIAL_DEGREE, duration);
+        this.currentDegree = INITIAL_DEGREE;
     }
 
     @Override
@@ -38,14 +38,14 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
 
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
             // 벡터의 내적을 구해 각도를 판정함.
-            double dotResult = mLastTouchLocation.first * x + mLastTouchLocation.second * y;
-            double theta = Math.toDegrees(Math.acos(dotResult / (Math.sqrt(x * x + y * y) * Math.sqrt(mLastTouchLocation.first * mLastTouchLocation.first + mLastTouchLocation.second * mLastTouchLocation.second))));
+            double dotResult = lastTouchLocation.first * x + lastTouchLocation.second * y;
+            double theta = Math.toDegrees(Math.acos(dotResult / (Math.sqrt(x * x + y * y) * Math.sqrt(lastTouchLocation.first * lastTouchLocation.first + lastTouchLocation.second * lastTouchLocation.second))));
 
             // 벡터의 외적을 구해 회전 방향을 판정함.
-            double crossResult = mLastTouchLocation.first * y - mLastTouchLocation.second * x;
+            double crossResult = lastTouchLocation.first * y - lastTouchLocation.second * x;
             int direction = (crossResult > 0) ? -1 : 1;
 
-            double nextDegree = this.mCurrentDegree + direction * theta;
+            double nextDegree = this.currentDegree + direction * theta;
 
             // nextDegree를 [0, 360)의 값으로 만듦.
             if (nextDegree < 0) {
@@ -54,11 +54,11 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
                 nextDegree %= 360;
             }
 
-            rotate(mCurrentDegree, nextDegree, 0);
-            mCurrentDegree = nextDegree;
+            rotate(currentDegree, nextDegree, 0);
+            currentDegree = nextDegree;
         }
 
-        mLastTouchLocation = new Pair<>(x, y);
+        lastTouchLocation = new Pair<>(x, y);
         return true;
     }
 
