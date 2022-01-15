@@ -27,46 +27,159 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/urgent_dials"
         android:layout_width="340dp"
         android:layout_height="84dp"
         android:layout_marginTop="20dp"
+        android:layout_weight="20"
         android:background="@drawable/bg_header_custom"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
 
         app:layout_constraintTop_toBottomOf="@id/imageView" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="205dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_dial_layout"
+        android:layout_width="match_parent"
         android:layout_height="205dp"
-        android:layout_marginTop="0dp"
-        android:src="@drawable/ic_dial_soleplate"
-        app:layout_constraintTop_toBottomOf="@id/view"
-        app:layout_constraintBottom_toTopOf="@id/view2"
+        app:layout_constraintBottom_toTopOf="@id/category_dials"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/urgent_dials" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/main_dial_slider"
         android:layout_width="205dp"
         android:layout_height="205dp"
-        android:layout_marginTop="0dp"
-        android:src="@drawable/ic_dial_rotate"
-        app:layout_constraintTop_toBottomOf="@id/view"
-        app:layout_constraintBottom_toTopOf="@id/view2"
+        android:contentDescription="@string/main_dial_slider"
+        app:layout_constraintBottom_toBottomOf="@+id/main_dial_layout"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/main_dial_layout"
+        app:srcCompat="@drawable/main_dial_slider" />
 
-    <View
-        android:id="@+id/view2"
+    <ImageView
+        android:id="@+id/category_circle_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+    <ImageView
+        android:id="@+id/category_circle_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/category_circle" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_dials"
         android:layout_width="340dp"
         android:layout_height="290dp"
         android:layout_marginTop="420dp"
         android:background="@drawable/bg_header_custom"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
