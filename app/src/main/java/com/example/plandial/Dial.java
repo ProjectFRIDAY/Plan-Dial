@@ -1,14 +1,21 @@
 package com.example.plandial;
 
-import java.time.OffsetDateTime;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 
-public class Dial {
+import java.time.OffsetDateTime;
+import java.util.Calendar;
+
+public class Dial{
     private String name;
     private String iconPath;
     private Period period;
     private OffsetDateTime startDateTime;
+    private PendingIntent pushIntent;
 
-    public Dial(final String name, final Period period, final OffsetDateTime startDateTime) {
+    public Dial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime)  {
         assert name != null;
         assert period != null;
         assert startDateTime != null;
@@ -17,10 +24,8 @@ public class Dial {
         this.iconPath = "icon/outline_shopping_cart_black_24dp.png";  // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
         this.period = period;
         this.startDateTime = startDateTime;
-    }
 
-    public void restart() {
-        this.startDateTime = OffsetDateTime.now();
+        makeAlarm(context);
     }
 
     public String getName() {
@@ -51,6 +56,31 @@ public class Dial {
 
     public OffsetDateTime getEndDateTime() {
         return startDateTime.plusSeconds(period.getPeriodInSeconds());
+    }
+
+    private void makeAlarm(final Context context){
+        AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, PushReceiver.class);
+        intent.putExtra("dial", name);
+        pushIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, startDateTime.getHour());
+        calendar.set(Calendar.MINUTE, startDateTime.getMinute());
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), period.getPeriodInMillis(), pushIntent);
+    }
+
+    public void disable(final Context context){
+        if(pushIntent != null){
+            AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+            alarmMgr.cancel(pushIntent);
+            pushIntent = null;
+        }
+    }
+
+    public void restart(final Context context) {
+        this.startDateTime = OffsetDateTime.now();
+        makeAlarm(context);
     }
 
     @Override
