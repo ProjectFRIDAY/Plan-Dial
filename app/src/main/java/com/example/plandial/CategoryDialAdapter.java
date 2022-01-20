@@ -1,27 +1,24 @@
 package com.example.plandial;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-
 public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapter.ItemViewHolder> {
     private static Category category;
-    private DialManager mDialManager = DialManager.getInstance();
+    private DialManager dialManager = DialManager.getInstance();
+    private StatusDisplayLayout statusDisplayLayout;
 
     public CategoryDialAdapter() {
+        this.category = dialManager.getCategoryByIndex(0);
+    }
+
+    public void setStatusDisplayLayout(StatusDisplayLayout statusDisplayLayout) {
+        this.statusDisplayLayout = statusDisplayLayout;
     }
 
     @NonNull
@@ -46,10 +43,10 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
     }
 
     //카테고리 받는 메서드 선언
-    public static void setCategory(Category category) {
+    public void setCategory(Category category) {
         if (category != null) {
-            CategoryDialAdapter.category = category;
-            Log.d("test", category.getName());
+            this.category = category;
+            this.notifyDataSetChanged();
         }
     }
 
@@ -63,6 +60,20 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
 
             dialIcon = itemView.findViewById(R.id.dial_icon);
             dialName = itemView.findViewById(R.id.dial_name);
+
+            dialIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if (pos < category.getDialCount()) {
+                            statusDisplayLayout.displayDial(category.getDialByIndex(pos));
+                        } else if (pos == category.getDialCount()) {
+                            // 다이얼 추가 화면으로 이동?
+                        }
+                    }
+                }
+            });
         }
 
         void onBind(Dial dial) {

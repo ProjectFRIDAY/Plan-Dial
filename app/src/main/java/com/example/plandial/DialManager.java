@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import android.util.Log;
 import android.util.Pair;
 
 public class DialManager {
@@ -90,7 +89,6 @@ public class DialManager {
                 // 남은 시간 구하기
                 OffsetDateTime endDateTime = dial.getEndDateTime();
                 long leftTime = OffsetDateTime.now().until(endDateTime, ChronoUnit.SECONDS);
-                Log.d("queue test", String.format("left time : %d", leftTime));
 
                 if (0 <= leftTime && leftTime < urgentBound) {
                     urgentDials.add(new Pair<>(leftTime, dial));
