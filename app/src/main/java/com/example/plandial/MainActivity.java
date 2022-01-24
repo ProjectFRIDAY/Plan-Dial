@@ -13,8 +13,12 @@ import android.widget.ImageView;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int SYNCING_URGENT_PERIOD = 1 * 60 * 1000; // 단위: ms
 
     SpinnableDialView mainDialSlider;
     ConstraintLayout mainDialLayout;
@@ -82,6 +86,16 @@ public class MainActivity extends AppCompatActivity {
             mainDialSlider.setCategoryDialAdapter(gridAdapter);
 
             gridAdapter.setStatusDisplayLayout(statusDisplayLayout);
+
+            // urgent dial 주기적 동기화
+            TimerTask syncUrgentTask = new TimerTask() {
+                @Override
+                public void run() {
+                    adapter.syncDials();
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(syncUrgentTask, 0, SYNCING_URGENT_PERIOD);
         }
 
     }
