@@ -4,12 +4,15 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.util.Log;
 
 import java.time.OffsetDateTime;
 import java.util.Calendar;
 
 public class Dial{
     private static int id = 0;
+
     private String name;
     private String iconPath;
     private Period period;
@@ -55,20 +58,34 @@ public class Dial{
         this.startDateTime = startDateTime;
     }
 
-    public OffsetDateTime getEndDateTime() {
-        return startDateTime.plusSeconds(period.getPeriodInSeconds());
+    public long getLeftTimeInMillis() {
+        long nowInMillis = System.currentTimeMillis();
+        long startInMillis = startDateTime.toEpochSecond() * 1000;
+
+        if(nowInMillis > startInMillis) {
+            long minus = nowInMillis - startInMillis;
+            int times = (int) (minus / period.getPeriodInMillis()) + 1;
+            return period.getPeriodInMillis() * times - minus;
+        }
+        else{
+            return startInMillis;
+        }
     }
 
     private void makeAlarm(final Context context){
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, PushReceiver.class);
         intent.putExtra("dial", name);
-        pushIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_IMMUTABLE);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, startDateTime.getHour());
-        calendar.set(Calendar.MINUTE, startDateTime.getMinute());
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), period.getPeriodInMillis(), pushIntent);
+
+        if(Build.VERSION.SDK_INT >= 26) {
+            pushIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_MUTABLE);
+        }
+        else {
+            pushIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
+        long addedTimeInMillis = getLeftTimeInMillis();
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + addedTimeInMillis, period.getPeriodInMillis(), pushIntent);
         id++;
     }
 

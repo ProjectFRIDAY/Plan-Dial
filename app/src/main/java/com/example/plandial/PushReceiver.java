@@ -29,7 +29,7 @@ public class PushReceiver extends BroadcastReceiver {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "push");
 
             Intent goMainIntent = new Intent(context, MainActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 101, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 999, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
 
             builder.setContentTitle(dialName);
             builder.setContentText("지금은 " + dialName + "을(를) 시작할 시간입니다.");

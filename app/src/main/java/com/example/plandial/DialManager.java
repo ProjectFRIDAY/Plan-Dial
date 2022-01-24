@@ -1,7 +1,5 @@
 package com.example.plandial;
 
-import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -88,8 +86,7 @@ public class DialManager {
                 Dial dial = category.getDialByIndex(j);
 
                 // 남은 시간 구하기
-                OffsetDateTime endDateTime = dial.getEndDateTime();
-                long leftTime = OffsetDateTime.now().until(endDateTime, ChronoUnit.SECONDS);
+                long leftTime = dial.getLeftTimeInMillis();
                 Log.d("queue test", String.format("left time : %d", leftTime));
 
                 if (0 <= leftTime && leftTime < urgentBound) {
