@@ -20,25 +20,27 @@ public class PushReceiver extends BroadcastReceiver {
         // 다이얼 이름 받음
         String dialName = intent.getStringExtra("dial");
 
-        // 푸쉬알림에 대한 내용
-        NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.createNotificationChannel(
-                new NotificationChannel("push", "push-alarm", NotificationManager.IMPORTANCE_HIGH)
-        );
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "push");
+        if(dialName != null) {
+            // 푸쉬알림에 대한 내용
+            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(
+                    new NotificationChannel("push", "push-alarm", NotificationManager.IMPORTANCE_HIGH)
+            );
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "push");
 
-        Intent goMainIntent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,101, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
+            Intent goMainIntent = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 101, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
 
-        builder.setContentTitle(dialName);
-        builder.setContentText("지금은 " + dialName + "을(를) 시작할 시간입니다.");
-        builder.setSmallIcon(R.drawable.ic_logo);
-        builder.setAutoCancel(true);
+            builder.setContentTitle(dialName);
+            builder.setContentText("지금은 " + dialName + "을(를) 시작할 시간입니다.");
+            builder.setSmallIcon(R.drawable.ic_logo);
+            builder.setAutoCancel(true);
 
-        builder.setContentIntent(pendingIntent);
+            builder.setContentIntent(pendingIntent);
 
-        Notification notification = builder.build();
-        manager.notify(1, notification);
+            Notification notification = builder.build();
+            manager.notify(1, notification);
+        }
     }
 
     // 재부팅 대응 필요
