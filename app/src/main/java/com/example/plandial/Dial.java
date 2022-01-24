@@ -1,7 +1,5 @@
 package com.example.plandial;
 
-import static android.app.PendingIntent.FLAG_MUTABLE;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,6 +9,7 @@ import java.time.OffsetDateTime;
 import java.util.Calendar;
 
 public class Dial{
+    private static int id = 0;
     private String name;
     private String iconPath;
     private Period period;
@@ -64,12 +63,13 @@ public class Dial{
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, PushReceiver.class);
         intent.putExtra("dial", name);
-        pushIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        pushIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_IMMUTABLE);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, startDateTime.getHour());
         calendar.set(Calendar.MINUTE, startDateTime.getMinute());
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), period.getPeriodInMillis(), pushIntent);
+        id++;
     }
 
     // 비활성화 on
