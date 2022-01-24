@@ -21,6 +21,7 @@ public class SpinnableDialView extends SpinnableImageView {
     private ArrayList<ImageView> circles;
     private final DialManager dialManager = DialManager.getInstance();
     private int selectedCategoryIndex = 0;
+    private CategoryDialAdapter categoryDialAdapter;
 
     Vibrator vibrator = (Vibrator) this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -44,7 +45,7 @@ public class SpinnableDialView extends SpinnableImageView {
                     + (int) ((currentDegree % DEGREE_BETWEEN_CATEGORY) / (DEGREE_BETWEEN_CATEGORY / 2));
 
             this.selectedCategoryIndex = (categoryIndex - (int) (INITIAL_DEGREE / DEGREE_BETWEEN_CATEGORY) + 12) % 12;
-            CategoryDialAdapter.setCategory(dialManager.getCategoryByIndex(this.selectedCategoryIndex));
+            categoryDialAdapter.setCategory(dialManager.getCategoryByIndex(this.selectedCategoryIndex));
 
             double lastDegree = categoryIndex * DEGREE_BETWEEN_CATEGORY;
             super.rotate(currentDegree, lastDegree, MAGNET_STRENGTH);
@@ -62,6 +63,10 @@ public class SpinnableDialView extends SpinnableImageView {
     public int getSelectedCategoryIndex() {
         // 선택된 카테고리의 인덱스를 반환함
         return this.selectedCategoryIndex;
+    }
+
+    public void setCategoryDialAdapter(CategoryDialAdapter categoryDialAdapter) {
+        this.categoryDialAdapter = categoryDialAdapter;
     }
 
     public void setCircles(Context context, ArrayList<ImageView> circles) {
