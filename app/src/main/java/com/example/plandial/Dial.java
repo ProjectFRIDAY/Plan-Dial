@@ -1,5 +1,7 @@
 package com.example.plandial;
 
+import static android.app.PendingIntent.FLAG_MUTABLE;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -62,7 +64,7 @@ public class Dial{
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, PushReceiver.class);
         intent.putExtra("dial", name);
-        pushIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        pushIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, startDateTime.getHour());
@@ -70,6 +72,7 @@ public class Dial{
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), period.getPeriodInMillis(), pushIntent);
     }
 
+    // 비활성화 on
     public void disable(final Context context){
         if(pushIntent != null){
             AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
@@ -78,6 +81,7 @@ public class Dial{
         }
     }
 
+    // 비활성화 off
     public void restart(final Context context) {
         this.startDateTime = OffsetDateTime.now();
         makeAlarm(context);
