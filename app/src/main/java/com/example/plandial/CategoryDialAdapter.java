@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapter.ItemViewHolder> {
-    private static Category category;
-    private DialManager dialManager = DialManager.getInstance();
+    private Category category;
+    private final DialManager dialManager = DialManager.getInstance();
     private StatusDisplayLayout statusDisplayLayout;
 
     public CategoryDialAdapter() {

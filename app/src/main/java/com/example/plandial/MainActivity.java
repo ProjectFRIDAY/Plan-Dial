@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //region test code
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 02, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 01, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial("공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 02, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial("코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 02, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 2, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 1, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial3 = new Dial("공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 2, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial4 = new Dial("코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 2, 0, 0, ZoneOffset.ofHours(9)));
         Category category1 = new Category("나는 바보다");
         category1.addDial(dial1);
         category1.addDial(dial2);
@@ -83,6 +83,5 @@ public class MainActivity extends AppCompatActivity {
 
             gridAdapter.setStatusDisplayLayout(statusDisplayLayout);
         }
-
     }
 }
