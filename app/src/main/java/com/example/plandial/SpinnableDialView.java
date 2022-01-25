@@ -6,6 +6,7 @@ import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -22,6 +23,7 @@ public class SpinnableDialView extends SpinnableImageView {
     private final DialManager dialManager = DialManager.getInstance();
     private int selectedCategoryIndex = 0;
     private CategoryDialAdapter categoryDialAdapter;
+    private TextView categoryNameView;
 
     Vibrator vibrator = (Vibrator) this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -53,6 +55,8 @@ public class SpinnableDialView extends SpinnableImageView {
 
             // 약한 진동을 발생함
             vibrator.vibrate(VibrationEffect.createOneShot(VIBRATE_STRENGTH, VibrationEffect.DEFAULT_AMPLITUDE));
+
+            syncCategoryName();
         }
 
         arrangeCircles();
@@ -90,12 +94,25 @@ public class SpinnableDialView extends SpinnableImageView {
         arrangeCircles();
     }
 
+    public void setCategoryNameView(TextView categoryNameView) {
+        this.categoryNameView = categoryNameView;
+        syncCategoryName();
+    }
+
     private void arrangeCircles() {
 
         double distanceToCircle = 1.6 * this.getX() / 2;
         for (int i = 0; i < circles.size(); ++i) {
             circles.get(i).setX((float) (-circles.get(i).getWidth() / 2 + this.getX() + getWidth() / 2 + distanceToCircle * Math.sin(Math.toRadians(currentDegree - i * DEGREE_BETWEEN_CATEGORY))));
             circles.get(i).setY((float) (-circles.get(i).getHeight() / 2 + this.getY() + getHeight() / 2 - distanceToCircle * Math.cos(Math.toRadians(currentDegree - i * DEGREE_BETWEEN_CATEGORY))));
+        }
+    }
+
+    private void syncCategoryName() {
+        int selectedCategoryIndex = this.getSelectedCategoryIndex();
+
+        if (selectedCategoryIndex < dialManager.getCategoryCount()) {
+            this.categoryNameView.setText(dialManager.getCategoryByIndex(selectedCategoryIndex).getName());
         }
     }
 }

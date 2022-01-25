@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             circles.add(findViewById(R.id.category_circle_8));
             circles.add(findViewById(R.id.category_circle_9));
             mainDialSlider.setCircles(this, circles);
+            mainDialSlider.setCategoryNameView(findViewById(R.id.category_name));
         }
 
         {
