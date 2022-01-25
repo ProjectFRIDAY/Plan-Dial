@@ -72,6 +72,10 @@ public class Dial{
         }
     }
 
+    public long getLeftTimeInSeconds() {
+        return getLeftTimeInMillis() / UnitOfTime.MILLIS_PER_SECOND;
+    }
+
     private void makeAlarm(final Context context){
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, PushReceiver.class);

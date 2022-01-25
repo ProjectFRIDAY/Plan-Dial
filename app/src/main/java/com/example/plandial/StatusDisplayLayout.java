@@ -21,7 +21,7 @@ public class StatusDisplayLayout extends LinearLayout {
 
     public void displayDial(Dial dial) {
         this.nameView.setText(dial.getName());
-        this.timeView.setText(dial.getEndDateTime().toString());
+        this.timeView.setText(String.format("%d분 남음", dial.getLeftTimeInSeconds() / UnitOfTime.SECONDS_PER_MINUTE));
     }
 
     @Override
