@@ -13,8 +13,12 @@ import android.widget.ImageView;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int SYNCING_URGENT_PERIOD = 1 * 60 * 1000; // 단위: ms
 
     SpinnableDialView mainDialSlider;
     ConstraintLayout mainDialLayout;
@@ -28,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //region test code
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 2, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 1, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial("공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 2, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial("코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 14, 22, 2, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 00, 0, ZoneOffset.ofHours(9)));
         Category category1 = new Category("나는 바보다");
         category1.addDial(dial1);
         category1.addDial(dial2);
@@ -83,6 +87,16 @@ public class MainActivity extends AppCompatActivity {
             mainDialSlider.setCategoryDialAdapter(gridAdapter);
 
             gridAdapter.setStatusDisplayLayout(statusDisplayLayout);
+
+            // urgent dial 주기적 동기화
+            TimerTask syncUrgentTask = new TimerTask() {
+                @Override
+                public void run() {
+                    adapter.syncDials();
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(syncUrgentTask, 0, SYNCING_URGENT_PERIOD);
         }
     }
 }

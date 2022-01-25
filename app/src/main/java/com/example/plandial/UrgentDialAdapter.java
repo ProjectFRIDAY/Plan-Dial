@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 
 public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.ItemViewHolder> {
-    private static final int URGENT_BOUND = 3600;
+    private static final int URGENT_BOUND = 3600 * 1000;
     private ArrayList<Dial> urgentDialList;
     private DialManager mDialManager = DialManager.getInstance();
 
