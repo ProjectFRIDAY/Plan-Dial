@@ -5,12 +5,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import java.time.OffsetDateTime;
-import java.util.Calendar;
 
-public class Dial{
+public class Dial {
     private static int id = 0;
 
     private String name;
@@ -19,7 +19,8 @@ public class Dial{
     private OffsetDateTime startDateTime;
     private PendingIntent pushIntent;
 
-    public Dial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime)  {
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    public Dial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime) {
         assert name != null;
         assert period != null;
         assert startDateTime != null;
@@ -62,12 +63,11 @@ public class Dial{
         long nowInMillis = System.currentTimeMillis();
         long startInMillis = startDateTime.toEpochSecond() * 1000;
 
-        if(nowInMillis > startInMillis) {
+        if (nowInMillis > startInMillis) {
             long minus = nowInMillis - startInMillis;
             int times = (int) (minus / period.getPeriodInMillis()) + 1;
             return period.getPeriodInMillis() * times - minus;
-        }
-        else{
+        } else {
             return startInMillis;
         }
     }
@@ -76,17 +76,13 @@ public class Dial{
         return getLeftTimeInMillis() / UnitOfTime.MILLIS_PER_SECOND;
     }
 
-    private void makeAlarm(final Context context){
-        AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    private void makeAlarm(final Context context) {
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, PushReceiver.class);
         intent.putExtra("dial", name);
 
-        if(Build.VERSION.SDK_INT >= 26) {
-            pushIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_MUTABLE);
-        }
-        else {
-            pushIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        pushIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_MUTABLE);
 
         long addedTimeInMillis = getLeftTimeInMillis();
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + addedTimeInMillis, period.getPeriodInMillis(), pushIntent);
@@ -94,15 +90,16 @@ public class Dial{
     }
 
     // 비활성화 on
-    public void disable(final Context context){
-        if(pushIntent != null){
-            AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+    public void disable(final Context context) {
+        if (pushIntent != null) {
+            AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarmMgr.cancel(pushIntent);
             pushIntent = null;
         }
     }
 
     // 비활성화 off
+    @RequiresApi(api = Build.VERSION_CODES.S)
     public void restart(final Context context) {
         this.startDateTime = OffsetDateTime.now();
         makeAlarm(context);
@@ -124,7 +121,7 @@ public class Dial{
             return true;
         }
 
-        if (obj == null || !(obj instanceof Dial) || this.hashCode() != obj.hashCode()) {
+        if (!(obj instanceof Dial) || this.hashCode() != obj.hashCode()) {
             return false;
         }
 
