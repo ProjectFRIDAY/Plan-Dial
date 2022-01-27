@@ -2,6 +2,10 @@
     <string name="app_name">PlanDial</string>
     <string name="main_dial_slider">메인다이얼 슬라이더</string>
     <string name="category_circle">카테고리 원</string>
+    <string name="logo_description">logo description</string>
+    <string name="name">name</string>
+    <string name="plus">plus</string>
+    <string name="dial_image">dial image</string>
     <string name="SettingText">Setting</string>
     <string name="DialName">다이얼 이름</string>
     <string name="DialNameHint">이름을 입력하시오</string>

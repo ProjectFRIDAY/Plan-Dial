@@ -117,7 +117,7 @@ public class Category {
             return true;
         }
 
-        if (obj == null || !(obj instanceof Category) || this.hashCode() != obj.hashCode()) {
+        if (!(obj instanceof Category) || this.hashCode() != obj.hashCode()) {
             return false;
         }
 

@@ -113,6 +113,8 @@ public class SpinnableDialView extends SpinnableImageView {
 
         if (selectedCategoryIndex < dialManager.getCategoryCount()) {
             this.categoryNameView.setText(dialManager.getCategoryByIndex(selectedCategoryIndex).getName());
+        } else {
+            this.categoryNameView.setText("빈 카테고리");
         }
     }
 }

@@ -1,14 +1,19 @@
 package com.example.plandial;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.room.Room;
 
-import android.os.Bundle;
-import android.widget.ImageView;
+import com.example.plandial.db.ICategoryDao;
+import com.example.plandial.db.IDialDao;
+import com.example.plandial.db.IPresetDao;
+import com.example.plandial.db.PlanDatabase;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -17,8 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final int SYNCING_URGENT_PERIOD = 1 * 60 * 1000; // 단위: ms
+    private static final int SYNCING_URGENT_PERIOD = 1 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND; // 단위: ms
 
     SpinnableDialView mainDialSlider;
     ConstraintLayout mainDialLayout;
@@ -26,16 +30,17 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView categoryDialView;
     StatusDisplayLayout statusDisplayLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //region test code
-        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
         Category category1 = new Category("나는 바보다");
         category1.addDial(dial1);
         category1.addDial(dial2);
@@ -98,5 +103,16 @@ public class MainActivity extends AppCompatActivity {
             Timer timer = new Timer();
             timer.schedule(syncUrgentTask, 0, SYNCING_URGENT_PERIOD);
         }
+
+        PlanDatabase database = Room.databaseBuilder(getApplicationContext(), PlanDatabase.class, "PlanDial")
+                .fallbackToDestructiveMigration()   // 스키마 (database) 버전 변경가능
+                .allowMainThreadQueries()           // Main Thread에서 DB에 IO(입출력) 가능
+                .build();
+
+        // 멤버변수 선언
+        IDialDao iDialDao = database.iDialDao(); //인터페이스 객체 할당
+        ICategoryDao iCategoryDao = database.iCategoryDao(); //인터페이스 객체 할당
+        IPresetDao iPresetDao = database.iPresetDao(); // 인터페이스 객체 할당
+
     }
 }

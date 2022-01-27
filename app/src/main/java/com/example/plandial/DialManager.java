@@ -93,20 +93,9 @@ public class DialManager {
             }
         }
 
-        urgentDials.sort(new Comparator<Pair<Long, Dial>>() {
-            @Override
-            public int compare(Pair<Long, Dial> lhs, Pair<Long, Dial> rhs) {
-                if (lhs.first < rhs.first) {
-                    return -1;
-                } else if (lhs.first > rhs.first) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            }
-        });
+        urgentDials.sort(Comparator.comparing(lhs -> lhs.first));
 
-        ArrayList<Dial> result = new ArrayList<Dial>();
+        ArrayList<Dial> result = new ArrayList<>();
 
         for (int i = 0; i < urgentDials.size(); ++i) {
             result.add(urgentDials.get(i).second);
