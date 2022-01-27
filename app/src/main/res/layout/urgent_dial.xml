@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:gravity="center" >
+
+    <ImageButton
+        android:id="@+id/dial_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/dial_image" />
+
+    <TextView
+        android:id="@+id/dial_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="@string/name"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="11sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

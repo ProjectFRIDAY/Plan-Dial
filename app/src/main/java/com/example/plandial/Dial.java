@@ -1,14 +1,26 @@
 package com.example.plandial;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.time.OffsetDateTime;
 
 public class Dial {
+    private static int id = 0;
+
     private String name;
     private int icon;
     private Period period;
     private OffsetDateTime startDateTime;
+    private PendingIntent pushIntent;
 
-    public Dial(final String name, final Period period, final OffsetDateTime startDateTime) {
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    public Dial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime) {
         assert name != null;
         assert period != null;
         assert startDateTime != null;
@@ -17,10 +29,8 @@ public class Dial {
         this.icon = R.drawable.baseline_question_mark_black;  // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
         this.period = period;
         this.startDateTime = startDateTime;
-    }
 
-    public void restart() {
-        this.startDateTime = OffsetDateTime.now();
+        makeAlarm(context);
     }
 
     public String getName() {
@@ -49,8 +59,50 @@ public class Dial {
         this.startDateTime = startDateTime;
     }
 
-    public OffsetDateTime getEndDateTime() {
-        return startDateTime.plusSeconds(period.getPeriodInSeconds());
+    public long getLeftTimeInMillis() {
+        long nowInMillis = System.currentTimeMillis();
+        long startInMillis = startDateTime.toEpochSecond() * 1000;
+
+        if (nowInMillis > startInMillis) {
+            long minus = nowInMillis - startInMillis;
+            int times = (int) (minus / period.getPeriodInMillis()) + 1;
+            return period.getPeriodInMillis() * times - minus;
+        } else {
+            return startInMillis;
+        }
+    }
+
+    public long getLeftTimeInSeconds() {
+        return getLeftTimeInMillis() / UnitOfTime.MILLIS_PER_SECOND;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    private void makeAlarm(final Context context) {
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, PushReceiver.class);
+        intent.putExtra("dial", name);
+
+        pushIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_MUTABLE);
+
+        long addedTimeInMillis = getLeftTimeInMillis();
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + addedTimeInMillis, period.getPeriodInMillis(), pushIntent);
+        id++;
+    }
+
+    // 비활성화 on
+    public void disable(final Context context) {
+        if (pushIntent != null) {
+            AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            alarmMgr.cancel(pushIntent);
+            pushIntent = null;
+        }
+    }
+
+    // 비활성화 off
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    public void restart(final Context context) {
+        this.startDateTime = OffsetDateTime.now();
+        makeAlarm(context);
     }
 
     @Override
@@ -69,7 +121,7 @@ public class Dial {
             return true;
         }
 
-        if (obj == null || !(obj instanceof Dial) || this.hashCode() != obj.hashCode()) {
+        if (!(obj instanceof Dial) || this.hashCode() != obj.hashCode()) {
             return false;
         }
 

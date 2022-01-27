@@ -38,6 +38,16 @@ public class Category {
         }
     }
 
+    public Dial getDialByName(String name) {
+        for (Dial dial : dials) {
+            if (dial.getName().equals(name)) {
+                return dial;
+            }
+        }
+
+        return null;
+    }
+
     public boolean addDial(Dial dialToAdd) {
         /* 이미 동일한 다이얼을 가지고 있으면 추가하지 않는다.
          * 이미 동일한 다이얼이 있다면 false, 그렇지 않으면 true를 반환한다.
@@ -107,7 +117,7 @@ public class Category {
             return true;
         }
 
-        if (obj == null || !(obj instanceof Category) || this.hashCode() != obj.hashCode()) {
+        if (!(obj instanceof Category) || this.hashCode() != obj.hashCode()) {
             return false;
         }
 
