@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -42,11 +43,10 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:gravity="center"
-        android:background="@drawable/ic_iconfinder_washing_machine_washer_front_7720300"
-        app:layout_constraintStart_toStartOf="@id/ChoiceImage"
+        app:layout_constraintBottom_toBottomOf="@id/ChoiceImage"
         app:layout_constraintEnd_toEndOf="@id/ChoiceImage"
-        app:layout_constraintTop_toTopOf="@id/ChoiceImage"
-        app:layout_constraintBottom_toBottomOf="@id/ChoiceImage"/>
+        app:layout_constraintStart_toStartOf="@id/ChoiceImage"
+        app:layout_constraintTop_toTopOf="@id/ChoiceImage" />
 
     <TextView
         android:id="@+id/DialName_Setting"
@@ -59,7 +59,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ChoiceImage"/>
+        app:layout_constraintTop_toBottomOf="@id/ChoiceImage" />
 
     <EditText
         android:id="@+id/Input_DialName"
@@ -67,12 +67,12 @@
         android:layout_height="42dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:hint="@string/DialNameHint"
-        android:gravity="center"
         android:background="@drawable/bg_namebox"
+        android:gravity="center"
+        android:hint="@string/DialNameHint"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DialName_Setting"/>
+        app:layout_constraintTop_toBottomOf="@+id/DialName_Setting" />
 
     <TextView
         android:id="@+id/DialTime_Setting"
@@ -85,18 +85,31 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Input_DialName"/>
+        app:layout_constraintTop_toBottomOf="@+id/Input_DialName" />
 
-    <ImageView
-        android:id="@+id/bg_dialchoice"
+    <com.example.plandial.LinearSelector
+        android:id="@+id/unit_selector"
         android:layout_width="304dp"
         android:layout_height="42dp"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
         android:background="@drawable/ic_dial_choice3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DialTime_Setting"/>
+        app:layout_constraintTop_toBottomOf="@+id/DialTime_Setting">
+
+        <ImageView
+            android:id="@+id/unit_circle"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:foregroundTint="#000000"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/category_circle" />
+
+    </com.example.plandial.LinearSelector>
 
     <TextView
         android:id="@+id/StartDay"
@@ -108,7 +121,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bg_dialchoice"/>
+        app:layout_constraintTop_toBottomOf="@id/unit_selector" />
 
     <ImageView
         android:id="@+id/Input_Startday"
@@ -119,62 +132,53 @@
         android:background="@drawable/bg_namebox"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/StartDay"/>
+        app:layout_constraintTop_toBottomOf="@id/StartDay" />
 
-    <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/DialPlus_box"
         android:layout_width="355dp"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/bg_header_custom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Input_Startday"/>
+        app:layout_constraintRight_toRightOf="parent">
 
-    <TextView
-        android:id="@+id/DialPlus_Text"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/DialPlusText"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/DialPlus_box"/>
+        <TextView
+            android:id="@+id/DialPlus_Text"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/DialPlusText"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/DialPlus_box" />
 
-    <TextView
-        android:id="@+id/DialPlus_Text2"
-        android:layout_width="210dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="1dp"
-        android:text="@string/DialPlusText2"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/DialPlus_Text"/>
+        <TextView
+            android:id="@+id/DialPlus_Text2"
+            android:layout_width="210dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="1dp"
+            android:text="@string/DialPlusText2"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DialPlus_Text" />
 
-    <ImageButton
-        android:id="@+id/DialPlus_Button"
-        android:layout_width="90dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/greenbutton"
-        app:layout_constraintStart_toEndOf="@id/DialPlus_Text2"
-        app:layout_constraintTop_toTopOf="@id/DialPlus_box"
-        app:layout_constraintBottom_toBottomOf="@id/DialPlus_box"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/DialPlus_Button"
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/greenbutton"
+            android:text="@string/Done"
+            app:layout_constraintBottom_toBottomOf="@id/DialPlus_box"
+            app:layout_constraintStart_toEndOf="@id/DialPlus_Text2"
+            app:layout_constraintTop_toTopOf="@id/DialPlus_box" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/Done"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@id/DialPlus_Button"
-        app:layout_constraintEnd_toEndOf="@id/DialPlus_Button"
-        app:layout_constraintTop_toTopOf="@id/DialPlus_Button"
-        app:layout_constraintBottom_toBottomOf="@id/DialPlus_Button"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
