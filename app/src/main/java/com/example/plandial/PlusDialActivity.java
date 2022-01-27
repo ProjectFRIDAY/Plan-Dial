@@ -12,7 +12,7 @@ public class PlusDialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plus_category);
+        setContentView(R.layout.activity_plus_dial);
 
         {
             // 뒤로가기 버튼 설정
