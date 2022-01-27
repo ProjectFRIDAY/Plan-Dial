@@ -1,6 +1,7 @@
 package com.example.plandial;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +17,14 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.example.plandial.db.DialTable;
+import com.example.plandial.db.ICategoryDao;
+import com.example.plandial.db.IDialDao;
+import com.example.plandial.db.IPresetDao;
+import com.example.plandial.db.PlanDatabase;
+
 public class MainActivity extends AppCompatActivity {
+
 
     private static final int SYNCING_URGENT_PERIOD = 1 * 60 * 1000; // 단위: ms
 
@@ -25,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView urgentDialView;
     RecyclerView categoryDialView;
     StatusDisplayLayout statusDisplayLayout;
+
+    private IDialDao iDialDao;             // 멤버변수 선언
+    private ICategoryDao iCategoryDao;
+    private IPresetDao iPresetDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,5 +111,15 @@ public class MainActivity extends AppCompatActivity {
             Timer timer = new Timer();
             timer.schedule(syncUrgentTask, 0, SYNCING_URGENT_PERIOD);
         }
+
+        PlanDatabase database = Room.databaseBuilder(getApplicationContext(), PlanDatabase.class, "PlanDial")
+                .fallbackToDestructiveMigration()   // 스키마 (database) 버전 변경가능
+                .allowMainThreadQueries()           // Main Thread에서 DB에 IO(입출력) 가능
+                .build();
+
+        iDialDao = database.iDialDao(); //인터페이스 객체 할당
+        iCategoryDao = database.iCategoryDao(); //인터페이스 객체 할당
+        iPresetDao = database.iPresetDao(); // 인터페이스 객체 할당
+
     }
 }
