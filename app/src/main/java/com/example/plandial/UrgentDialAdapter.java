@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
         this.urgentDialList = dialManager.getUrgentDials(URGENT_BOUND);
     }
 
-    @androidx.annotation.NonNull
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
