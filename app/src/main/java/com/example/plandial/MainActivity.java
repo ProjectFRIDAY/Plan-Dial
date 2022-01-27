@@ -1,7 +1,10 @@
 package com.example.plandial;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView urgentDialView;
     RecyclerView categoryDialView;
     StatusDisplayLayout statusDisplayLayout;
+    ImageButton plusButton;
 
 
     @Override
@@ -57,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
         mainDialSlider = findViewById(R.id.main_dial_slider);
         mainDialLayout = findViewById(R.id.main_dial_layout);
         statusDisplayLayout = findViewById(R.id.status_display_layout);
+
+        {
+            // 카테고리 추가 버튼 설정
+            plusButton = findViewById(R.id.add_button);
+            plusButton.setOnClickListener(view -> {
+                Intent intent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
+                startActivity(intent);
+            });
+        }
 
         {
             // 메인다이얼 슬라이더 설정 (객체 내부에서 ImageView 등록하도록 개선 필요)
