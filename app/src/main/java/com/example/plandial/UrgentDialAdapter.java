@@ -14,13 +14,14 @@ import java.util.ArrayList;
 public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.ItemViewHolder> {
     private static final int URGENT_BOUND = 3600 * 1000;
     private ArrayList<Dial> urgentDialList;
-    private DialManager mDialManager = DialManager.getInstance();
+    private final DialManager dialManager = DialManager.getInstance();
 
     public UrgentDialAdapter() {
 
-        this.urgentDialList = mDialManager.getUrgentDials(URGENT_BOUND);
+        this.urgentDialList = dialManager.getUrgentDials(URGENT_BOUND);
     }
 
+    @androidx.annotation.NonNull
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,13 +42,13 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
 
     public void syncDials() {
         // urgentDial을 DialManager와 동기화하는 함수 (개선 필요)
-        this.urgentDialList = mDialManager.getUrgentDials(URGENT_BOUND);
+        this.urgentDialList = dialManager.getUrgentDials(URGENT_BOUND);
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageButton dialIcon;
-        private TextView dialName;
+        private final ImageButton dialIcon;
+        private final TextView dialName;
 
         ItemViewHolder(View itemView) {
             super(itemView);

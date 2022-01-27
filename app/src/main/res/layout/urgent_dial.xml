@@ -9,7 +9,7 @@
         android:id="@+id/dial_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/dial_image" />
 
     <TextView
         android:id="@+id/dial_name"

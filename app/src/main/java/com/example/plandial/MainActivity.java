@@ -1,27 +1,25 @@
 package com.example.plandial;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+import android.os.Bundle;
+import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.room.Room;
 
-import android.os.Bundle;
-import android.widget.ImageView;
+import com.example.plandial.db.ICategoryDao;
+import com.example.plandial.db.IDialDao;
+import com.example.plandial.db.IPresetDao;
+import com.example.plandial.db.PlanDatabase;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import com.example.plandial.db.DialTable;
-import com.example.plandial.db.ICategoryDao;
-import com.example.plandial.db.IDialDao;
-import com.example.plandial.db.IPresetDao;
-import com.example.plandial.db.PlanDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView categoryDialView;
     StatusDisplayLayout statusDisplayLayout;
 
-    private IDialDao iDialDao;             // 멤버변수 선언
-    private ICategoryDao iCategoryDao;
-    private IPresetDao iPresetDao;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //region test code
-        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 00, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 00, 0, ZoneOffset.ofHours(9)));
+        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
         Category category1 = new Category("나는 바보다");
         category1.addDial(dial1);
         category1.addDial(dial2);
@@ -117,9 +111,10 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries()           // Main Thread에서 DB에 IO(입출력) 가능
                 .build();
 
-        iDialDao = database.iDialDao(); //인터페이스 객체 할당
-        iCategoryDao = database.iCategoryDao(); //인터페이스 객체 할당
-        iPresetDao = database.iPresetDao(); // 인터페이스 객체 할당
+        // 멤버변수 선언
+        IDialDao iDialDao = database.iDialDao(); //인터페이스 객체 할당
+        ICategoryDao iCategoryDao = database.iCategoryDao(); //인터페이스 객체 할당
+        IPresetDao iPresetDao = database.iPresetDao(); // 인터페이스 객체 할당
 
     }
 }
