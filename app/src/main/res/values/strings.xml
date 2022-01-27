@@ -2,4 +2,6 @@
     <string name="app_name">PlanDial</string>
     <string name="main_dial_slider">메인다이얼 슬라이더</string>
     <string name="category_circle">카테고리 원</string>
+    <string name="todo">TODO</string>
+    <string name="name">name</string>
 </resources>
