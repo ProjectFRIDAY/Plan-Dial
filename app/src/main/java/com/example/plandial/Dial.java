@@ -61,7 +61,7 @@ public class Dial {
 
     public long getLeftTimeInMillis() {
         long nowInMillis = System.currentTimeMillis();
-        long startInMillis = startDateTime.toEpochSecond() * 1000;
+        long startInMillis = startDateTime.toEpochSecond() * UnitOfTime.MILLIS_PER_SECOND;
 
         if (nowInMillis > startInMillis) {
             long minus = nowInMillis - startInMillis;

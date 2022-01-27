@@ -22,9 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-
-
-    private static final int SYNCING_URGENT_PERIOD = 1 * 60 * 1000; // 단위: ms
+    private static final int SYNCING_URGENT_PERIOD = 1 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND; // 단위: ms
 
     SpinnableDialView mainDialSlider;
     ConstraintLayout mainDialLayout;
