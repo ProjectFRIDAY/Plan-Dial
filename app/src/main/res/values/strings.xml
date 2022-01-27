@@ -2,4 +2,19 @@
     <string name="app_name">PlanDial</string>
     <string name="main_dial_slider">메인다이얼 슬라이더</string>
     <string name="category_circle">카테고리 원</string>
+    <string name="SettingText">Setting</string>
+    <string name="DialName">다이얼 이름</string>
+    <string name="DialNameHint">이름을 입력하시오</string>
+    <string name="DialTime">다이얼 시간 단위</string>
+    <string name="Startday">시작일</string>
+    <string name="DialPlusText">다이얼 생성</string>
+    <string name="DialPlusText2">현재 설정대로 다이얼을 생성합니다</string>
+    <string name="Done">완료</string>
+    <string name="Empty_Temple">빈 템플</string>
+    <string name="name_category">카테고리 이름</string>
+    <string name="name_category2">카테고리 이름을 입력하시오</string>
+    <string name="ch_dial1">다이얼 선택</string>
+    <string name="ch_dial2">카테고리에 포함할 다이얼을 선택해주세요</string>
+    <string name="ctPlusText">카테고리 생성</string>
+    <string name="ctPlusText2">현재 설정대로 카테고리를 생성합니다</string>
 </resources>
