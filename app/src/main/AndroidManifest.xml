@@ -25,6 +25,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".PlusDialActivity" />
+
         <receiver android:name=".PushReceiver"  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>

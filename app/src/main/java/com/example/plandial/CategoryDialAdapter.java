@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,15 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
+
+        if (position == category.getDialCount()) {
+            // 다이얼 추가 버튼 생성
+            holder.setAsAddButton();
+            return;
+        }
+
         holder.onBind(category.getDialByIndex(position));
     }
 
@@ -40,7 +48,8 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
         if (category == null) {
             return 0;
         }
-        return category.getDialCount();
+
+        return category.getDialCount() + 1;
     }
 
     //카테고리 받는 메서드 선언
@@ -65,6 +74,10 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
                 if (pos != RecyclerView.NO_POSITION) {
                     if (pos < category.getDialCount()) {
                         statusDisplayLayout.displayDial(category.getDialByIndex(pos));
+                    } else if (pos == category.getDialCount()) {
+                        Intent intent = new Intent(v.getContext().getApplicationContext(), PlusDialActivity.class);
+                        intent.putExtra("categoryName", category.getName());
+                        v.getContext().startActivity(intent);
                     }
                 }
             });
@@ -73,6 +86,11 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
         void onBind(Dial dial) {
             dialIcon.setImageResource(R.drawable.ic_launcher_foreground);
             dialName.setText(dial.getName());
+        }
+
+        void setAsAddButton() {
+            dialIcon.setImageResource(R.drawable.ic_plus);
+            dialName.setText("다이얼 추가");
         }
     }
 }
