@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -113,6 +114,8 @@ public class SpinnableDialView extends SpinnableImageView {
 
         if (selectedCategoryIndex < dialManager.getCategoryCount()) {
             this.categoryNameView.setText(dialManager.getCategoryByIndex(selectedCategoryIndex).getName());
+        } else {
+            this.categoryNameView.setText("빈 카테고리");
         }
     }
 }

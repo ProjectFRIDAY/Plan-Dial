@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,10 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
 
     //카테고리 받는 메서드 선언
     public void setCategory(Category category) {
-        if (category != null) {
-            this.category = category;
-            this.notifyDataSetChanged();
-        }
+
+        this.category = category;
+        this.notifyDataSetChanged();
+
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
