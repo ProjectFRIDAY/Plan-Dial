@@ -2,7 +2,6 @@ package com.example.plandial;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -14,7 +13,7 @@ public class LinearSelector extends ConstraintLayout {
     private static final int START_X = 10;
     private static final int END_X = 725;
     private static final int UNIT_COUNT = 4;
-    private int selected = 0;
+    private int selectedIndex = 0;
 
 
     public LinearSelector(Context context) {
@@ -25,17 +24,15 @@ public class LinearSelector extends ConstraintLayout {
         super(context, attrs);
     }
 
-    public int getSelected() {
-        return this.selected;
+    public int getSelectedIndex() {
+        return this.selectedIndex;
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        Log.d("test", "finish inflate selector!");
 
         circle = findViewById(R.id.unit_circle);
-        circle.setX(START_X);   // 초기 위치 설정
 
         // 터치 이벤트 설정
         circle.setOnTouchListener((view, motionEvent) -> {
@@ -59,7 +56,7 @@ public class LinearSelector extends ConstraintLayout {
                     circle.setX(START_X + interval * index);
                     // 자석 기능 추가해야 함.
 
-                    selected = index;
+                    selectedIndex = index;
                     break;
             }
 
