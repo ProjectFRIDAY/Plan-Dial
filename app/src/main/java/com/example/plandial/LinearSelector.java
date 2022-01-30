@@ -1,9 +1,11 @@
 package com.example.plandial;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -36,25 +38,25 @@ public class LinearSelector extends ConstraintLayout {
 
         // 터치 이벤트 설정
         circle.setOnTouchListener((view, motionEvent) -> {
-            float xPos = motionEvent.getRawX() - circle.getWidth() / 2 - this.getX();
+            float xPos = getViewCenteredPostion(view, motionEvent.getRawX() - (this.getX() + START_X));
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
+                    xPos = boundPosition(xPos);
 
-                    if (xPos < START_X) {
-                        xPos = START_X;
-                    } else if (xPos > END_X) {
-                        xPos = END_X;
-                    }
-
+                    // 손가락 따라 이동
                     circle.setX(xPos);
                     break;
                 case MotionEvent.ACTION_UP:
+                    xPos = boundPosition(xPos);
+
                     float interval = (END_X - START_X) / (float) (UNIT_COUNT - 1);
                     int index = Math.round(xPos / interval);
-
-                    circle.setX(START_X + interval * index);
-                    // 자석 기능 추가해야 함.
+                    
+                    // 자석 효과 애니메이션
+                    ObjectAnimator magnetAnimation = ObjectAnimator.ofFloat(view, "translationX", interval * index);
+                    magnetAnimation.setDuration(400);
+                    magnetAnimation.start();
 
                     selectedIndex = index;
                     break;
@@ -62,5 +64,20 @@ public class LinearSelector extends ConstraintLayout {
 
             return true;
         });
+    }
+
+    private float boundPosition(float pos) {
+        // 좌표의 최소값과 최대값 제한
+        if (pos < START_X) {
+            return START_X;
+        } else if (pos > END_X) {
+            return END_X;
+        }
+
+        return pos;
+    }
+
+    private float getViewCenteredPostion(View view, float pos) {
+        return pos - view.getWidth() / 2 + view.getPaddingLeft();
     }
 }
