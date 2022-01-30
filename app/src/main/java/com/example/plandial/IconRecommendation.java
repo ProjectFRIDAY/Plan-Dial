@@ -41,7 +41,7 @@ public class IconRecommendation {
     private static final String JSON_ICON_KEY = "icon";
     private static final String JSON_VECTOR_KEY = "vector";
 
-    public void roadIconData(Context context){
+    public void roadIconData(Context context) {
         RoadDataTask roadDataTask = new RoadDataTask(context);
         roadDataTask.execute();
     }
@@ -129,7 +129,7 @@ public class IconRecommendation {
     }
 
     public int getIconByName(Context context, String keyword) {
-        if(!isReady) return UNKNOWN_IMAGE;
+        if (!isReady) return UNKNOWN_IMAGE;
         try {
             ArrayList<String> wordVector = wordVectors.get(keyword);
             int targetIndex = -1;
