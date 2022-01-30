@@ -1,6 +1,8 @@
 package com.example.plandial;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import com.opencsv.CSVReader;
 
@@ -19,11 +21,11 @@ import java.util.HashMap;
 
 /*
 사용법
-Context ctx = getApplicationContext();
-IconRecommendation IconRecommendation = new IconRecommendation(ctx);
-if(IconRecommendation.getIsReady()) int result = IconRecommendation.getIconByName(ctx, kword);
+IconRecommendation iconRecommendation = new IconRecommendation();
+if(iconRecommendation.getIsReady()) int result = iconRecommendation.getIconByName(context, kword);
  */
 
+// 추후 싱글톤으로 변경 가능성 있음
 public class IconRecommendation {
     private static boolean isReady = false;
     private static final HashMap<String, ArrayList<String>> wordVectors = new HashMap<>();
@@ -39,10 +41,9 @@ public class IconRecommendation {
     private static final String JSON_ICON_KEY = "icon";
     private static final String JSON_VECTOR_KEY = "vector";
 
-
-    public IconRecommendation(Context context) {
-        // 최초 1회 -> 파일 준비
-        if (!isReady && getIconVectors(context) && getWordVectors(context)) isReady = true;
+    public void roadIconData(Context context){
+        RoadDataTask roadDataTask = new RoadDataTask(context);
+        roadDataTask.execute();
     }
 
     private boolean getWordVectors(Context context) {
@@ -128,6 +129,7 @@ public class IconRecommendation {
     }
 
     public int getIconByName(Context context, String keyword) {
+        if(!isReady) return UNKNOWN_IMAGE;
         try {
             ArrayList<String> wordVector = wordVectors.get(keyword);
             int targetIndex = -1;
@@ -153,5 +155,20 @@ public class IconRecommendation {
 
     public boolean getIsReady() {
         return isReady;
+    }
+
+    private class RoadDataTask extends AsyncTask<Boolean, Boolean, Boolean> {
+        private final Context context;
+
+        public RoadDataTask(Context context) {
+            super();
+            this.context = context;
+        }
+
+        @Override
+        protected Boolean doInBackground(Boolean... booleans) {
+            boolean completed = getIconVectors(context) && getWordVectors(context);
+            return isReady = completed;
+        }
     }
 }
