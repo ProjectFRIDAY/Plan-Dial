@@ -19,7 +19,6 @@ public class Dial {
     private OffsetDateTime startDateTime;
     private PendingIntent pushIntent;
 
-    @RequiresApi(api = Build.VERSION_CODES.S)
     public Dial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime) {
         assert name != null;
         assert period != null;
@@ -31,6 +30,18 @@ public class Dial {
         this.startDateTime = startDateTime;
 
         makeAlarm(context);
+    }
+
+    public Dial( final String name, final Period period, final OffsetDateTime startDateTime) {
+        assert name != null;
+        assert period != null;
+        assert startDateTime != null;
+
+        this.name = name;
+        this.icon = R.drawable.baseline_question_mark_black;  // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
+        this.period = period;
+        this.startDateTime = startDateTime;
+
     }
 
     public String getName() {
@@ -76,7 +87,7 @@ public class Dial {
         return getLeftTimeInMillis() / UnitOfTime.MILLIS_PER_SECOND;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.S)
+
     private void makeAlarm(final Context context) {
         AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, PushReceiver.class);
@@ -99,7 +110,6 @@ public class Dial {
     }
 
     // 비활성화 off
-    @RequiresApi(api = Build.VERSION_CODES.S)
     public void restart(final Context context) {
         this.startDateTime = OffsetDateTime.now();
         makeAlarm(context);
