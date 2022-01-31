@@ -21,4 +21,5 @@
     <string name="ch_dial2">카테고리에 포함할 다이얼을 선택해주세요</string>
     <string name="ctPlusText">카테고리 생성</string>
     <string name="ctPlusText2">현재 설정대로 카테고리를 생성합니다</string>
+    <string name="InactivateDial">다이얼 비활성화</string>
 </resources>

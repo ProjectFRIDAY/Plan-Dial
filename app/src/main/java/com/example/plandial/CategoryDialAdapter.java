@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapter.ItemViewHolder> {
+    private Dial dial;
     private Category category;
     private final DialManager dialManager = DialManager.getInstance();
     private StatusDisplayLayout statusDisplayLayout;
@@ -80,6 +81,19 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
                         v.getContext().startActivity(intent);
                     }
                 }
+            });
+            dialIcon.setOnLongClickListener(v ->  {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if (pos < category.getDialCount()) {
+                            Dial dial = category.getDialByIndex(pos);
+                            String dialName = dial.getName();
+                            Intent intent = new Intent(v.getContext().getApplicationContext(), EditDialActivity.class);
+                            intent.putExtra("dialName", String.valueOf(dialName));
+                            v.getContext().startActivity(intent);
+                        }
+                    }
+                    return true;
             });
         }
 

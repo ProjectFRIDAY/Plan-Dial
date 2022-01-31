@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +18,7 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
     private EditText dialName;
 
     private final IconRecommendation iconRecommendation = new IconRecommendation();
+    private FormatTextView startDayInput;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,5 +53,13 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
             }
         }
         return false;
+    
+            startDayInput = findViewById(R.id.Input_Startday);
+            Activity activity = this;
+            startDayInput.setOnClickListener(view -> {
+                DateTimePickerDialog dateTimePickerDialog = new DateTimePickerDialog(activity, startDayInput);
+                dateTimePickerDialog.show();
+            });
+        }
     }
 }

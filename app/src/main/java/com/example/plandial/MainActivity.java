@@ -1,8 +1,12 @@
 package com.example.plandial;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView urgentDialView;
     RecyclerView categoryDialView;
     StatusDisplayLayout statusDisplayLayout;
+    ImageButton add_button;
 
 
     @Override
@@ -77,11 +82,20 @@ public class MainActivity extends AppCompatActivity {
         DialManager.getInstance().addCategory(category2);
         //endregion
 
+        add_button = findViewById(R.id.add_button);
         urgentDialView = findViewById(R.id.urgent_dials);
         categoryDialView = findViewById(R.id.category_dials);
         mainDialSlider = findViewById(R.id.main_dial_slider);
         mainDialLayout = findViewById(R.id.main_dial_layout);
         statusDisplayLayout = findViewById(R.id.status_display_layout);
+
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), EditDialActivity.class);
+                startActivity(intent);
+            }
+        });
 
         {
             // 메인다이얼 슬라이더 설정 (객체 내부에서 ImageView 등록하도록 개선 필요)
