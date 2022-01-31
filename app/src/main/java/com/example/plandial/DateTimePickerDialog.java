@@ -19,7 +19,7 @@ public class DateTimePickerDialog {
         DatePickerDialog.OnDateSetListener datePickerCallbackMethod = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                selectedDateTime = selectedDateTime.withYear(year).withMonth(month).withDayOfMonth(dayOfMonth);
+                selectedDateTime = selectedDateTime.withYear(year).withMonth(month + 1).withDayOfMonth(dayOfMonth);
 
                 // TimePickerDialog를 연달아 호출함
                 timePickerDialog.show();

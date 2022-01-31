@@ -136,7 +136,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/StartDay"
-        custom:formatString="%d.%d.%d %d:%d" />
+        custom:formatString="%d.%d.%d %02d:%02d" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/DialPlus_box"
