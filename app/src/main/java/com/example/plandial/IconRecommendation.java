@@ -130,27 +130,30 @@ public class IconRecommendation {
 
     public int getIconByName(Context context, String keyword) {
         if (!isReady) return UNKNOWN_IMAGE;
-        try {
-            ArrayList<String> wordVector = wordVectors.get(keyword);
-            int targetIndex = -1;
-            double targetValue = -1;
 
-            for (int i = 0; i < iconVectors.size(); i++) {
-                ArrayList<Double> iconVector = iconVectors.get(i);
-                double value = dotOperation(wordVector, iconVector) / (Math.sqrt(normOperationString(wordVector)) * Math.sqrt(normOperation(iconVector)));
+        int targetIndex = -1;
+        double targetValue = -1;
 
-                if (value > targetValue) {
-                    targetValue = value;
-                    targetIndex = i;
+        for (String word : keyword.split(" ")) {
+            try {
+                ArrayList<String> wordVector = wordVectors.get(word);
+                for (int i = 0; i < iconVectors.size(); i++) {
+                    ArrayList<Double> iconVector = iconVectors.get(i);
+                    double value = dotOperation(wordVector, iconVector) / (Math.sqrt(normOperationString(wordVector)) * Math.sqrt(normOperation(iconVector)));
+
+                    if (value > targetValue) {
+                        targetValue = value;
+                        targetIndex = i;
+                    }
                 }
+            } catch (Exception ignored) {
             }
-
-            String iconName = iconFileNames.get(targetIndex);
-            return context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
-
-        } catch (Exception e) {
-            return UNKNOWN_IMAGE;
         }
+
+        if (targetIndex == -1) return UNKNOWN_IMAGE;
+
+        String iconName = iconFileNames.get(targetIndex);
+        return context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
     }
 
     public boolean getIsReady() {
