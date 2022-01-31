@@ -37,6 +37,13 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
             iconImage = findViewById(R.id.DialImage_Recommend);
             dialName.setOnEditorActionListener(this);
         }
+
+        startDayInput = findViewById(R.id.Input_Startday);
+        Activity activity = this;
+        startDayInput.setOnClickListener(view -> {
+            DateTimePickerDialog dateTimePickerDialog = new DateTimePickerDialog(activity, startDayInput);
+            dateTimePickerDialog.show();
+        });
     }
 
     @Override
@@ -53,13 +60,5 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
             }
         }
         return false;
-    
-            startDayInput = findViewById(R.id.Input_Startday);
-            Activity activity = this;
-            startDayInput.setOnClickListener(view -> {
-                DateTimePickerDialog dateTimePickerDialog = new DateTimePickerDialog(activity, startDayInput);
-                dateTimePickerDialog.show();
-            });
-        }
     }
 }
