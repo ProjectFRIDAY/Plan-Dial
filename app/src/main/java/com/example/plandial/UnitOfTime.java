@@ -1,6 +1,7 @@
 package com.example.plandial;
 
 public enum UnitOfTime {
+    MINUTE(60),
     HOUR(3600),
     DAY(86400),
     WEEK(604800),

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //region test code
-        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.HOUR, 2), OffsetDateTime.of(2022, 1, 28, 18, 23, 0, 0, ZoneOffset.ofHours(9)));
         Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
         Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
         Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
