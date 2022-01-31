@@ -153,5 +153,8 @@ public class MainActivity extends AppCompatActivity {
         ICategoryDao iCategoryDao = database.iCategoryDao(); //인터페이스 객체 할당
         IPresetDao iPresetDao = database.iPresetDao(); // 인터페이스 객체 할당
 
+        // 아이콘 추천 준비
+        IconRecommendation iconRecommendation = new IconRecommendation();
+        iconRecommendation.roadIconData(this);
     }
 }
