@@ -51,11 +51,13 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
         if (v.getId() == R.id.Input_DialName && actionId == EditorInfo.IME_ACTION_DONE) {
             String text = v.getText().toString();
 
-            if (text.length() == 0) iconImage.setImageBitmap(null);
-            else {
+            if (text.length() == 0) {
+                iconImage.setImageBitmap(null);
+            } else {
                 int imageId = R.drawable.baseline_question_mark_black;
-                if (iconRecommendation.getIsReady())
+                if (iconRecommendation.getIsReady()) {
                     imageId = iconRecommendation.getIconByName(this, text);
+                }
                 iconImage.setImageResource(imageId);
             }
         }

@@ -129,7 +129,9 @@ public class IconRecommendation {
     }
 
     public int getIconByName(Context context, String keyword) {
-        if (!isReady) return UNKNOWN_IMAGE;
+        if (!isReady) {
+            return UNKNOWN_IMAGE;
+        }
 
         int targetIndex = -1;
         double targetValue = -1;
@@ -146,11 +148,14 @@ public class IconRecommendation {
                         targetIndex = i;
                     }
                 }
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
-        if (targetIndex == -1) return UNKNOWN_IMAGE;
+        if (targetIndex == -1) {
+            return UNKNOWN_IMAGE;
+        }
 
         String iconName = iconFileNames.get(targetIndex);
         return context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
