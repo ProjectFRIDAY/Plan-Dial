@@ -26,6 +26,8 @@
         </activity>
 
         <activity android:name=".PlusDialActivity" />
+        <activity android:name=".EditDialActivity" />
+
 
         <receiver android:name=".PushReceiver"  android:exported="true">
             <intent-filter>
