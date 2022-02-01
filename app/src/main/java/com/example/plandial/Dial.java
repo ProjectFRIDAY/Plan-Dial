@@ -14,34 +14,39 @@ public class Dial {
     private static int id = 0;
 
     private String name;
-    private int icon;
+    private int icon = -1;
     private Period period;
     private OffsetDateTime startDateTime;
     private PendingIntent pushIntent;
+    private static final IconRecommendation iconRecommendation = new IconRecommendation();
 
-    public Dial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime, final int icon) {
-        assert name != null;
-        assert period != null;
-        assert startDateTime != null;
-
-        this.name = name;
-        this.icon = icon;  // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
-        this.period = period;
-        this.startDateTime = startDateTime;
-
+    // 다이얼 첫 생성시 -> 아이콘 추천
+    public Dial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime) {
+        makeDial(name, period, startDateTime);
+        icon = iconRecommendation.getIconByName(context, name);
         makeAlarm(context);
     }
 
-    public Dial(final String name, final Period period, final OffsetDateTime startDateTime, final int icon) {
+    // 다이얼 DB에서 가져올 시 -> 아이콘 불러오기
+    public Dial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime, int icon) {
+        makeDial(name, period, startDateTime);
+        this.icon = icon;
+        makeAlarm(context);
+    }
+
+    // for test
+    public Dial(final String name, final Period period, final OffsetDateTime startDateTime) {
+        makeDial(name, period, startDateTime);
+    }
+
+    private void makeDial(final String name, final Period period, final OffsetDateTime startDateTime) {
         assert name != null;
         assert period != null;
         assert startDateTime != null;
 
         this.name = name;
-        this.icon = icon;  // 임시로 작성한 코드임. 아이콘 자동 선택 로직으로 대체해야 함.
         this.period = period;
         this.startDateTime = startDateTime;
-
     }
 
     public String getName() {

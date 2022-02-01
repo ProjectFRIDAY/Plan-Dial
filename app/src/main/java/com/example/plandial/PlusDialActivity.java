@@ -82,7 +82,6 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
                     imageId = iconRecommendation.getIconByName(this, text);
                 }
                 iconImage.setImageResource(imageId);
-                dialSettingViewModel.setImage(imageId);
             }
         }
         return false;
