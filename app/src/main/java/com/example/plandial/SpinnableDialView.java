@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,15 +16,21 @@ import java.util.ArrayList;
 
 public class SpinnableDialView extends SpinnableImageView {
 
-    private static final double DEGREE_BETWEEN_CATEGORY = 30;
+    private static final float DEGREE_BETWEEN_CATEGORY = 30;
     private static final int MAGNET_STRENGTH = 50;
     private static final int VIBRATE_STRENGTH = 4;
+    private static final float CIRCLE_SIZE = 32.0f;     // dp
+    private static final float SLIDER_SIZE = 205.0f;    // dp
 
     private ArrayList<ImageView> circles;
     private final DialManager dialManager = DialManager.getInstance();
     private int selectedCategoryIndex = 0;
     private CategoryDialAdapter categoryDialAdapter;
     private TextView categoryNameView;
+
+    private float distanceToCircle;
+    private float baseX;
+    private float baseY;
 
     Vibrator vibrator = (Vibrator) this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -49,7 +56,7 @@ public class SpinnableDialView extends SpinnableImageView {
             this.selectedCategoryIndex = (categoryIndex - (int) (INITIAL_DEGREE / DEGREE_BETWEEN_CATEGORY) + 12) % 12;
             categoryDialAdapter.setCategory(dialManager.getCategoryByIndex(this.selectedCategoryIndex));
 
-            double lastDegree = categoryIndex * DEGREE_BETWEEN_CATEGORY;
+            float lastDegree = categoryIndex * DEGREE_BETWEEN_CATEGORY;
             super.rotate(currentDegree, lastDegree, MAGNET_STRENGTH);
             currentDegree = lastDegree;
 
@@ -90,8 +97,6 @@ public class SpinnableDialView extends SpinnableImageView {
         for (int i = dialManager.getCategoryCount(); i < this.circles.size(); ++i) {
             circles.get(i).setColorFilter(ContextCompat.getColor(context, R.color.empty_color));
         }
-
-        arrangeCircles();
     }
 
     public void setCategoryNameView(TextView categoryNameView) {
@@ -99,12 +104,20 @@ public class SpinnableDialView extends SpinnableImageView {
         syncCategoryName();
     }
 
-    private void arrangeCircles() {
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
 
-        double distanceToCircle = 1.6 * this.getX() / 2;
+        this.distanceToCircle = 0.76f * (convertDpToPx(SLIDER_SIZE)) / 2;
+
+        this.baseX = -convertDpToPx(CIRCLE_SIZE) / 2 + this.getX() + convertDpToPx(SLIDER_SIZE) / 2;
+        this.baseY = -convertDpToPx(CIRCLE_SIZE) / 2 + this.getY() + convertDpToPx(SLIDER_SIZE) / 2;
+    }
+
+    public void arrangeCircles() {
         for (int i = 0; i < circles.size(); ++i) {
-            circles.get(i).setX((float) (-circles.get(i).getWidth() / 2 + this.getX() + getWidth() / 2 + distanceToCircle * Math.sin(Math.toRadians(currentDegree - i * DEGREE_BETWEEN_CATEGORY))));
-            circles.get(i).setY((float) (-circles.get(i).getHeight() / 2 + this.getY() + getHeight() / 2 - distanceToCircle * Math.cos(Math.toRadians(currentDegree - i * DEGREE_BETWEEN_CATEGORY))));
+            circles.get(i).setX((float) (baseX + distanceToCircle * Math.sin(Math.toRadians(currentDegree - i * DEGREE_BETWEEN_CATEGORY))));
+            circles.get(i).setY((float) (baseY - distanceToCircle * Math.cos(Math.toRadians(currentDegree - i * DEGREE_BETWEEN_CATEGORY))));
         }
     }
 
@@ -116,5 +129,12 @@ public class SpinnableDialView extends SpinnableImageView {
         } else {
             this.categoryNameView.setText("빈 카테고리");
         }
+    }
+
+    private float convertDpToPx(float dp) {
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                this.getContext().getResources().getDisplayMetrics());
     }
 }

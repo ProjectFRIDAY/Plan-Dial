@@ -1,6 +1,7 @@
 package com.example.plandial;
 
 import android.os.Bundle;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView urgentDialView;
     RecyclerView categoryDialView;
     StatusDisplayLayout statusDisplayLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
             circles.add(findViewById(R.id.category_circle_9));
             mainDialSlider.setCircles(this, circles);
             mainDialSlider.setCategoryNameView(findViewById(R.id.category_name));
+
+            //ConstraintLayout mainDialLayout = findViewById(R.id.main_dial_layout);
+            mainDialSlider.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    mainDialSlider.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    mainDialSlider.arrangeCircles();
+                }
+            });
         }
 
         {
