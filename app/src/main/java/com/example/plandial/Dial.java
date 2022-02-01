@@ -53,10 +53,9 @@ public class Dial {
         return this.name;
     }
 
-    public void setName(final String name) {
+    public void setName(final Context context, final String name) {
+        icon = iconRecommendation.getIconByName(context, name);
         this.name = name;
-
-        // 아이콘 자동 선택을 통해 아이콘 변경
     }
 
     public int getIcon() {
