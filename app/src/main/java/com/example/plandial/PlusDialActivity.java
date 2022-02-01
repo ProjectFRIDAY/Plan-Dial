@@ -18,7 +18,7 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
     private EditText dialName;
 
     private final IconRecommendation iconRecommendation = new IconRecommendation();
-    private FormatTextView startDayInput;
+    private DateTimeTextView startDayInput;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

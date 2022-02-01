@@ -126,7 +126,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/unit_selector" />
 
-    <com.example.plandial.FormatTextView
+    <com.example.plandial.DateTimeTextView
         android:id="@+id/Input_Startday"
         android:layout_width="304dp"
         android:layout_height="42dp"

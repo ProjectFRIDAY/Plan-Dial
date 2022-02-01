@@ -14,7 +14,7 @@ public class DateTimePickerDialog {
     private final DatePickerDialog datePickerDialog;
     private final TimePickerDialog timePickerDialog;
 
-    public DateTimePickerDialog(Context context, FormatTextView formatTextView) {
+    public DateTimePickerDialog(Context context, IOffsetDateTimeRequester offsetDateTimeRequester) {
 
         DatePickerDialog.OnDateSetListener datePickerCallbackMethod = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -31,7 +31,7 @@ public class DateTimePickerDialog {
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 selectedDateTime = selectedDateTime.withHour(hour).withMinute(minute);
 
-                formatTextView.setTextByOffsetDateTime(selectedDateTime);
+                offsetDateTimeRequester.setByOffsetDateTime(selectedDateTime);
             }
         };
 
