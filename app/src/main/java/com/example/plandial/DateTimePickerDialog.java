@@ -39,7 +39,7 @@ public class DateTimePickerDialog {
                 context,
                 datePickerCallbackMethod,
                 OffsetDateTime.now().getYear(),
-                OffsetDateTime.now().getMonthValue(),
+                OffsetDateTime.now().getMonthValue() - 1,
                 OffsetDateTime.now().getDayOfMonth());
 
         timePickerDialog = new TimePickerDialog(
