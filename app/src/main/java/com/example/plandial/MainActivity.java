@@ -42,22 +42,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //region test code
-        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.HOUR, 2), OffsetDateTime.of(2022, 1, 28, 18, 23, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial5 = new Dial(this, "코딩5", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial6 = new Dial(this, "코딩6", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial7 = new Dial(this, "코딩7", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial8 = new Dial(this, "코딩8", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial9 = new Dial(this, "코딩9", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial10 = new Dial(this, "코딩10", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial11 = new Dial(this, "코딩11", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial12 = new Dial(this, "코딩12", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial13 = new Dial(this, "코딩13", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial14 = new Dial(this, "코딩14", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial15 = new Dial(this, "코딩15", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial16 = new Dial(this, "코딩16", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.HOUR, 2), OffsetDateTime.of(2022, 1, 28, 18, 23, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)), R.drawable.outline_cleaning_services_black);
+        Dial dial3 = new Dial(this, "그림", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)), R.drawable.outline_palette_black);
+        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial5 = new Dial(this, "코딩5", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial6 = new Dial(this, "코딩6", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial7 = new Dial(this, "코딩7", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial8 = new Dial(this, "코딩8", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial9 = new Dial(this, "코딩9", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial10 = new Dial(this, "코딩10", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial11 = new Dial(this, "코딩11", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial12 = new Dial(this, "코딩12", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial13 = new Dial(this, "코딩13", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial14 = new Dial(this, "코딩14", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial15 = new Dial(this, "코딩15", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
+        Dial dial16 = new Dial(this, "코딩16", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
         Category category1 = new Category("나는 바보다");
         category1.addDial(dial1);
         category1.addDial(dial2);

@@ -2,7 +2,6 @@ package com.example.plandial;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.widget.EditText;
 
@@ -91,6 +90,7 @@ public class DialSettingViewModel implements ISettingViewModel {
     public void save() {
         // 카테고리에 새로운 다이얼 생성
         Dial dial = new Dial(
+                activity.getApplicationContext(),
                 dialNameData,
                 periodData,
                 startDayData);
