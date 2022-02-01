@@ -3,7 +3,9 @@ package com.example.plandial;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,12 +20,18 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
     private EditText dialName;
 
     private final IconRecommendation iconRecommendation = new IconRecommendation();
+    private DialSettingViewModel dialSettingViewModel;
+
     private DateTimeTextView startDayInput;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plus_dial);
+
+        dialSettingViewModel = new DialSettingViewModel(
+                this,
+                DialManager.getInstance().getCategoryByName(getIntent().getExtras().getString("categoryName")));
 
         {
             // 뒤로가기 버튼 설정
@@ -38,12 +46,27 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
             dialName.setOnEditorActionListener(this);
         }
 
-        startDayInput = findViewById(R.id.Input_Startday);
-        Activity activity = this;
-        startDayInput.setOnClickListener(view -> {
-            DateTimePickerDialog dateTimePickerDialog = new DateTimePickerDialog(activity, startDayInput);
-            dateTimePickerDialog.show();
-        });
+        {
+            startDayInput = findViewById(R.id.Input_Startday);
+            Activity activity = this;
+            startDayInput.setOnClickListener(view -> {
+                DateTimePickerDialog dateTimePickerDialog = new DateTimePickerDialog(activity, startDayInput);
+                dateTimePickerDialog.show();
+            });
+        }
+
+        //region 완료 버튼 설정
+        {
+            Activity activity = this;
+            Button completeButton = findViewById(R.id.DialPlus_Button);
+            completeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialSettingViewModel.complete();
+                }
+            });
+        }
+        //endregion
     }
 
     @Override

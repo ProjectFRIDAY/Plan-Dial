@@ -7,6 +7,7 @@ import java.time.OffsetDateTime;
 import java.util.IllegalFormatException;
 
 public class DateTimeTextView extends FormatTextView implements IOffsetDateTimeRequester{
+
     private OffsetDateTime dateTime;
 
     public DateTimeTextView(Context context, AttributeSet attrs) {
@@ -35,5 +36,9 @@ public class DateTimeTextView extends FormatTextView implements IOffsetDateTimeR
         }
 
         return true;
+    }
+
+    public OffsetDateTime getDateTime() {
+        return dateTime;
     }
 }

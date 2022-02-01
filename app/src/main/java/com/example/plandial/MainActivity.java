@@ -28,12 +28,12 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private static final int SYNCING_URGENT_PERIOD = 1 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND; // 단위: ms
 
-    SpinnableDialView mainDialSlider;
-    ConstraintLayout mainDialLayout;
-    RecyclerView urgentDialView;
-    RecyclerView categoryDialView;
-    StatusDisplayLayout statusDisplayLayout;
-    ImageButton add_button;
+    private SpinnableDialView mainDialSlider;
+    private ConstraintLayout mainDialLayout;
+    private RecyclerView urgentDialView;
+    private RecyclerView categoryDialView;
+    private StatusDisplayLayout statusDisplayLayout;
+    private ImageButton add_button;
 
 
     @Override
@@ -156,5 +156,12 @@ public class MainActivity extends AppCompatActivity {
         // 아이콘 추천 준비
         IconRecommendation iconRecommendation = new IconRecommendation();
         iconRecommendation.roadIconData(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        this.categoryDialView.getAdapter().notifyDataSetChanged();
     }
 }
