@@ -98,7 +98,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
         }
 
         void onBind(Dial dial) {
-            dialIcon.setImageResource(R.drawable.ic_launcher_foreground);
+            dialIcon.setImageResource(dial.getIcon());
             dialName.setText(dial.getName());
         }
 

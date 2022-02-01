@@ -77,11 +77,12 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
             if (text.length() == 0) {
                 iconImage.setImageBitmap(null);
             } else {
-                int imageId = R.drawable.baseline_question_mark_black;
+                int imageId = iconRecommendation.getUnknownImage();
                 if (iconRecommendation.getIsReady()) {
                     imageId = iconRecommendation.getIconByName(this, text);
                 }
                 iconImage.setImageResource(imageId);
+                dialSettingViewModel.setImage(imageId);
             }
         }
         return false;

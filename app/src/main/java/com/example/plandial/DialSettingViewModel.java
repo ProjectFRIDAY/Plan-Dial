@@ -8,6 +8,7 @@ public class DialSettingViewModel implements ISettingViewModel {
 
     private final Activity activity;
     private final Category category;
+    private int icon = -1;
 
     public DialSettingViewModel(Activity activity, Category category) {
         this.activity = activity;
@@ -43,13 +44,21 @@ public class DialSettingViewModel implements ISettingViewModel {
         Dial dial = new Dial(
                 dialName.getText().toString(),
                 new Period(UnitOfTime.values()[timeUnit.getSelectedIndex() + 1], 1),
-                startDay.getDateTime());
+                startDay.getDateTime(),
+                icon);
 
         category.addDial(dial);
     }
 
+    public void setImage(int imageId) {
+        icon = imageId;
+    }
+
     private boolean validate() {
         // 입력이 유효한지 판단
+        if (icon == -1) {
+            return false;
+        }
         return true;
     }
 }

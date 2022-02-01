@@ -34,7 +34,7 @@ public class IconRecommendation {
 
     private static final String WORD_VECTOR_FILE = "datas/word_vectors.csv";
     private static final String ICON_VECTOR_FILE = "datas/icon_vectors.json";
-    private static final int UNKNOWN_IMAGE = R.drawable.baseline_question_mark_black;
+    public static final int UNKNOWN_IMAGE = R.drawable.baseline_question_mark_black;
     private static final String IMAGE_EXTENSION = ""; // 예비용
 
     private static final String JSON_ENTIRE_KEY = "data";
@@ -163,6 +163,10 @@ public class IconRecommendation {
 
     public boolean getIsReady() {
         return isReady;
+    }
+
+    public int getUnknownImage() {
+        return UNKNOWN_IMAGE;
     }
 
     private class RoadDataTask extends AsyncTask<Boolean, Boolean, Boolean> {

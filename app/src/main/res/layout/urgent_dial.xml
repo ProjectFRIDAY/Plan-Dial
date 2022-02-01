@@ -9,6 +9,7 @@
         android:id="@+id/dial_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:scaleType="fitCenter"
         android:contentDescription="@string/dial_image" />
 
     <TextView
