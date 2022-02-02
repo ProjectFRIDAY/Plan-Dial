@@ -3,6 +3,7 @@ package com.example.plandial;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,6 +14,7 @@ import com.example.plandial.db.IDialDao;
 import com.example.plandial.db.IPresetDao;
 import com.example.plandial.db.PlanDatabase;
 import com.example.plandial.db.PresetTable;
+import com.example.plandial.db.WorkDatabase;
 
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        WorkDatabase.getInstance().ready(this);
+        WorkDatabase.getInstance().fillPresetdatas(this);
 
 
     }
