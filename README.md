@@ -5,3 +5,5 @@
 + master : default 브랜치입니다.    
   + feature/category-create-page : part3 작업들에 대한 브랜치입니다. 템플릿 선택과 카테고리 생성 화면에 대한 기능을 다룹니다.
   + feature/dial-create-page : part4 작업들에 대한 브랜치입니다. 다이얼 생성 화면에 대한 기능을 다룹니다.
+  + feature/db-connect : part2 ~ part4와 DB를 연결하는 작업들에 대한 브랜치입니다.
+  + repair/main-page : 메인 페이지를 수정하는 작업들에 대한 브랜치입니다.
