@@ -77,15 +77,15 @@ public class Dial {
 
         if (nowInMillis > startInMillis) {
             long minus = nowInMillis - startInMillis;
-            int times = (int) (minus / period.getPeriodInMillis()) + 1;
+            long times = minus / period.getPeriodInMillis() + 1;
             return period.getPeriodInMillis() * times - minus;
         } else {
-            return startInMillis;
+            return startInMillis - nowInMillis;
         }
     }
 
-    public long getLeftTimeInSeconds() {
-        return getLeftTimeInMillis() / UnitOfTime.MILLIS_PER_SECOND;
+    public int getLeftTimeInSeconds() {
+        return (int) (getLeftTimeInMillis() / UnitOfTime.MILLIS_PER_SECOND);
     }
 
 
