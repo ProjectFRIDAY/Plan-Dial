@@ -2,7 +2,6 @@ package com.example.plandial;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -13,7 +12,8 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
     protected static final float INITIAL_DEGREE = 180;
 
     protected float currentDegree = 0;
-    protected Pair<Float, Float> lastTouchLocation = new Pair<>(0.0f, 0.0f);
+    protected float lastX = 0.0f;
+    protected float lastY = 0.0f;
 
     public SpinnableImageView(Context context) {
         super(context);
@@ -38,12 +38,10 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
 
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
             // 벡터의 내적을 구해 각도를 판정함.
-            float dotResult = lastTouchLocation.first * x + lastTouchLocation.second * y;
-            float theta = (float) Math.toDegrees(Math.acos(dotResult / (Math.sqrt(x * x + y * y) * Math.sqrt(lastTouchLocation.first * lastTouchLocation.first + lastTouchLocation.second * lastTouchLocation.second))));
+            float theta = (float) Math.toDegrees(Math.acos((lastX * x + lastY * y) / (Math.sqrt(x * x + y * y) * Math.sqrt(lastX * lastX + lastY * lastY))));
 
             // 벡터의 외적을 구해 회전 방향을 판정함.
-            float crossResult = lastTouchLocation.first * y - lastTouchLocation.second * x;
-            int direction = (crossResult > 0) ? -1 : 1;
+            int direction = (lastX * y - lastY * x > 0) ? -1 : 1;
 
             float nextDegree = this.currentDegree + direction * theta;
 
@@ -58,7 +56,9 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
             currentDegree = nextDegree;
         }
 
-        lastTouchLocation = new Pair<>(x, y);
+        this.lastX = x;
+        this.lastY = y;
+
         return true;
     }
 
