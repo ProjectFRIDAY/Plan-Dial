@@ -42,13 +42,13 @@ public class TemplateListAdapter extends BaseAdapter {
 
         Category template = getItem(position);
         title.setText(template.getName());
-
+/*
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GridLayout
             }
-        });
+        });*/
 
         return view;
     }
