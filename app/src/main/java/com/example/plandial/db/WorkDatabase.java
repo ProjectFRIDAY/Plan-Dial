@@ -32,7 +32,8 @@ public class WorkDatabase {
     private static IPresetDao iPresetDao;
     private static boolean ok = false;
 
-    private WorkDatabase() {}
+    private WorkDatabase() {
+    }
 
     public static WorkDatabase getInstance() {
         return workDatabase;
@@ -87,7 +88,7 @@ public class WorkDatabase {
     // -- 생성 파트 ----------------------------------------------------------------------------------
 
     // 다이얼 데이터 생성
-    public void makeDial(String dialName, String dialTimeUnit, int dialTime, int categoryLocation, String dialIcon, int dialStart) {
+    public void makeDial(int categoryLocation, String dialName, String dialTimeUnit, int dialTime, String dialIcon, int dialStart) {
 
         assert ok;
         List<CategoryTable> categoryId = iCategoryDao.getCategoryAll();
@@ -117,7 +118,7 @@ public class WorkDatabase {
     // -- 수정 파트 ----------------------------------------------------------------------------------
 
     // 다이얼 데이터 수정
-    public void fixDial(String dialName, String dialTimeUnit, int dialTime, int categoryLocation, String dialIcon, int dialStart) {
+    public void fixDial(int categoryLocation, String dialName, String dialTimeUnit, int dialTime, String dialIcon, int dialStart) {
 
         assert ok;
         List<CategoryTable> categoryId = iCategoryDao.getCategoryAll();
@@ -147,7 +148,7 @@ public class WorkDatabase {
     // -- 삭제 파트 ----------------------------------------------------------------------------------
 
     // 다이얼 데이터 삭제
-    public void delDial(String dialName, String dialTimeUnit, int dialTime, int categoryLocation, String dialIcon, int dialStart) {
+    public void delDial(int categoryLocation, String dialName, String dialTimeUnit, int dialTime, String dialIcon, int dialStart) {
 
         assert ok;
         List<CategoryTable> categoryId = iCategoryDao.getCategoryAll();
@@ -225,8 +226,6 @@ public class WorkDatabase {
 //                + ableDialTables.get(i).getDialIcon() + "\n"
 //                + ableDialTables.get(i).getDialStart() + "\n");
 //    }
-
-
 
 
     // 프리셋  선택 부분 추가해서 개선해야함.
