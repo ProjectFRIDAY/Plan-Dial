@@ -34,6 +34,10 @@ public interface IPresetDao {
     @Query("DELETE FROM PresetTable")
     void delPresetAll();
 
+    // 프리셋 이름으로 데이터 불러오기 쿼리
+    @Query("SELECT * FROM PresetTable WHERE PresetTable.presetName = :name")
+    List<PresetTable> getNamePreset(String name);
+
     // 템플릿 가지고 올 때 각 템플릿의 프리셋들을 한번에 여러개 가져올 수 있도록 제작
     // 1은 나중에 진짜 templet아이디로 바뀜
     @Query("SELECT * FROM PresetTable WHERE templateId ='t1' ")

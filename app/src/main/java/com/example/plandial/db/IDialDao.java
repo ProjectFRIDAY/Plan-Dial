@@ -33,6 +33,11 @@ public interface IDialDao {
     @Query("SELECT * FROM DialTable WHERE not DialTable.dialDisabled")
     List<DialTable> getDialDis();
 
+    // 다이얼 이름으로 데이터 불러오기 쿼리
+    @Query("SELECT * FROM DialTable WHERE DialTable.dialName = :name")
+    List<DialTable> getNameDial(String name);
+
+
     // 특정 카테고리 아이디를 가지고 있는 다이얼 데이터 쿼리
 
 

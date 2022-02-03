@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.example.plandial.Dial;
 import com.example.plandial.DialManager;
 import com.opencsv.CSVReader;
 
@@ -77,12 +78,11 @@ public class WorkDatabase {
     }
 
 
-    // == Database method ==
-    // [index]
+    // == Database method [index] ==
     // -- 생성 파트 --
     // -- 수정 파트 --
     // -- 삭제 파트 --
-    // -- 조회 파트 --
+    // -- 조회 파트 & anything --
 
 
     // -- 생성 파트 ----------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ public class WorkDatabase {
     }
 
 
-    // -- 조회 파트 ----------------------------------------------------------------------------------
+    // -- 조회 파트 & anything -----------------------------------------------------------------------
     // *조회 파트는 함수화 시키는 것보다 직접 db를 활용하는것이 더 효율적일 것 같아 가이드만 적어놓겠습니다.
 
     // 전체 다이얼 데이터 조회 (step 1 & 2는 WorkDatabase class의 상단에 있는 코드를 붙여넣기 하면 됩니다. )
@@ -200,6 +200,29 @@ public class WorkDatabase {
     // step 4 - 원하는 정보를 가져오는 코드 EX) 다이얼 이름을 불러온다 -> dialTables.get(i).getId()
     // 여기서 i는 DialTable에 있는 데이터들의 순서입니다. i = 1이면 첫번째 데이터라는 뜻.
     // 필요한 기능은 Dao 파일에서 query문 확인하시면 되고 필요한 기능이 없으면 문의주세요!! 담당자 : 평화
+
+
+    // 이름으로 데이터 가져오기 (다이얼)
+    //List<DialTable> getNameDial(String name);
+
+    // 이름으로 데이터 가져오기 (프리셋)
+    //List<PresetTable> getNamePreset(String name);
+
+    // 다이얼 이름을 받아서 다이얼 개수 조회
+    public int numDial(String name) {
+        List<DialTable> dialTables = iDialDao.getNameDial(name);
+        return dialTables.size();
+    }
+
+    // 템플릿 이름을 받아서 프리셋 개수 조회
+    public int numPreset(String name) {
+        List<PresetTable> presetTables = iPresetDao.getNamePreset(name);
+        return presetTables.size();
+    }
+
+
+
+
 
 
     // 전체 다이얼들의 데이터 조회
