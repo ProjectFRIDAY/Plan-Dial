@@ -1,6 +1,9 @@
 package com.example.plandial;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+
+import android.util.Pair;
 
 public class DialManager {
     private static final DialManager dialManager = new DialManager();
@@ -66,6 +69,39 @@ public class DialManager {
 
     public boolean removeCategoryByObject(Category category) {
         return categories.remove(category);
+    }
+
+    public ArrayList<Dial> getUrgentDials(long urgentBound) {
+        ArrayList<Pair<Long, Dial>> urgentDials = new ArrayList<>();
+
+        DialManager dm = DialManager.getInstance();
+        int categoryCount = dm.getCategoryCount();
+
+        for (int i = 0; i < categoryCount; ++i) {
+            Category category = dm.getCategoryByIndex(i);
+            int dialCount = category.getDialCount();
+
+            for (int j = 0; j < dialCount; ++j) {
+                Dial dial = category.getDialByIndex(j);
+
+                // 남은 시간 구하기
+                long leftTime = dial.getLeftTimeInMillis();
+
+                if (0 <= leftTime && leftTime < urgentBound) {
+                    urgentDials.add(new Pair<>(leftTime, dial));
+                }
+            }
+        }
+
+        urgentDials.sort(Comparator.comparing(lhs -> lhs.first));
+
+        ArrayList<Dial> result = new ArrayList<>();
+
+        for (int i = 0; i < urgentDials.size(); ++i) {
+            result.add(urgentDials.get(i).second);
+        }
+
+        return result;
     }
 
     private static void saveContent() {

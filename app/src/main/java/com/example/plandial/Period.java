@@ -35,7 +35,7 @@ public class Period {
             return true;
         }
 
-        if (obj == null || !(obj instanceof Period) || this.hashCode() != obj.hashCode()) {
+        if (!(obj instanceof Period) || this.hashCode() != obj.hashCode()) {
             return false;
         }
 
