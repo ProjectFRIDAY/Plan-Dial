@@ -64,9 +64,9 @@ public class DialSettingViewModel implements ISettingViewModel {
                 builder.show();
                 return false;
             } else if (!dialValidator.validateStartDay(startDayData)) {
-                builder.setMessage("시작일은 지금보다 뒤로 설정해야 합니다.");
-                builder.show();
-                return false;
+                // 시작일이 과거면 현재로 강제 이동
+                this.startDayData = OffsetDateTime.now();
+                startDayView.setByOffsetDateTime(startDayData);
             }
         }
         //endregion
