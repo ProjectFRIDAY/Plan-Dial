@@ -10,6 +10,11 @@ public class TemplateManager {
         return TemplateManager.templateManager;
     }
 
+    public int getPresetCount() {
+        // 전체 프리셋 개수 가져오기
+        return 0;
+    }
+
     public Dial getPresetByIndex(int index) {
         // index번째 프리셋 가져오기
         return null;
@@ -20,9 +25,13 @@ public class TemplateManager {
         return null;
     }
 
+    public int getTemplateCount() {
+        // 전체 템플릿 개수 가져오기
+        return DialManager.getInstance().getCategoryCount();
+    }
+
     public Category getTemplateByIndex(int index) {
-        // index번째 템플릿 가져오기
-        return null;
+        return DialManager.getInstance().getCategoryByIndex(index);
     }
 
     public Category getTemplateByName(String name) {

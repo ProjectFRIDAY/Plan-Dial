@@ -27,17 +27,13 @@
         app:layout_constraintStart_toEndOf="@id/BackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/new_category_bt"
-        android:text="@string/Empty_Temple"
-        android:textSize="36sp"
-        android:textColor="@color/black"
-        android:background="#00ff0000"
-        android:layout_width="198dp"
-        android:layout_height="71dp"
-        android:layout_marginStart="33dp"
+    <ListView
+        android:id="@+id/template_list"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/BackButton"/>
+        app:layout_constraintTop_toBottomOf="@+id/SettingText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
