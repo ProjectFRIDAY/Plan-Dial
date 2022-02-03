@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EditDialActivity extends AppCompatActivity implements TextView.OnEditorActionListener {
     private final DialManager dialManager = DialManager.getInstance();
     private final IconRecommendation iconRecommendation = new IconRecommendation();
+    private DialEditingViewModel dialEditingViewModel;
     private Intent intent;
     private Dial dial;
 
@@ -57,7 +59,15 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
         // 아이콘 표시 설정
         Input_DialName.setOnEditorActionListener(this);
 
-        // (추가 필요) 저장 기능
+        // 저장
+        dialEditingViewModel = new DialEditingViewModel(this, dial);
+
+        //region 완료 버튼 설정
+        {
+            Button completeButton = findViewById(R.id.DialEdit_Button);
+            completeButton.setOnClickListener(view -> dialEditingViewModel.complete());
+        }
+        //endregion
     }
 
     @Override
