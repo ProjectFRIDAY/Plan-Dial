@@ -101,7 +101,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
             if (dial.isDisabled()) {
                 dialIcon.setBackgroundResource(R.drawable.dial_background_disabled);
             } else {
-                dialIcon.setBackgroundResource(R.drawable.dial_background);
+                dialIcon.setBackgroundResource(R.drawable.dial_background_ripple);
             }
             dialIcon.setImageResource(dial.getIcon());
             dialName.setText(dial.getName());
