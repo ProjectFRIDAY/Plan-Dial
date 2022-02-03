@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:orientation="vertical"
-    android:gravity="center" >
+    android:gravity="center"
+    android:orientation="vertical">
 
     <ImageButton
         android:id="@+id/dial_icon"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/dial_image" />
+        android:background="@drawable/dial_background"
+        android:contentDescription="@string/dial_image"
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/dial_name"
