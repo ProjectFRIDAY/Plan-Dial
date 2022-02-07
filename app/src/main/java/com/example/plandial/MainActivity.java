@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
         Dial dial15 = new Dial(this, "코딩15", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
         Dial dial16 = new Dial(this, "코딩16", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
         Category category1 = new Category("나는 바보다");
-        category1.addDial(dial1);
+        // category1.addDial(dial1);
         category1.addDial(dial2);
         category1.addDial(dial3);
-        category1.addDial(dial4);
+        // category1.addDial(dial4);
         category1.addDial(dial5);
         category1.addDial(dial6);
         category1.addDial(dial7);

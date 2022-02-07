@@ -81,23 +81,28 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
                     }
                 }
             });
-            dialIcon.setOnLongClickListener(v ->  {
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) {
-                        if (pos < category.getDialCount()) {
-                            Dial dial = category.getDialByIndex(pos);
-                            String categoryName = category.getName();
-                            String dialName = dial.getName();
-                            Intent intent = new Intent(v.getContext().getApplicationContext(), EditDialActivity.class);
-                            intent.putExtra("dialName", String.valueOf(dialName));
-                            v.getContext().startActivity(intent);
-                        }
+            dialIcon.setOnLongClickListener(v -> {
+                int pos = getAdapterPosition();
+                if (pos != RecyclerView.NO_POSITION) {
+                    if (pos < category.getDialCount()) {
+                        Dial dial = category.getDialByIndex(pos);
+                        String dialName = dial.getName();
+                        Intent intent = new Intent(v.getContext().getApplicationContext(), EditDialActivity.class);
+                        intent.putExtra("dialName", String.valueOf(dialName));
+                        intent.putExtra("categoryName", category.getName());
+                        v.getContext().startActivity(intent);
                     }
-                    return true;
+                }
+                return true;
             });
         }
 
         void onBind(Dial dial) {
+            if (dial.isDisabled()) {
+                dialIcon.setBackgroundResource(R.drawable.dial_background_disabled);
+            } else {
+                dialIcon.setBackgroundResource(R.drawable.dial_background_ripple);
+            }
             dialIcon.setImageResource(dial.getIcon());
             dialName.setText(dial.getName());
         }

@@ -14,6 +14,8 @@ public class Dial {
     private int icon = -1;
     private Period period;
     private OffsetDateTime startDateTime;
+    private boolean disable = false;
+
     private PendingIntent pushIntent;
     private static final IconRecommendation iconRecommendation = new IconRecommendation();
 
@@ -103,6 +105,7 @@ public class Dial {
 
     // 비활성화 on
     public void disable(final Context context) {
+        disable = true;
         if (pushIntent != null) {
             AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarmMgr.cancel(pushIntent);
@@ -112,8 +115,13 @@ public class Dial {
 
     // 비활성화 off
     public void restart(final Context context) {
+        disable = false;
         this.startDateTime = OffsetDateTime.now();
         makeAlarm(context);
+    }
+
+    public boolean isDisabled() {
+        return disable;
     }
 
     @Override
