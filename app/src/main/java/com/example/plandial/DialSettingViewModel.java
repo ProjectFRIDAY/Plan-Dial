@@ -63,6 +63,10 @@ public class DialSettingViewModel implements ISettingViewModel {
                 builder.setMessage("다이얼 이름은 1자 이상 10자 미만이어야 합니다.");
                 builder.show();
                 return false;
+            } else if (!dialValidator.validateName(dialNameData, category)) {
+                builder.setMessage("카테고리에 동일한 이름의 다이얼이 있습니다.");
+                builder.show();
+                return false;
             } else if (!dialValidator.validatePeriod(periodData)) {
                 builder.setMessage("주기는 0보다 커야 합니다.");
                 builder.show();

@@ -1,15 +1,13 @@
 package com.example.plandial;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.view.MotionEvent;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -107,7 +105,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
         Input_DialName.setOnEditorActionListener(this);
 
         // 저장
-        dialEditingViewModel = new DialEditingViewModel(this, dial);
+        dialEditingViewModel = new DialEditingViewModel(this, dial, category);
 
         //region 완료 버튼 설정
         {

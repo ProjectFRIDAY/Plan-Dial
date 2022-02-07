@@ -22,11 +22,15 @@ import java.util.ArrayList;
 
 public class PlusDialActivity extends AppCompatActivity implements TextView.OnEditorActionListener {
     private static final int VIBRATE_STRENGTH = 5;
+    private Vibrator vibrator;
+
+    private final IconRecommendation iconRecommendation = new IconRecommendation();
+    private DialSettingViewModel dialSettingViewModel;
+
+    private DateTimeTextView startDayInput;
     private ImageButton backButton;
     private ImageView iconImage;
     private EditText dialName;
-    private Vibrator vibrator;
-
     private TextView period, unitOfTime;
     private ImageButton periodPlus, periodMinus;
     private ImageButton unitOfTimePlus, unitOfTimeMinus;
@@ -34,11 +38,6 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
     int countForPeriod = 1;
     private int countForUnitOfTime = 0;
     private final ArrayList<String> timeArray = UnitOfTime.unitNames;
-
-    private final IconRecommendation iconRecommendation = new IconRecommendation();
-    private DialSettingViewModel dialSettingViewModel;
-
-    private DateTimeTextView startDayInput;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

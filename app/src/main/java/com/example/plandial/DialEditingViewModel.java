@@ -18,6 +18,7 @@ public class DialEditingViewModel implements ISettingViewModel {
     private static final IDialValidator dialValidator = new BasicDialValidator();
 
     private final Activity activity;
+    private final Category category;
     private final Dial dial;
 
     private final TextView period, unitOfTime;
@@ -28,8 +29,9 @@ public class DialEditingViewModel implements ISettingViewModel {
     private Period periodData;
     private boolean unableData;
 
-    public DialEditingViewModel(Activity activity, Dial dial) {
+    public DialEditingViewModel(Activity activity, Dial dial, Category category) {
         this.activity = activity;
+        this.category = category;
         this.dial = dial;
 
         this.dialNameView = activity.findViewById(R.id.Input_DialName);
@@ -59,6 +61,10 @@ public class DialEditingViewModel implements ISettingViewModel {
 
             if (!dialValidator.validateName(dialNameData)) {
                 builder.setMessage("다이얼 이름은 1자 이상 10자 미만이어야 합니다.");
+                builder.show();
+                return false;
+            } else if (!dialValidator.validateName(dialNameData, category)) {
+                builder.setMessage("카테고리에 동일한 이름의 다이얼이 있습니다.");
                 builder.show();
                 return false;
             } else if (!dialValidator.validatePeriod(periodData)) {
