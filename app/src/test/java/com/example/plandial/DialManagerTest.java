@@ -20,21 +20,21 @@ public class DialManagerTest {
         AlertDial alertDial3 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
         AlertDial alertDial4 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
 
-        ArrayList<AlertDial> dials1 = new ArrayList<AlertDial>() {
+        ArrayList<Dial> dials1 = new ArrayList<Dial>() {
             {
                 add(alertDial1);
                 add(alertDial3);
             }
         };
 
-        ArrayList<AlertDial> dials2 = new ArrayList<AlertDial>() {
+        ArrayList<Dial> dials2 = new ArrayList<Dial>() {
             {
                 add(alertDial2);
                 add(alertDial4);
             }
         };
 
-        ArrayList<AlertDial> dials3 = new ArrayList<AlertDial>() {
+        ArrayList<Dial> dials3 = new ArrayList<Dial>() {
             {
                 add(alertDial2);
             }

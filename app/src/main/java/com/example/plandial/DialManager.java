@@ -82,7 +82,7 @@ public class DialManager {
             int dialCount = category.getDialCount();
 
             for (int j = 0; j < dialCount; ++j) {
-                AlertDial alertDial = category.getDialByIndex(j);
+                AlertDial alertDial = (AlertDial) category.getDialByIndex(j);
 
                 // 남은 시간 구하기
                 long leftTime = alertDial.getLeftTimeInMillis();

@@ -22,6 +22,11 @@ public class AlertDial extends Dial {
         makeAlarm(context);
     }
 
+    // for test
+    public AlertDial(final String name, final Period period, final OffsetDateTime startDateTime) {
+        super(name, R.drawable.baseline_question_mark_black, period);
+    }
+
     public OffsetDateTime getStartDateTime() {
         return startDateTime;
     }
