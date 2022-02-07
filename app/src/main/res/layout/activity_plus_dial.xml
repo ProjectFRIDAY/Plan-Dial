@@ -142,7 +142,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:hint="분"
+        android:text="분"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/DialTime_Period"
