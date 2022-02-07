@@ -86,6 +86,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
                     if (pos != RecyclerView.NO_POSITION) {
                         if (pos < category.getDialCount()) {
                             Dial dial = category.getDialByIndex(pos);
+                            String categoryName = category.getName();
                             String dialName = dial.getName();
                             Intent intent = new Intent(v.getContext().getApplicationContext(), EditDialActivity.class);
                             intent.putExtra("dialName", String.valueOf(dialName));
