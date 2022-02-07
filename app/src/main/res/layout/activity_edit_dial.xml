@@ -193,18 +193,4 @@
         app:layout_constraintLeft_toRightOf="@id/InactivateDial"
         app:layout_constraintTop_toBottomOf="@+id/DialTime_Period" />
 
-    <!-- For Dial Editing Test -->
-    <Button
-        android:id="@+id/DialEdit_Button"
-        android:layout_width="90dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/greenbutton"
-        android:text="@string/Done"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/InactivateDial" />
-    <!-- End Test -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

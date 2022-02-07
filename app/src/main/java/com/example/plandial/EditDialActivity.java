@@ -186,7 +186,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
 
         //region 완료 버튼 설정
         {
-            Button completeButton = findViewById(R.id.DialEdit_Button);
+            ImageButton completeButton = findViewById(R.id.SaveButton);
             completeButton.setOnClickListener(view -> dialEditingViewModel.complete());
         }
         //endregion
