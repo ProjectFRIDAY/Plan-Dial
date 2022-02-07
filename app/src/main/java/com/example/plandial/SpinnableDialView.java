@@ -1,16 +1,23 @@
 package com.example.plandial;
 
+import static android.media.MediaCodec.MetricsConstants.MODE;
+
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 
@@ -111,12 +118,19 @@ public class SpinnableDialView extends SpinnableImageView {
 
     private void syncCategoryName() {
         int selectedCategoryIndex = this.getSelectedCategoryIndex();
+        Resources resources = getResources();
+        Drawable categoryBackground = ResourcesCompat.getDrawable(resources, R.drawable.category_background_ripple, null);
+        int color = ContextCompat.getColor(getContext(), R.color.empty_bg_color);
+
+        assert categoryBackground != null;
         if (selectedCategoryIndex < dialManager.getCategoryCount()) {
-            categoryNameView.setBackgroundResource(getResources().getIdentifier("category_color_" + selectedCategoryIndex, "color", this.getContext().getPackageName()));
+            color = ContextCompat.getColor(getContext(), resources.getIdentifier("category_bg_color_" + selectedCategoryIndex, "color", this.getContext().getPackageName()));
             this.categoryNameView.setText(dialManager.getCategoryByIndex(selectedCategoryIndex).getName());
         } else {
-            categoryNameView.setBackgroundColor(Color.CYAN);
             this.categoryNameView.setText("빈 카테고리");
         }
+
+        categoryBackground.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+        this.categoryNameView.setBackground(categoryBackground);
     }
 }

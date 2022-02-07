@@ -220,6 +220,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="center"
+        android:background="@drawable/category_background_ripple"
+        android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/category_dials"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
