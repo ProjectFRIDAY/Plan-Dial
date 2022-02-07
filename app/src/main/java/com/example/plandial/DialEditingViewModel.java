@@ -9,13 +9,14 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.plandial.policy.BasicDialValidator;
+import com.example.plandial.policy.EditDialValidator;
 import com.example.plandial.policy.IDialValidator;
 
 import java.time.OffsetDateTime;
 
 public class DialEditingViewModel implements ISettingViewModel {
     private static final String FORMAT_STRING = "선택하신 내용대로 %s 다이얼을 수정할게요!";
-    private static final IDialValidator dialValidator = new BasicDialValidator();
+    private static final EditDialValidator dialValidator = new EditDialValidator();
 
     private final Activity activity;
     private final Category category;
@@ -63,7 +64,7 @@ public class DialEditingViewModel implements ISettingViewModel {
                 builder.setMessage("다이얼 이름은 1자 이상 10자 미만이어야 합니다.");
                 builder.show();
                 return false;
-            } else if (!dialValidator.validateName(dialNameData, category)) {
+            } else if (!dialValidator.validateName(dialNameData, category, dial)) {
                 builder.setMessage("카테고리에 동일한 이름의 다이얼이 있습니다.");
                 builder.show();
                 return false;

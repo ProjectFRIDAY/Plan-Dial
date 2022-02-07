@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 
 public class DialSettingViewModel implements ISettingViewModel {
     private static final String FORMAT_STRING = "선택하신 내용대로 %s 다이얼을 생성할게요!";
-    private static final IDialValidator dialValidator = new BasicDialValidator();
+    private static final BasicDialValidator dialValidator = new BasicDialValidator();
 
     private final Activity activity;
     private final Category category;

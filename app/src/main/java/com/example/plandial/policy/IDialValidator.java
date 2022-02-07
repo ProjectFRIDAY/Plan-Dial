@@ -9,8 +9,6 @@ import java.time.OffsetDateTime;
 public interface IDialValidator {
     boolean validateName(String name);
 
-    boolean validateName(String name, Category category);
-
     boolean validatePeriod(Period period);
 
     boolean validateStartDay(OffsetDateTime startDay);
