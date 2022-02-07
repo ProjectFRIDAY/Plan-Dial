@@ -70,9 +70,9 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
             });
         }
 
-        void onBind(Dial dial) {
+        void onBind(AlertDial alertDial) {
             dialIcon.setImageResource(R.drawable.ic_launcher_foreground);
-            dialName.setText(dial.getName());
+            dialName.setText(alertDial.getName());
         }
     }
 }

@@ -15,28 +15,28 @@ public class DialManagerTest {
         Category category2;
         Category category3;
 
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial1 = new AlertDial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial2 = new AlertDial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial3 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial4 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
 
-        ArrayList<Dial> dials1 = new ArrayList<Dial>() {
+        ArrayList<AlertDial> dials1 = new ArrayList<AlertDial>() {
             {
-                add(dial1);
-                add(dial3);
+                add(alertDial1);
+                add(alertDial3);
             }
         };
 
-        ArrayList<Dial> dials2 = new ArrayList<Dial>() {
+        ArrayList<AlertDial> dials2 = new ArrayList<AlertDial>() {
             {
-                add(dial2);
-                add(dial4);
+                add(alertDial2);
+                add(alertDial4);
             }
         };
 
-        ArrayList<Dial> dials3 = new ArrayList<Dial>() {
+        ArrayList<AlertDial> dials3 = new ArrayList<AlertDial>() {
             {
-                add(dial2);
+                add(alertDial2);
             }
         };
 

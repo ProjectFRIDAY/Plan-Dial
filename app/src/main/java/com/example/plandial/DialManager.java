@@ -71,8 +71,8 @@ public class DialManager {
         return categories.remove(category);
     }
 
-    public ArrayList<Dial> getUrgentDials(long urgentBound) {
-        ArrayList<Pair<Long, Dial>> urgentDials = new ArrayList<>();
+    public ArrayList<AlertDial> getUrgentDials(long urgentBound) {
+        ArrayList<Pair<Long, AlertDial>> urgentDials = new ArrayList<>();
 
         DialManager dm = DialManager.getInstance();
         int categoryCount = dm.getCategoryCount();
@@ -82,20 +82,20 @@ public class DialManager {
             int dialCount = category.getDialCount();
 
             for (int j = 0; j < dialCount; ++j) {
-                Dial dial = category.getDialByIndex(j);
+                AlertDial alertDial = category.getDialByIndex(j);
 
                 // 남은 시간 구하기
-                long leftTime = dial.getLeftTimeInMillis();
+                long leftTime = alertDial.getLeftTimeInMillis();
 
                 if (0 <= leftTime && leftTime < urgentBound) {
-                    urgentDials.add(new Pair<>(leftTime, dial));
+                    urgentDials.add(new Pair<>(leftTime, alertDial));
                 }
             }
         }
 
         urgentDials.sort(Comparator.comparing(lhs -> lhs.first));
 
-        ArrayList<Dial> result = new ArrayList<>();
+        ArrayList<AlertDial> result = new ArrayList<>();
 
         for (int i = 0; i < urgentDials.size(); ++i) {
             result.add(urgentDials.get(i).second);

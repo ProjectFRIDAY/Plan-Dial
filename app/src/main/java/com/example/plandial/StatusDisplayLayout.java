@@ -19,9 +19,9 @@ public class StatusDisplayLayout extends LinearLayout {
         super(context, attrs);
     }
 
-    public void displayDial(Dial dial) {
-        this.nameView.setText(dial.getName());
-        this.timeView.setText(String.format("%d분 남음", dial.getLeftTimeInSeconds() / UnitOfTime.SECONDS_PER_MINUTE));
+    public void displayDial(AlertDial alertDial) {
+        this.nameView.setText(alertDial.getName());
+        this.timeView.setText(String.format("%d분 남음", alertDial.getLeftTimeInSeconds() / UnitOfTime.SECONDS_PER_MINUTE));
     }
 
     @Override

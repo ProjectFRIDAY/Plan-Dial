@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Category {
     private String name;
-    private final ArrayList<Dial> dials = new ArrayList<>();
+    private final ArrayList<AlertDial> alertDials = new ArrayList<>();
 
     public Category(final String name) {
         // 다이얼을 가지지 않은 카테고리를 생성하는 생성자
         this(name, new ArrayList<>());
     }
 
-    public Category(final String name, final ArrayList<Dial> dials) {
+    public Category(final String name, final ArrayList<AlertDial> alertDials) {
         this.name = name;
 
-        this.addDials(dials);
+        this.addDials(alertDials);
     }
 
     public String getName() {
@@ -26,44 +26,44 @@ public class Category {
     }
 
     public int getDialCount() {
-        return this.dials.size();
+        return this.alertDials.size();
     }
 
-    public Dial getDialByIndex(int index) {
+    public AlertDial getDialByIndex(int index) {
         try {
-            return this.dials.get(index);
+            return this.alertDials.get(index);
         } catch (IndexOutOfBoundsException e) {
             assert false;
             return null;
         }
     }
 
-    public Dial getDialByName(String name) {
-        for (Dial dial : dials) {
-            if (dial.getName().equals(name)) {
-                return dial;
+    public AlertDial getDialByName(String name) {
+        for (AlertDial alertDial : alertDials) {
+            if (alertDial.getName().equals(name)) {
+                return alertDial;
             }
         }
 
         return null;
     }
 
-    public boolean addDial(Dial dialToAdd) {
+    public boolean addDial(AlertDial alertDialToAdd) {
         /* 이미 동일한 다이얼을 가지고 있으면 추가하지 않는다.
          * 이미 동일한 다이얼이 있다면 false, 그렇지 않으면 true를 반환한다.
          */
 
-        for (Dial addedDial : dials) {
-            if (dialToAdd.equals(addedDial)) {
+        for (AlertDial addedAlertDial : alertDials) {
+            if (alertDialToAdd.equals(addedAlertDial)) {
                 return false;
             }
         }
 
-        this.dials.add(dialToAdd);
+        this.alertDials.add(alertDialToAdd);
         return true;
     }
 
-    public int addDials(ArrayList<Dial> dialsToAdd) {
+    public int addDials(ArrayList<AlertDial> dialsToAdd) {
         /* 이미 동일한 다이얼을 가지고 있으면 추가하지 않는다.
          * 추가한 다이얼의 개수를 반환한다.
          */
@@ -71,18 +71,18 @@ public class Category {
         boolean hasSameDial;
         int addCount = 0;
 
-        for (Dial dialToAdd : dialsToAdd) {
+        for (AlertDial alertDialToAdd : dialsToAdd) {
             hasSameDial = false;
 
-            for (Dial addedDial : dials) {
-                if (dialToAdd.equals(addedDial)) {
+            for (AlertDial addedAlertDial : alertDials) {
+                if (alertDialToAdd.equals(addedAlertDial)) {
                     hasSameDial = true;
                     break;
                 }
             }
 
             if (!hasSameDial) {
-                this.dials.add(dialToAdd);
+                this.alertDials.add(alertDialToAdd);
                 ++addCount;
             }
         }
@@ -90,24 +90,24 @@ public class Category {
         return addCount;
     }
 
-    public Dial removeDialByIndex(int index) {
+    public AlertDial removeDialByIndex(int index) {
         try {
-            return this.dials.remove(index);
+            return this.alertDials.remove(index);
         } catch (IndexOutOfBoundsException e) {
             assert false;
             return null;
         }
     }
 
-    public boolean removeDialByObject(Dial dial) {
-        return this.dials.remove(dial);
+    public boolean removeDialByObject(AlertDial alertDial) {
+        return this.alertDials.remove(alertDial);
     }
 
     @Override
     public int hashCode() {
         int result = 17;
         result = 31 * result + this.name.hashCode();
-        result = 31 * result + this.dials.hashCode();
+        result = 31 * result + this.alertDials.hashCode();
         return result;
     }
 
@@ -122,6 +122,6 @@ public class Category {
         }
 
         Category other = (Category) obj;
-        return this.name.equals(other.name) && this.dials.equals(other.dials);
+        return this.name.equals(other.name) && this.alertDials.equals(other.alertDials);
     }
 }
