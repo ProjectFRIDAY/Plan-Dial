@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.plandial.policy.BasicDialValidator;
 import com.example.plandial.policy.IDialValidator;
@@ -17,8 +18,8 @@ public class DialSettingViewModel implements ISettingViewModel {
     private final Activity activity;
     private final Category category;
 
+    private final TextView period, unitOfTime;
     private final EditText dialNameView;
-    private final LinearSelector timeUnitView;
     private final DateTimeTextView startDayView;
 
     private String dialNameData;
@@ -30,17 +31,20 @@ public class DialSettingViewModel implements ISettingViewModel {
         this.category = category;
 
         this.dialNameView = activity.findViewById(R.id.Input_DialName);
-        this.timeUnitView = activity.findViewById(R.id.unit_selector);
+        this.period = activity.findViewById(R.id.DialTime_Period);
+        this.unitOfTime = activity.findViewById(R.id.DialTime_UnitOfTime);
         this.startDayView = activity.findViewById(R.id.Input_Startday);
     }
 
     @Override
     public boolean complete() {
         // 사용자가 값 입력을 완료했다고 알릴 때 호출되는 함수임
+        UnitOfTime unit = UnitOfTime.nameToUnit.get(unitOfTime.getText().toString());
+        assert unit != null;
 
         //region 뷰로부터 값 불러오기
         this.dialNameData = dialNameView.getText().toString();
-        this.periodData = new Period(UnitOfTime.values()[timeUnitView.getSelectedIndex() + 1], 1);
+        this.periodData = new Period(unit, Integer.parseInt(period.getText().toString()));
         this.startDayData = startDayView.getDateTime();
         //endregion
 

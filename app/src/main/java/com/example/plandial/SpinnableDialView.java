@@ -1,6 +1,7 @@
 package com.example.plandial;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.AttributeSet;
@@ -110,10 +111,11 @@ public class SpinnableDialView extends SpinnableImageView {
 
     private void syncCategoryName() {
         int selectedCategoryIndex = this.getSelectedCategoryIndex();
-
         if (selectedCategoryIndex < dialManager.getCategoryCount()) {
+            categoryNameView.setBackgroundResource(getResources().getIdentifier("category_color_" + selectedCategoryIndex, "color", this.getContext().getPackageName()));
             this.categoryNameView.setText(dialManager.getCategoryByIndex(selectedCategoryIndex).getName());
         } else {
+            categoryNameView.setBackgroundColor(Color.CYAN);
             this.categoryNameView.setText("빈 카테고리");
         }
     }

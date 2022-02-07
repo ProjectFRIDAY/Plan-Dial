@@ -1,4 +1,4 @@
-package com.example.plandial;
+/*package com.example.plandial;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -81,3 +81,4 @@ public class LinearSelector extends ConstraintLayout {
         return pos - view.getWidth() / 2 + view.getPaddingLeft();
     }
 }
+*/
