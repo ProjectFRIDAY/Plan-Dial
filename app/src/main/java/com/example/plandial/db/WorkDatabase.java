@@ -1,17 +1,9 @@
 package com.example.plandial.db;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
-import android.widget.TableLayout;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import com.example.plandial.Dial;
-import com.example.plandial.DialManager;
 import com.opencsv.CSVReader;
 
 import java.io.BufferedReader;
@@ -19,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WorkDatabase {
