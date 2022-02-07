@@ -65,6 +65,10 @@ public class Dial {
         this.period = period;
     }
 
+    public Period getPeriod() {
+        return period;
+    }
+
     public OffsetDateTime getStartDateTime() {
         return this.startDateTime;
     }

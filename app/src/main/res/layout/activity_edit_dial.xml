@@ -30,23 +30,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/CancelButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="290dp"
+        android:id="@+id/RemoveButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="270dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/ic_iconfinder_back_arrow_211686"
+        android:background="@drawable/ic_remove_button"
         app:layout_constraintStart_toStartOf="@id/BackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/SaveButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/ic_save_button"
-        app:layout_constraintStart_toStartOf="@id/CancelButton"
+        app:layout_constraintStart_toStartOf="@id/RemoveButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -112,10 +112,12 @@
 
     <ImageButton
         android:id="@+id/Period_Up"
-        android:layout_width="30dp"
+        android:layout_width="40dp"
         android:layout_height="30dp"
         android:layout_marginStart="250dp"
         android:background="@drawable/ic_iconfinder_back_arrow_211686"
+        android:rotation="90"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/DialTime_Period"/>
 
@@ -134,17 +136,21 @@
 
     <ImageButton
         android:id="@+id/Period_Down"
-        android:layout_width="30dp"
+        android:layout_width="40dp"
         android:layout_height="30dp"
         android:layout_marginStart="250dp"
+        android:rotation="270"
+        android:gravity="center"
         android:background="@drawable/ic_iconfinder_back_arrow_211686"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/DialTime_Period"/>
 
     <ImageButton
         android:id="@+id/UnitOfTime_Up"
-        android:layout_width="30dp"
+        android:layout_width="40dp"
         android:layout_height="30dp"
+        android:rotation="90"
+        android:gravity="center"
         android:background="@drawable/ic_iconfinder_back_arrow_211686"
         app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime"
         app:layout_constraintBottom_toTopOf="@id/DialTime_UnitOfTime"/>
@@ -164,8 +170,10 @@
 
     <ImageButton
         android:id="@+id/UnitOfTime_Down"
-        android:layout_width="30dp"
+        android:layout_width="40dp"
         android:layout_height="30dp"
+        android:rotation="270"
+        android:gravity="center"
         android:background="@drawable/ic_iconfinder_back_arrow_211686"
         app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime"
         app:layout_constraintTop_toBottomOf="@id/DialTime_UnitOfTime"/>

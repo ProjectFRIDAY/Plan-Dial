@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.plandial.policy.BasicDialValidator;
 import com.example.plandial.policy.IDialValidator;
@@ -19,8 +20,8 @@ public class DialEditingViewModel implements ISettingViewModel {
     private final Activity activity;
     private final Dial dial;
 
+    private final TextView period, unitOfTime;
     private final EditText dialNameView;
-    private final LinearSelector timeUnitView;
     private final Switch unableSwitchView;
 
     private String dialNameData;
@@ -32,30 +33,29 @@ public class DialEditingViewModel implements ISettingViewModel {
         this.dial = dial;
 
         this.dialNameView = activity.findViewById(R.id.Input_DialName);
-        this.timeUnitView = activity.findViewById(R.id.unit_selector);
+        this.period = activity.findViewById(R.id.DialTime_Period);
+        this.unitOfTime = activity.findViewById(R.id.DialTime_UnitOfTime);
         this.unableSwitchView = activity.findViewById(R.id.switchButton);
     }
 
     @Override
     public boolean complete() {
         // 사용자가 값 입력을 완료했다고 알릴 때 호출되는 함수임
+        UnitOfTime unit = UnitOfTime.nameToUnit.get(unitOfTime.getText().toString());
+        assert unit != null;
 
         //region 뷰로부터 값 불러오기
         this.dialNameData = dialNameView.getText().toString();
-        this.periodData = new Period(UnitOfTime.values()[timeUnitView.getSelectedIndex() + 1], 1);
+        this.periodData = new Period(unit, Integer.parseInt(period.getText().toString()));
         this.unableData = unableSwitchView.isChecked();
         //endregion
 
         //region 값이 유효한 지 판단함
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // nothing
-                }
+            builder.setPositiveButton("확인", (dialogInterface, i) -> {
+                // nothing
             });
-
 
             if (!dialValidator.validateName(dialNameData)) {
                 builder.setMessage("다이얼 이름은 1자 이상 10자 미만이어야 합니다.");
