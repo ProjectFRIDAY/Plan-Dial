@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+
+import com.example.plandial.db.WorkDatabase;
 import com.example.plandial.policy.BasicDialValidator;
 import com.example.plandial.policy.EditDialValidator;
 import com.example.plandial.policy.IDialValidator;
@@ -20,7 +24,7 @@ public class DialEditingViewModel implements ISettingViewModel {
 
     private final Activity activity;
     private final Category category;
-    private final Dial dial;
+    private final AlertDial dial;
 
     private final TextView period, unitOfTime;
     private final EditText dialNameView;
@@ -30,7 +34,7 @@ public class DialEditingViewModel implements ISettingViewModel {
     private Period periodData;
     private boolean unableData;
 
-    public DialEditingViewModel(Activity activity, Dial dial, Category category) {
+    public DialEditingViewModel(Activity activity, AlertDial dial, Category category) {
         this.activity = activity;
         this.category = category;
         this.dial = dial;
@@ -83,6 +87,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void finish() {
         // 검증 과정까지 마친 후 세팅을 마무리하는 함수임
@@ -90,8 +95,11 @@ public class DialEditingViewModel implements ISettingViewModel {
         activity.finish();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void save() {
+        String oldName = dial.getName();
+
         // 다이얼 수정
         dial.setName(activity.getApplicationContext(), dialNameData);
         dial.setPeriod(periodData);
@@ -101,5 +109,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         } else {
             dial.restart(activity.getApplicationContext());
         }
+
+        WorkDatabase.getInstance().fixDial(category, dial, oldName);
     }
 }

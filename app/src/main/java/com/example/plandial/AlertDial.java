@@ -8,16 +8,30 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.plandial.db.WorkDatabase;
+
 import java.time.OffsetDateTime;
 
 public class AlertDial extends Dial {
+    private static final IconRecommendation iconRecommendation = new IconRecommendation();
+
+    private boolean disable = false;
     private static int id = 0;
     private PendingIntent pushIntent;
     private OffsetDateTime startDateTime;
 
+    // 다이얼 첫 생성시 -> 아이콘 추천
     @RequiresApi(api = Build.VERSION_CODES.S)
     public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime) {
-        super(name, R.drawable.baseline_question_mark_black, period);
+        super(name, iconRecommendation.getIconByName(context, name), period);
+        this.startDateTime = startDateTime;
+        makeAlarm(context);
+    }
+
+    // 다이얼 DB에서 가져올 시 -> 아이콘 불러오기
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime, int icon) {
+        super(name, icon, period);
         this.startDateTime = startDateTime;
         makeAlarm(context);
     }
@@ -25,6 +39,12 @@ public class AlertDial extends Dial {
     // for test
     public AlertDial(final String name, final Period period, final OffsetDateTime startDateTime) {
         super(name, R.drawable.baseline_question_mark_black, period);
+        this.startDateTime = startDateTime;
+    }
+
+    public void setName(final Context context, final String name) {
+        setIcon(iconRecommendation.getIconByName(context, name));
+        setName(name);
     }
 
     public OffsetDateTime getStartDateTime() {
@@ -67,6 +87,7 @@ public class AlertDial extends Dial {
 
     // 비활성화 on
     public void disable(final Context context) {
+        disable = true;
         if (pushIntent != null) {
             AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarmMgr.cancel(pushIntent);
@@ -77,7 +98,12 @@ public class AlertDial extends Dial {
     // 비활성화 off
     @RequiresApi(api = Build.VERSION_CODES.S)
     public void restart(final Context context) {
-        setStartDateTime(OffsetDateTime.now());
+        disable = false;
+        this.startDateTime = OffsetDateTime.now();
         makeAlarm(context);
+    }
+
+    public boolean isDisabled() {
+        return disable;
     }
 }

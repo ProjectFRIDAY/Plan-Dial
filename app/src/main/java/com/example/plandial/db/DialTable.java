@@ -22,10 +22,10 @@ public class DialTable {
 
     private Boolean dialDisabled; // True일 경우 비활성화 False일 경우 활성화
 
-    private int dialStart; // 다이얼 작동 시작시점의 년 월 일 시 분을 저장, 특수문자 없이 일단 숫자로만 저장
+    private String dialStart; // 다이얼 작동 시작시점의 년 월 일 시 분을 저장, 특수문자 없이 일단 숫자로만 저장
 
     // 인스턴스 생성할 때 값도 같이 입력
-    public DialTable(String dialName, String dialTimeUnit, int dialTime, int dialToCategory, String dialIcon, Boolean dialDisabled, int dialStart) {
+    public DialTable(String dialName, String dialTimeUnit, int dialTime, int dialToCategory, String dialIcon, Boolean dialDisabled, String dialStart) {
         this.dialName = dialName;
         this.dialTimeUnit = dialTimeUnit;
         this.dialTime = dialTime;
@@ -92,11 +92,22 @@ public class DialTable {
         this.dialDisabled = dialDisabled;
     }
 
-    public int getDialStart() {
+    public String getDialStart() {
         return dialStart;
     }
 
-    public void setDialStart(int dialStart) {
+    public void setDialStart(String dialStart) {
+        this.dialStart = dialStart;
+    }
+
+    // 인스턴스 생성할 때 값도 같이 입력
+    public void changeDialTable(String dialName, String dialTimeUnit, int dialTime, int dialToCategory, String dialIcon, Boolean dialDisabled, String dialStart) {
+        this.dialName = dialName;
+        this.dialTimeUnit = dialTimeUnit;
+        this.dialTime = dialTime;
+        this.dialToCategory = dialToCategory;
+        this.dialIcon = dialIcon;
+        this.dialDisabled = dialDisabled;
         this.dialStart = dialStart;
     }
 }

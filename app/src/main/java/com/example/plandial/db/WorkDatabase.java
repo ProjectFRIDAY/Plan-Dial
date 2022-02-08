@@ -1,21 +1,33 @@
 package com.example.plandial.db;
 
 import android.content.Context;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 import androidx.room.Room;
 
+import com.example.plandial.AlertDial;
+import com.example.plandial.Category;
+import com.example.plandial.DialManager;
+import com.example.plandial.Period;
+import com.example.plandial.UnitOfTime;
 import com.opencsv.CSVReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class WorkDatabase {
     private static final String PresetDatabase_FILE = "database/PresetDatabase.csv";
-
 
     private static final WorkDatabase workDatabase = new WorkDatabase();
 
@@ -24,6 +36,10 @@ public class WorkDatabase {
     private static IPresetDao iPresetDao;
     private static boolean ok = false;
 
+    private static final DialManager dialManager = DialManager.getInstance();
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+    private final static ArrayList<String> unitNames = UnitOfTime.unitEnglishNames;
+
     private WorkDatabase() {
     }
 
@@ -31,6 +47,7 @@ public class WorkDatabase {
         return workDatabase;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     public void ready(Context context) {
         PlanDatabase database = Room.databaseBuilder(context, PlanDatabase.class, "PlanDial")
                 .fallbackToDestructiveMigration()   // 스키마 (database) 버전 변경가능
@@ -43,7 +60,29 @@ public class WorkDatabase {
         iPresetDao = database.iPresetDao(); // 인터페이스 객체 할당
 
         iPresetDao.delPresetAll();
+        //iCategoryDao.delCategoryAll();
+        //iDialDao.delDialAll();
 
+        // feat : Load All Data
+        HashMap<Integer, Category> idToCategory = new HashMap<>();
+        for (CategoryTable categoryTable : iCategoryDao.getCategoryAll()) {
+            idToCategory.put(categoryTable.getId(), new Category(categoryTable.getCategoryName()));
+        }
+
+        for (DialTable dialTable : iDialDao.getDialAll()) {
+            Period period = new Period(Objects.requireNonNull(UnitOfTime.EnglishNameToUnit.get(dialTable.getDialTimeUnit())), dialTable.getDialTime());
+            OffsetDateTime startDateTime = OffsetDateTime.of(LocalDateTime.parse(dialTable.getDialStart(), formatter), OffsetDateTime.now().getOffset());
+
+            AlertDial dial = new AlertDial(context, dialTable.getDialName(), period, startDateTime, Integer.parseInt(dialTable.getDialIcon()));
+            Objects.requireNonNull(idToCategory.get(dialTable.getDialToCategory())).addDial(dial);
+        }
+
+        for (Category category : idToCategory.values()) {
+            dialManager.addCategory(category);
+        }
+        // end feat
+
+        fillPresetdatas(context);
         ok = true;
     }
 
@@ -79,105 +118,106 @@ public class WorkDatabase {
     // -- 생성 파트 ----------------------------------------------------------------------------------
 
     // 다이얼 데이터 생성
-    public void makeDial(int categoryLocation, String dialName, String dialTimeUnit, int dialTime, String dialIcon, int dialStart) {
-
+    public void makeDial(Category category, AlertDial dial) {
         assert ok;
         List<CategoryTable> categoryId = iCategoryDao.getCategoryAll();
-        DialTable dialTable = new DialTable(dialName, dialTimeUnit, dialTime,
-                categoryId.get(categoryLocation).getId(), // categoryLocation = 메인다이얼의 List의 index 번호
-                dialIcon, false, dialStart);
+
+
+        OffsetDateTime startDateTime = dial.getStartDateTime();
+        String unitName = unitNames.get((Integer) UnitOfTime.unitToIndex.get(dial.getPeriod().getUnit()));
+
+        DialTable dialTable = new DialTable(dial.getName(), unitName, dial.getPeriod().getTimes(),
+                categoryId.get(dialManager.getIndexByCategory(category)).getId(), // categoryLocation = 메인다이얼의 List의 index 번호
+                String.valueOf(dial.getIcon()), dial.isDisabled(), formatter.format(startDateTime));
         iDialDao.insertDial(dialTable);
     }
 
     // 카테고리 데이터 생성
-    public void makeCategory(String categoryName, String categoryToTemplate, String categoryColor) {
-
+    public void makeCategory(Category category) {
         assert ok;
-        CategoryTable categoryTable = new CategoryTable(categoryName, categoryToTemplate, categoryColor);
+        CategoryTable categoryTable = new CategoryTable(category.getName(), "", ""); // 수정 필요
         iCategoryDao.insertCategory(categoryTable);
     }
 
-    // 프리셋 데이터 생성
-    public void makePreset(String presetName, String templateId, String presetTimeUnit, int presetTime, String presetIcon) {
-
-        assert ok;
-        PresetTable presetTable = new PresetTable(presetName, templateId, presetTimeUnit, presetTime, presetIcon);
-        iPresetDao.insertPreset(presetTable);
-    }
+//    // 프리셋 데이터 생성
+//    public void makePreset(String presetName, String templateId, String presetTimeUnit, int presetTime, String presetIcon) {
+//
+//        assert ok;
+//        PresetTable presetTable = new PresetTable(presetName, templateId, presetTimeUnit, presetTime, presetIcon);
+//        iPresetDao.insertPreset(presetTable);
+//    }
 
 
     // -- 수정 파트 ----------------------------------------------------------------------------------
 
     // 다이얼 데이터 수정
-    public void fixDial(int categoryLocation, String dialName, String dialTimeUnit, int dialTime, String dialIcon, int dialStart) {
-
+    public void fixDial(Category category, AlertDial dial, String oldName) {
         assert ok;
         List<CategoryTable> categoryId = iCategoryDao.getCategoryAll();
-        DialTable dialTable = new DialTable(dialName, dialTimeUnit, dialTime,
-                categoryId.get(categoryLocation).getId(), // categoryLocation = 메인다이얼의 List의 index 번호
-                dialIcon, false, dialStart);
+
+        OffsetDateTime startDateTime = dial.getStartDateTime();
+        String unitName = unitNames.get((Integer) UnitOfTime.unitToIndex.get(dial.getPeriod().getUnit()));
+
+        DialTable dialTable = iDialDao.getNameDial(oldName).get(0);
+        dialTable.changeDialTable(dial.getName(), unitName, dial.getPeriod().getTimes(),
+                categoryId.get(dialManager.getIndexByCategory(category)).getId(), // categoryLocation = 메인다이얼의 List의 index 번호
+                String.valueOf(dial.getIcon()), dial.isDisabled(), formatter.format(startDateTime));
         iDialDao.updateDial(dialTable);
     }
 
     // 카테고리 데이터 수정
-    public void fixCategory(String categoryName, String categoryToTemplate, String categoryColor) {
-
+    public void fixCategory(Category category, String oldName) {
         assert ok;
-        CategoryTable categoryTable = new CategoryTable(categoryName, categoryToTemplate, categoryColor);
+        CategoryTable categoryTable = iCategoryDao.getNameCategory(oldName).get(0);
+        categoryTable.setCategoryName(category.getName());
         iCategoryDao.updateCategory(categoryTable);
     }
 
-    // 프리셋 데이터 수정
-    public void fixPreset(String presetName, String templateId, String presetTimeUnit, int presetTime, String presetIcon) {
-
-        assert ok;
-        PresetTable presetTable = new PresetTable(presetName, templateId, presetTimeUnit, presetTime, presetIcon);
-        iPresetDao.updatePreset(presetTable);
-    }
+//    // 프리셋 데이터 수정
+//    public void fixPreset(String presetName, String templateId, String presetTimeUnit, int presetTime, String presetIcon) {
+//
+//        assert ok;
+//        PresetTable presetTable = new PresetTable(presetName, templateId, presetTimeUnit, presetTime, presetIcon);
+//        iPresetDao.updatePreset(presetTable);
+//    }
 
 
     // -- 삭제 파트 ----------------------------------------------------------------------------------
 
     // 다이얼 데이터 삭제
-    public void delDial(int categoryLocation, String dialName, String dialTimeUnit, int dialTime, String dialIcon, int dialStart) {
-
+    public void delDial(AlertDial dial) {
         assert ok;
-        List<CategoryTable> categoryId = iCategoryDao.getCategoryAll();
-        DialTable dialTable = new DialTable(dialName, dialTimeUnit, dialTime,
-                categoryId.get(categoryLocation).getId(), // categoryLocation = 메인다이얼의 List의 index 번호
-                dialIcon, false, dialStart);
+        DialTable dialTable = iDialDao.getNameDial(dial.getName()).get(0);
         iDialDao.deleteDial(dialTable);
     }
 
     // 카테고리 데이터 삭제
-    public void delCategory(int categoryLocaton, String categoryName, String categoryToTemplate, String categoryColor) {
-
+    public void delCategory(Category category) {
         assert ok;
-        CategoryTable categoryTable1 = new CategoryTable(categoryName, categoryToTemplate, categoryColor);
-        iCategoryDao.deleteCategory(categoryTable1);
+        CategoryTable categoryTable1 = iCategoryDao.getNameCategory(category.getName()).get(0);
+
         // 카테고리 삭제시 해당 카테고리에 있는 다이얼도 삭제
         List<DialTable> dialTables = iDialDao.getDialAll();
         List<CategoryTable> categoryId = iCategoryDao.getCategoryAll();
-        // 이부분 쿼리로 정리할 수 있으면 하기
-        for (int i = 0; i < dialTables.size(); i++) {
-            if (dialTables.get(i).getDialToCategory() == categoryId.get(categoryLocaton).getId()) { // categoryLocation = 메인다이얼의 List의 index 번호
-                DialTable dialTable = new DialTable(dialTables.get(i).getDialName(),
-                        dialTables.get(i).getDialTimeUnit(), dialTables.get(i).getDialTime(),
-                        dialTables.get(i).getDialToCategory(), dialTables.get(i).getDialIcon(),
-                        dialTables.get(i).getDialDisabled(), dialTables.get(i).getDialStart());
-                iDialDao.deleteDial(dialTable);
 
+        // 이부분 쿼리로 정리할 수 있으면 하기
+        for (DialTable dialTable : dialTables) {
+            // categoryLocation = 메인다이얼의 List의 index 번호
+            if (dialTable.getDialToCategory() == categoryTable1.getId()) {
+                iDialDao.deleteDial(dialTable);
             }
         }
+
+        iCategoryDao.deleteCategory(categoryTable1);
     }
 
-    // 프리셋 데이터 삭제
-    public void delPreset(String presetName, String templateId, String presetTimeUnit, int presetTime, String presetIcon) {
-
-        assert ok;
-        PresetTable presetTable = new PresetTable(presetName, templateId, presetTimeUnit, presetTime, presetIcon);
-        iPresetDao.deletePreset(presetTable);
-    }
+//    // 프리셋 데이터 삭제
+//    public void delPreset(String presetName, String templateId, String presetTimeUnit, int presetTime, String presetIcon) {
+//
+//        assert ok;
+//        PresetTable presetTable = new PresetTable(presetName, templateId, presetTimeUnit, presetTime, presetIcon);
+//        iPresetDao.deletePreset(presetTable);
+//    }
 
 
     // -- 조회 파트 & anything -----------------------------------------------------------------------
@@ -210,10 +250,6 @@ public class WorkDatabase {
         List<PresetTable> presetTables = iPresetDao.getNamePreset(name);
         return presetTables.size();
     }
-
-
-
-
 
 
     // 전체 다이얼들의 데이터 조회

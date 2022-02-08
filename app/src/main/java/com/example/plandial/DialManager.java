@@ -43,6 +43,19 @@ public class DialManager {
         return null;
     }
 
+    public int getIndexByCategory(Category targetCategory) {
+        /* 인자로 들어온 카테고리의 index를 반환한다.
+         * 인자로 들어온 카테고리와 같은 카테고리가 없다면 0을 반환한다.
+         */
+
+        for (int i = 0; i < categories.size(); i++) {
+            Category category = categories.get(i);
+            if (category.equals(targetCategory)) return i;
+        }
+
+        return -1;
+    }
+
     public boolean addCategory(Category category) {
         /* 이미 동일한 카테고리가 있으면 추가하지 않는다.
          * 이미 동일한 카테고리가 있는 경우 false, 없는 경우 true를 반환한다.

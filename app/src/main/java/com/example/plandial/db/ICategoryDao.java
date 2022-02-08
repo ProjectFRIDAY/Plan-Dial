@@ -32,4 +32,12 @@ public interface ICategoryDao {
     @Query("SELECT * FROM CategoryTable")
     List<CategoryTable> getCategoryAll();
 
+    // 다이얼 이름으로 데이터 불러오기 쿼리
+    @Query("SELECT * FROM CategoryTable WHERE CategoryTable.categoryName = :name")
+    List<CategoryTable> getNameCategory(String name);
+
+    // 데이터 전부 삭제 -> ICategoryDao
+    @Query("DELETE FROM CategoryTable")
+    void delCategoryAll();
+
 }

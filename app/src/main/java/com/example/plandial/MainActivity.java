@@ -20,6 +20,7 @@ import com.example.plandial.db.ICategoryDao;
 import com.example.plandial.db.IDialDao;
 import com.example.plandial.db.IPresetDao;
 import com.example.plandial.db.PlanDatabase;
+import com.example.plandial.db.WorkDatabase;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -45,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //region test code
-        AlertDial alertDial1 = new AlertDial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
-        AlertDial alertDial2 = new AlertDial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
-        AlertDial alertDial3 = new AlertDial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
-        AlertDial alertDial4 = new AlertDial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Category category1 = new Category("나는 바보다");
-        category1.addDial(alertDial1);
-        category1.addDial(alertDial2);
-        category1.addDial(alertDial3);
-        Category category2 = new Category("나는 바보다2");
-        category2.addDial(alertDial1);
-        category2.addDial(alertDial4);
-        DialManager.getInstance().addCategory(category1);
-        DialManager.getInstance().addCategory(category2);
+//        AlertDial alertDial1 = new AlertDial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial2 = new AlertDial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial3 = new AlertDial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial4 = new AlertDial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
+//        Category category1 = new Category("나는 바보다");
+//        category1.addDial(alertDial1);
+//        category1.addDial(alertDial2);
+//        category1.addDial(alertDial3);
+//        Category category2 = new Category("나는 바보다2");
+//        category2.addDial(alertDial1);
+//        category2.addDial(alertDial4);
+//        DialManager.getInstance().addCategory(category1);
+//        DialManager.getInstance().addCategory(category2);
         //endregion
 
         add_button = findViewById(R.id.add_button);
@@ -67,12 +68,9 @@ public class MainActivity extends AppCompatActivity {
         mainDialLayout = findViewById(R.id.main_dial_layout);
         statusDisplayLayout = findViewById(R.id.status_display_layout);
 
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
-                startActivity(intent);
-            }
+        add_button.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
+            startActivity(intent);
         });
 
         {
@@ -134,6 +132,10 @@ public class MainActivity extends AppCompatActivity {
         // 아이콘 추천 준비
         IconRecommendation iconRecommendation = new IconRecommendation();
         iconRecommendation.roadIconData(this);
+
+        // DB 준비
+        WorkDatabase workDatabase = WorkDatabase.getInstance();
+        workDatabase.ready(this);
     }
 
     @Override

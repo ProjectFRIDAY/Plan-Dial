@@ -37,6 +37,10 @@ public interface IDialDao {
     @Query("SELECT * FROM DialTable WHERE DialTable.dialName = :name")
     List<DialTable> getNameDial(String name);
 
+    // 데이터 전부 삭제 -> IDialDao
+    @Query("DELETE FROM DialTable")
+    void delDialAll();
+
 
     // 특정 카테고리 아이디를 가지고 있는 다이얼 데이터 쿼리
 
