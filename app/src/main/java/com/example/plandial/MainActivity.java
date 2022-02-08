@@ -1,6 +1,8 @@
 package com.example.plandial;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -44,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // for widget testing
+        Intent intent = new Intent(this, PlanDialWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        intent.putExtra("itemList", "모임:baseline_groups_black/샤워:outline_bathroom_black/쇼핑:outline_shopping_cart_black/빨래:outline_local_laundry_service_black/교회:outline_church_black");
+        sendBroadcast(intent);
 
         //region test code
 //        AlertDial alertDial1 = new AlertDial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
