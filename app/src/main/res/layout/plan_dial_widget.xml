@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:textColor="#505050"
                 android:text="@string/appwidget_empty_text"
                 android:textSize="13dp" />
@@ -51,6 +51,7 @@
                 android:orientation="vertical"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginLeft="1dp" >
                 <ImageView
                     android:id="@+id/widget_item1_img"
@@ -71,6 +72,7 @@
                 android:orientation="vertical"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginLeft="6dp" >
                 <ImageView
                     android:id="@+id/widget_item2_img"
@@ -91,6 +93,7 @@
                 android:orientation="vertical"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginLeft="6dp" >
                 <ImageView
                     android:id="@+id/widget_item3_img"
@@ -111,6 +114,7 @@
                 android:orientation="vertical"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginLeft="6dp" >
                 <ImageView
                     android:id="@+id/widget_item4_img"
@@ -131,6 +135,7 @@
                 android:orientation="vertical"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginLeft="6dp" >
                 <ImageView
                     android:id="@+id/widget_item5_img"
