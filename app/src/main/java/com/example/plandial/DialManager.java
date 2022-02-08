@@ -87,7 +87,7 @@ public class DialManager {
                 // 남은 시간 구하기
                 long leftTime = alertDial.getLeftTimeInMillis();
 
-                if (0 <= leftTime && leftTime < urgentBound) {
+                if (0 <= leftTime && leftTime < urgentBound && !alertDial.isDisabled()) {
                     urgentDials.add(new Pair<>(leftTime, alertDial));
                 }
             }

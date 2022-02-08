@@ -20,6 +20,14 @@ public class Period {
         return (long) unitOfTime.getSeconds() * UnitOfTime.MILLIS_PER_SECOND * times;
     }
 
+    public int getTimes() {
+        return times;
+    }
+
+    public UnitOfTime getUnit() {
+        return unitOfTime;
+    }
+
     @Override
     public int hashCode() {
         // { unitOfTime, times } 에서 { HOUR, 24 } 와 { DAY, 1 } 은 다름.

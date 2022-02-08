@@ -58,7 +58,7 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
         }
 
         void onBind(AlertDial alertDial) {
-            dialIcon.setImageResource(R.drawable.ic_launcher_foreground);
+            dialIcon.setImageResource(alertDial.getIcon());
             dialName.setText(alertDial.getName());
         }
     }
