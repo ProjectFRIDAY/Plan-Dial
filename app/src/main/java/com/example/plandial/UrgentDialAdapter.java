@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.ItemViewHolder> {
     private static final int URGENT_BOUND = 60 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND;
-    private ArrayList<Dial> urgentDialList;
+    private ArrayList<AlertDial> urgentAlertDialList;
     private final DialManager dialManager = DialManager.getInstance();
 
     public UrgentDialAdapter() {
 
-        this.urgentDialList = dialManager.getUrgentDials(URGENT_BOUND);
+        this.urgentAlertDialList = dialManager.getUrgentDials(URGENT_BOUND);
     }
 
     @NonNull
@@ -32,17 +32,17 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
-        holder.onBind(urgentDialList.get(position));
+        holder.onBind(urgentAlertDialList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return urgentDialList.size();
+        return urgentAlertDialList.size();
     }
 
     public void syncDials() {
         // urgentDial을 DialManager와 동기화하는 함수 (개선 필요)
-        this.urgentDialList = dialManager.getUrgentDials(URGENT_BOUND);
+        this.urgentAlertDialList = dialManager.getUrgentDials(URGENT_BOUND);
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -57,9 +57,9 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
             dialName = itemView.findViewById(R.id.dial_name);
         }
 
-        void onBind(Dial dial) {
-            dialIcon.setImageResource(dial.getIcon());
-            dialName.setText(dial.getName());
+        void onBind(AlertDial alertDial) {
+            dialIcon.setImageResource(alertDial.getIcon());
+            dialName.setText(alertDial.getName());
         }
     }
 }

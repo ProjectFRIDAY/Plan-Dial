@@ -4,7 +4,7 @@
     package="com.example.plandial">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -28,15 +28,19 @@
         <activity android:name=".PlusDialActivity" />
         <activity android:name=".EditDialActivity" />
 
+        <activity android:name=".TemplateChoiceActivity" />
 
-        <receiver android:name=".PushReceiver"  android:exported="true">
+        <receiver
+            android:name=".PushReceiver"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".PushReceiver$ReBootReceiver"
+        <receiver
+            android:name=".PushReceiver$ReBootReceiver"
             android:enabled="true"
             android:exported="false"
             tools:ignore="Instantiatable">

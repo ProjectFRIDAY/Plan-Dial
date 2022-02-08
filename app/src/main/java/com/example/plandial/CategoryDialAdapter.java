@@ -40,7 +40,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
             return;
         }
 
-        holder.onBind(category.getDialByIndex(position));
+        holder.onBind((AlertDial) category.getDialByIndex(position));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
                 int pos = getAdapterPosition();
                 if (pos != RecyclerView.NO_POSITION) {
                     if (pos < category.getDialCount()) {
-                        statusDisplayLayout.displayDial(category.getDialByIndex(pos));
+                        statusDisplayLayout.displayDial((AlertDial) category.getDialByIndex(pos));
                     } else if (pos == category.getDialCount()) {
                         Intent intent = new Intent(v.getContext().getApplicationContext(), PlusDialActivity.class);
                         intent.putExtra("categoryName", category.getName());
@@ -97,7 +97,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
             });
         }
 
-        void onBind(Dial dial) {
+        void onBind(AlertDial dial) {
             if (dial.isDisabled()) {
                 dialIcon.setBackgroundResource(R.drawable.dial_background_disabled);
             } else {

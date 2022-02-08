@@ -14,12 +14,20 @@ public enum UnitOfTime {
     private final int seconds;
 
     public final static ArrayList<String> unitNames = new ArrayList<>(Arrays.asList("분", "시간", "일", "주", "개월"));
+    public final static ArrayList<String> unitEnglishNames = new ArrayList<>(Arrays.asList("MINUTE", "HOUR", "DAY", "WEEK", "MONTH"));
     public final static HashMap<String, UnitOfTime> nameToUnit = new HashMap<String, UnitOfTime>() {{
         put(unitNames.get(0), MINUTE);
         put(unitNames.get(1), HOUR);
         put(unitNames.get(2), DAY);
         put(unitNames.get(3), WEEK);
         put(unitNames.get(4), MONTH);
+    }};
+    public final static HashMap<String, UnitOfTime> EnglishNameToUnit = new HashMap<String, UnitOfTime>() {{
+        put(unitEnglishNames.get(0), MINUTE);
+        put(unitEnglishNames.get(1), HOUR);
+        put(unitEnglishNames.get(2), DAY);
+        put(unitEnglishNames.get(3), WEEK);
+        put(unitEnglishNames.get(4), MONTH);
     }};
     public final static HashMap<Object, Object> unitToIndex = new HashMap<Object, Object>() {{
         put(MINUTE, 0);

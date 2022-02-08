@@ -3,9 +3,13 @@ package com.example.plandial;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+
+import com.example.plandial.db.WorkDatabase;
 import com.example.plandial.policy.BasicDialValidator;
 import com.example.plandial.policy.IDialValidator;
 
@@ -86,6 +90,7 @@ public class DialSettingViewModel implements ISettingViewModel {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void finish() {
         // 검증 과정까지 마친 후 세팅을 마무리하는 함수임
@@ -94,15 +99,17 @@ public class DialSettingViewModel implements ISettingViewModel {
         activity.finish();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void save() {
         // 카테고리에 새로운 다이얼 생성
-        Dial dial = new Dial(
+        AlertDial dial = new AlertDial(
                 activity.getApplicationContext(),
                 dialNameData,
                 periodData,
                 startDayData);
 
         category.addDial(dial);
+        WorkDatabase.getInstance().makeDial(category, dial);
     }
 }

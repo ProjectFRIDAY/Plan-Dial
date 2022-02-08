@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.plandial.db.WorkDatabase;
+
 import java.util.ArrayList;
 
 public class EditDialActivity extends AppCompatActivity implements TextView.OnEditorActionListener {
@@ -29,7 +31,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
     private DialEditingViewModel dialEditingViewModel;
     private Intent intent;
     private Category category;
-    private Dial dial;
+    private AlertDial dial;
 
     private EditText Input_DialName;
     private ImageButton backButton;
@@ -55,7 +57,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
             //  값 불러오기
             intent = getIntent();
             category = dialManager.getCategoryByName(intent.getStringExtra("categoryName"));
-            dial = category.getDialByName(intent.getStringExtra("dialName"));
+            dial = (AlertDial) category.getDialByName(intent.getStringExtra("dialName"));
 
             // 값 보여주기
             Input_DialName = findViewById(R.id.Input_DialName);
@@ -93,6 +95,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
                 builder.setMessage("정말로 " + dial.getName() + " 다이얼을 삭제하시겠습니까?")
                         .setPositiveButton("예", (dialogInterface, i) -> {
                             category.removeDialByObject(dial);
+                            WorkDatabase.getInstance().delDial(dial);
                             this.finish();
                         })
                         .setNegativeButton("아니오", (dialogInterface, i) -> {

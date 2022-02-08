@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,6 +20,7 @@ import com.example.plandial.db.ICategoryDao;
 import com.example.plandial.db.IDialDao;
 import com.example.plandial.db.IPresetDao;
 import com.example.plandial.db.PlanDatabase;
+import com.example.plandial.db.WorkDatabase;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -36,50 +39,26 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton add_button;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //region test code
-        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.HOUR, 2), OffsetDateTime.of(2022, 1, 28, 18, 23, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)), R.drawable.outline_cleaning_services_black);
-        Dial dial3 = new Dial(this, "그림", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)), R.drawable.outline_palette_black);
-        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial5 = new Dial(this, "코딩5", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial6 = new Dial(this, "코딩6", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial7 = new Dial(this, "코딩7", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial8 = new Dial(this, "코딩8", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial9 = new Dial(this, "코딩9", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial10 = new Dial(this, "코딩10", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial11 = new Dial(this, "코딩11", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial12 = new Dial(this, "코딩12", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial13 = new Dial(this, "코딩13", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial14 = new Dial(this, "코딩14", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial15 = new Dial(this, "코딩15", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Dial dial16 = new Dial(this, "코딩16", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)), R.drawable.baseline_question_mark_black);
-        Category category1 = new Category("나는 바보다");
-        // category1.addDial(dial1);
-        category1.addDial(dial2);
-        category1.addDial(dial3);
-        // category1.addDial(dial4);
-        category1.addDial(dial5);
-        category1.addDial(dial6);
-        category1.addDial(dial7);
-        category1.addDial(dial8);
-        category1.addDial(dial9);
-        category1.addDial(dial10);
-        category1.addDial(dial11);
-        category1.addDial(dial12);
-        category1.addDial(dial13);
-        category1.addDial(dial14);
-        category1.addDial(dial15);
-        category1.addDial(dial16);
-        Category category2 = new Category("나는 바보다2");
-        category2.addDial(dial1);
-        category2.addDial(dial4);
-        DialManager.getInstance().addCategory(category1);
-        DialManager.getInstance().addCategory(category2);
+//        AlertDial alertDial1 = new AlertDial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial2 = new AlertDial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial3 = new AlertDial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial4 = new AlertDial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
+//        Category category1 = new Category("나는 바보다");
+//        category1.addDial(alertDial1);
+//        category1.addDial(alertDial2);
+//        category1.addDial(alertDial3);
+//        Category category2 = new Category("나는 바보다2");
+//        category2.addDial(alertDial1);
+//        category2.addDial(alertDial4);
+//        DialManager.getInstance().addCategory(category1);
+//        DialManager.getInstance().addCategory(category2);
         //endregion
 
         add_button = findViewById(R.id.add_button);
@@ -89,12 +68,9 @@ public class MainActivity extends AppCompatActivity {
         mainDialLayout = findViewById(R.id.main_dial_layout);
         statusDisplayLayout = findViewById(R.id.status_display_layout);
 
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), EditDialActivity.class);
-                startActivity(intent);
-            }
+        add_button.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
+            startActivity(intent);
         });
 
         {
@@ -156,6 +132,10 @@ public class MainActivity extends AppCompatActivity {
         // 아이콘 추천 준비
         IconRecommendation iconRecommendation = new IconRecommendation();
         iconRecommendation.roadIconData(this);
+
+        // DB 준비
+        WorkDatabase workDatabase = WorkDatabase.getInstance();
+        workDatabase.ready(this);
     }
 
     @Override

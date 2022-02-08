@@ -20,7 +20,7 @@ public class StatusDisplayLayout extends LinearLayout {
         super(context, attrs);
     }
 
-    public void displayDial(Dial dial) {
+    public void displayDial(AlertDial dial) {
         this.nameView.setText(dial.getName());
         int leftTime = Long.valueOf(dial.getLeftTimeInSeconds()).intValue();
 
