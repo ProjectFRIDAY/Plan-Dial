@@ -10,7 +10,6 @@ public class DialManager {
     private static final ArrayList<Category> categories = new ArrayList<>();
 
     private DialManager() {
-        // 로컬 DB에서 카테고리, 다이얼 불러오는 코드
     }
 
     public static DialManager getInstance() {
@@ -68,7 +67,6 @@ public class DialManager {
         }
 
         categories.add(category);
-        saveContent();
         return true;
     }
 
@@ -115,9 +113,5 @@ public class DialManager {
         }
 
         return result;
-    }
-
-    private static void saveContent() {
-        // 현재 정보를 로컬 DB에 저장하도록 구현해야 함.
     }
 }

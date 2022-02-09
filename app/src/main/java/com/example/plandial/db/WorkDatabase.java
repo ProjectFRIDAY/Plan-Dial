@@ -2,6 +2,7 @@ package com.example.plandial.db;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.room.Room;
@@ -10,6 +11,9 @@ import com.example.plandial.AlertDial;
 import com.example.plandial.Category;
 import com.example.plandial.DialManager;
 import com.example.plandial.Period;
+import com.example.plandial.Preset;
+import com.example.plandial.Template;
+import com.example.plandial.TemplateManager;
 import com.example.plandial.UnitOfTime;
 import com.opencsv.CSVReader;
 
@@ -19,15 +23,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 public class WorkDatabase {
     private static final String PresetDatabase_FILE = "database/PresetDatabase.csv";
+    private static final String PresetData_FILE = "datas/PresetData.csv";
+    private static final String TEMPLATE = "T";
+    private static final String PRESET = "P";
 
     private static final WorkDatabase workDatabase = new WorkDatabase();
 
@@ -63,7 +70,7 @@ public class WorkDatabase {
         //iCategoryDao.delCategoryAll();
         //iDialDao.delDialAll();
 
-        // feat : Load All Data
+        // start loading all data
         HashMap<Integer, Category> idToCategory = new HashMap<>();
         for (CategoryTable categoryTable : iCategoryDao.getCategoryAll()) {
             idToCategory.put(categoryTable.getId(), new Category(categoryTable.getCategoryName()));
@@ -80,9 +87,10 @@ public class WorkDatabase {
         for (Category category : idToCategory.values()) {
             dialManager.addCategory(category);
         }
-        // end feat
 
-        fillPresetdatas(context);
+        fillPresets(context);
+        // end loading all data
+
         ok = true;
     }
 
@@ -94,8 +102,6 @@ public class WorkDatabase {
             CSVReader read = new CSVReader(reader);
 
             String[] record = null;
-            ArrayList<String> tmp;
-            int i = 0;
             while ((record = read.readNext()) != null) {
                 PresetTable presetTable = new PresetTable(record[1], record[2], record[3], Integer.parseInt(record[4]), record[5]);
                 iPresetDao.insertPreset(presetTable);
@@ -105,6 +111,35 @@ public class WorkDatabase {
             return false;
         }
         return true;
+    }
+
+    // TemplateManager에 preset 데이터 채우는 함수 (DB 안씀) =================================================================
+    public void fillPresets(Context context) {
+        try {
+            InputStream inputStream = context.getAssets().open(PresetData_FILE);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            CSVReader read = new CSVReader(reader);
+
+            HashMap<String, Template> idToTemplate = new HashMap<>();
+            String[] record = read.readNext();
+
+            while ((record = read.readNext()) != null) {
+                if (record[0].equals(TEMPLATE)) {
+                    idToTemplate.put(record[2], new Template(record[1], record[6]));
+                } else if (record[0].equals(PRESET)) {
+                    int presetIcon = context.getResources().getIdentifier(record[5], "drawable", context.getPackageName());
+                    Period presetPeriod = new Period(Objects.requireNonNull(UnitOfTime.EnglishNameToUnit.get(record[3])), Integer.parseInt(record[4]));
+                    Preset preset = new Preset(record[1], presetIcon, presetPeriod, record[6]);
+                    Objects.requireNonNull(idToTemplate.get(record[2])).addDial(preset);
+                }
+            }
+
+            for (Template template : idToTemplate.values()) {
+                TemplateManager.getInstance().addTemplate(template);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -121,7 +156,6 @@ public class WorkDatabase {
     public void makeDial(Category category, AlertDial dial) {
         assert ok;
         List<CategoryTable> categoryId = iCategoryDao.getCategoryAll();
-
 
         OffsetDateTime startDateTime = dial.getStartDateTime();
         String unitName = unitNames.get((Integer) UnitOfTime.unitToIndex.get(dial.getPeriod().getUnit()));
@@ -239,17 +273,17 @@ public class WorkDatabase {
     // 이름으로 데이터 가져오기 (프리셋)
     //List<PresetTable> getNamePreset(String name);
 
-    // 다이얼 이름을 받아서 다이얼 개수 조회
-    public int numDial(String name) {
-        List<DialTable> dialTables = iDialDao.getNameDial(name);
-        return dialTables.size();
-    }
-
-    // 템플릿 이름을 받아서 프리셋 개수 조회
-    public int numPreset(String name) {
-        List<PresetTable> presetTables = iPresetDao.getNamePreset(name);
-        return presetTables.size();
-    }
+//    // 다이얼 이름을 받아서 다이얼 개수 조회
+//    public int numDial(String name) {
+//        List<DialTable> dialTables = iDialDao.getNameDial(name);
+//        return dialTables.size();
+//    }
+//
+//    // 템플릿 이름을 받아서 프리셋 개수 조회
+//    public int numPreset(String name) {
+//        List<PresetTable> presetTables = iPresetDao.getNamePreset(name);
+//        return presetTables.size();
+//    }
 
 
     // 전체 다이얼들의 데이터 조회
