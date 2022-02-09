@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("itemList", "모임:baseline_groups_black/샤워:outline_bathroom_black/쇼핑:outline_shopping_cart_black/빨래:outline_local_laundry_service_black/교회:outline_church_black");
         sendBroadcast(intent);
 
-        //region test code
-        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
+        // region test code
+        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
         Category category1 = new Category("나는 바보다");
         category1.addDial(dial1);
         category1.addDial(dial2);
