@@ -1,9 +1,13 @@
 package com.example.plandial;
 
+import android.appwidget.AppWidgetManager;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -31,16 +35,23 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView categoryDialView;
     StatusDisplayLayout statusDisplayLayout;
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //region test code
-        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
+        // for widget testing
+        Intent intent = new Intent(this, PlanDialWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        intent.putExtra("itemList", "모임:baseline_groups_black/샤워:outline_bathroom_black/쇼핑:outline_shopping_cart_black/빨래:outline_local_laundry_service_black/교회:outline_church_black");
+        sendBroadcast(intent);
+
+        // region test code
+        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
+        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.HOUR, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
         Category category1 = new Category("나는 바보다");
         category1.addDial(dial1);
         category1.addDial(dial2);

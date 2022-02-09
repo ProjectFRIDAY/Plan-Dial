@@ -21,4 +21,8 @@
     <string name="ch_dial2">카테고리에 포함할 다이얼을 선택해주세요</string>
     <string name="ctPlusText">카테고리 생성</string>
     <string name="ctPlusText2">현재 설정대로 카테고리를 생성합니다</string>
+    <string name="appwidget_text">임박 다이얼</string>
+    <string name="appwidget_empty_text">임박 다이얼이 없습니다</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
