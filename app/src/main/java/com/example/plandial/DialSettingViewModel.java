@@ -55,11 +55,8 @@ public class DialSettingViewModel implements ISettingViewModel {
         //region 값이 유효한 지 판단함
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // nothing
-                }
+            builder.setPositiveButton("확인", (dialogInterface, i) -> {
+                // nothing
             });
 
 
@@ -97,6 +94,7 @@ public class DialSettingViewModel implements ISettingViewModel {
 
         save();
         activity.finish();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.S)

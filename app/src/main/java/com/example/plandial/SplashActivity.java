@@ -20,7 +20,6 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this.getApplicationContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
     }

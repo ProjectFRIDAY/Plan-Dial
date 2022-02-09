@@ -43,6 +43,7 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
     public void syncDials() {
         // urgentDial을 DialManager와 동기화하는 함수 (개선 필요)
         this.urgentAlertDialList = dialManager.getUrgentDials(URGENT_BOUND);
+        this.notifyDataSetChanged();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {

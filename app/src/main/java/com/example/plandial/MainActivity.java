@@ -31,7 +31,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int SYNCING_URGENT_PERIOD = 1 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND; // 단위: ms
+    private static final int SYNCING_URGENT_PERIOD = 5 * UnitOfTime.MILLIS_PER_SECOND; // 단위: ms
 
     private SpinnableDialView mainDialSlider;
     private ConstraintLayout mainDialLayout;
@@ -40,12 +40,19 @@ public class MainActivity extends AppCompatActivity {
     private StatusDisplayLayout statusDisplayLayout;
     private ImageButton add_button;
 
-
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 아이콘 추천 준비
+        IconRecommendation iconRecommendation = new IconRecommendation();
+        iconRecommendation.roadIconData(this);
+
+        // DB 준비
+        WorkDatabase workDatabase = WorkDatabase.getInstance();
+        workDatabase.ready(this);
 
         // for widget testing
         Intent intent = new Intent(this, PlanDialWidget.class);
@@ -77,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         statusDisplayLayout = findViewById(R.id.status_display_layout);
 
         add_button.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
-            startActivity(intent);
+            Intent templateIntent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
+            startActivity(templateIntent);
         });
 
         {
@@ -120,36 +127,18 @@ public class MainActivity extends AppCompatActivity {
             TimerTask syncUrgentTask = new TimerTask() {
                 @Override
                 public void run() {
-                    adapter.syncDials();
+                    runOnUiThread(adapter::syncDials);
                 }
             };
             Timer timer = new Timer();
             timer.schedule(syncUrgentTask, 0, SYNCING_URGENT_PERIOD);
         }
 
-        PlanDatabase database = Room.databaseBuilder(getApplicationContext(), PlanDatabase.class, "PlanDial")
-                .fallbackToDestructiveMigration()   // 스키마 (database) 버전 변경가능
-                .allowMainThreadQueries()           // Main Thread에서 DB에 IO(입출력) 가능
-                .build();
-
-        // 멤버변수 선언
-        IDialDao iDialDao = database.iDialDao(); //인터페이스 객체 할당
-        ICategoryDao iCategoryDao = database.iCategoryDao(); //인터페이스 객체 할당
-        IPresetDao iPresetDao = database.iPresetDao(); // 인터페이스 객체 할당
-
-        // 아이콘 추천 준비
-        IconRecommendation iconRecommendation = new IconRecommendation();
-        iconRecommendation.roadIconData(this);
-
-        // DB 준비
-        WorkDatabase workDatabase = WorkDatabase.getInstance();
-        workDatabase.ready(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         this.categoryDialView.getAdapter().notifyDataSetChanged();
     }
 }
