@@ -64,7 +64,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/main_dial_layout"
-            app:srcCompat="@drawable/main_dial" />
+            app:srcCompat="@drawable/main_dial_no_circle" />
 
         <com.example.plandial.StatusDisplayLayout
             android:id="@+id/status_display_layout"

@@ -4,7 +4,7 @@
     android:initialKeyguardLayout="@layout/plan_dial_widget"
     android:initialLayout="@layout/plan_dial_widget"
     android:minWidth="180dp"
-    android:minHeight="40dp"
+    android:minHeight="70dp"
     android:previewImage="@drawable/example_appwidget_preview"
     android:previewLayout="@layout/plan_dial_widget"
     android:resizeMode="horizontal|vertical"
