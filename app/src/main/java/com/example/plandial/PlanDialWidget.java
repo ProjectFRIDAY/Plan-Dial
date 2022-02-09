@@ -16,7 +16,6 @@ import android.widget.RemoteViews;
 public class PlanDialWidget extends AppWidgetProvider {
     private static final int MAX_ITEM_CNT = 5;
 
-    private static Context ctx;
     private static String itemList = null;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -31,17 +30,16 @@ public class PlanDialWidget extends AppWidgetProvider {
         PendingIntent pe = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_layout, pe);
 
-        ctx = context;
         int num = 1, visibleItemCnt = 0;
         if (itemList != null) {
             String[] items = itemList.split("/");
-            int cnt = (items.length < MAX_ITEM_CNT) ? items.length : MAX_ITEM_CNT;
-            for ( ; num <= cnt; num++) {
-                if (setItem(views, num, items[num - 1])) visibleItemCnt++;
+            int cnt = Math.min(items.length, MAX_ITEM_CNT);
+            for (; num <= cnt; num++) {
+                if (setItem(context, views, num, items[num - 1])) visibleItemCnt++;
             }
         }
-        for ( ; num <= MAX_ITEM_CNT; num++) {
-            setItem(views, num, null); // 나머지 item 감추기
+        for (; num <= MAX_ITEM_CNT; num++) {
+            setItem(context, views, num, null); // 나머지 item 감추기
         }
 
         views.setViewVisibility(R.id.appwidget_empty_text,
@@ -51,40 +49,40 @@ public class PlanDialWidget extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    static int getResId(String name, String defType) {
+    static int getResId(Context context, String name, String defType) {
         // name 에 해당하는 id가 없는 경우 0을 리턴함
-        return ctx.getResources().getIdentifier(name, defType, ctx.getPackageName());
+        return context.getResources().getIdentifier(name, defType, context.getPackageName());
     }
 
-    static int getResId(String name) {
-        return getResId(name, "id");
+    static int getResId(Context context, String name) {
+        return getResId(context, name, "id");
     }
 
-    static int getResDrawableId(String name) {
-        return getResId(name, "drawable");
+    static int getResDrawableId(Context context, String name) {
+        return getResId(context, name, "drawable");
     }
 
-    static boolean setItem(RemoteViews views, int num, String item) {
+    static boolean setItem(Context context, RemoteViews views, int num, String item) {
         int resId, imgResId = -1;
         String text = "";
 
-        Log.d("WIDGET", "num="+num+" item="+item);
+        Log.d("WIDGET", "num=" + num + " item=" + item);
         if (item != null) {
             String[] arr = item.split(":");
             if (arr.length >= 1) text = arr[0];
             if (arr.length >= 2) {
-                imgResId = getResDrawableId(arr[1]); // image resource가 없는 경우 resImgId = 0임
+                imgResId = getResDrawableId(context, arr[1]); // image resource가 없는 경우 resImgId = 0임
             }
         }
 
-        resId = getResId("widget_item"+num+"_layout"); // item LinearLayout id 얻기
+        resId = getResId(context, "widget_item" + num + "_layout"); // item LinearLayout id 얻기
         if (imgResId < 0 && text.length() == 0) { // "이름:리소스" 형태가 아닌 "" or ":"인 경우
             views.setViewVisibility(resId, View.GONE); // item layout 감추기
             return false; // item 이미지가 없는 경우 해당 item이 표시되지 않도록 하고 return 함
         }
         views.setViewVisibility(resId, View.VISIBLE); // item layout 보이기
 
-        resId = getResId("widget_item"+num+"_img"); // item의 ImageView id 얻기
+        resId = getResId(context, "widget_item" + num + "_img"); // item의 ImageView id 얻기
         if (imgResId <= 0) {
             views.setViewVisibility(resId, View.INVISIBLE); // imageView 감추기(GONE이 아니기 때문에 자리차지함)
         } else {
@@ -92,7 +90,7 @@ public class PlanDialWidget extends AppWidgetProvider {
             views.setImageViewResource(resId, imgResId);
         }
 
-        resId = getResId("widget_item"+num+"_text"); // item의 TextView id 얻기
+        resId = getResId(context, "widget_item" + num + "_text"); // item의 TextView id 얻기
         views.setTextViewText(resId, text);
         return true;
     }
@@ -110,7 +108,7 @@ public class PlanDialWidget extends AppWidgetProvider {
         String action = intent.getAction();
         if (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
             String strItem = intent.getStringExtra("itemList");
-            Log.d("WIDGET", "itemList="+itemList);
+            Log.d("WIDGET", "itemList=" + itemList);
             if (strItem != null) {
                 itemList = strItem;
                 // 아래 부분에서 onUpdate()를 직접 호출하지 않으면 update 주기가 되기 전까진 변경되지 않음
