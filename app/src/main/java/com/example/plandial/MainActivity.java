@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView urgentDialView;
     RecyclerView categoryDialView;
     StatusDisplayLayout statusDisplayLayout;
-
 
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
@@ -84,6 +84,15 @@ public class MainActivity extends AppCompatActivity {
             circles.add(findViewById(R.id.category_circle_9));
             mainDialSlider.setCircles(this, circles);
             mainDialSlider.setCategoryNameView(findViewById(R.id.category_name));
+
+            //ConstraintLayout mainDialLayout = findViewById(R.id.main_dial_layout);
+            mainDialSlider.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    mainDialSlider.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    mainDialSlider.arrangeCircles();
+                }
+            });
         }
 
         {
