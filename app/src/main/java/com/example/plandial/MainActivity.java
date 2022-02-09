@@ -4,28 +4,16 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.os.Build;
 
 import androidx.annotation.RequiresApi;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import com.example.plandial.db.ICategoryDao;
-import com.example.plandial.db.IDialDao;
-import com.example.plandial.db.IPresetDao;
-import com.example.plandial.db.PlanDatabase;
-import com.example.plandial.db.WorkDatabase;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -45,14 +33,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // 아이콘 추천 준비
-        IconRecommendation iconRecommendation = new IconRecommendation();
-        iconRecommendation.roadIconData(this);
-
-        // DB 준비
-        WorkDatabase workDatabase = WorkDatabase.getInstance();
-        workDatabase.ready(this);
 
         // for widget testing
         Intent intent = new Intent(this, PlanDialWidget.class);
