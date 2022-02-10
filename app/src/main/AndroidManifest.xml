@@ -37,7 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+
+        <activity android:name=".PlusDialActivity" />
+        <activity android:name=".EditDialActivity" />
+        <activity android:name=".TemplateChoiceActivity" />
 
         <receiver
             android:name=".PushReceiver"
@@ -47,6 +51,7 @@
                 <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
             </intent-filter>
         </receiver>
+
         <receiver
             android:name=".PushReceiver$ReBootReceiver"
             android:enabled="true"

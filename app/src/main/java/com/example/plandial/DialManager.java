@@ -10,7 +10,6 @@ public class DialManager {
     private static final ArrayList<Category> categories = new ArrayList<>();
 
     private DialManager() {
-        // 로컬 DB에서 카테고리, 다이얼 불러오는 코드
     }
 
     public static DialManager getInstance() {
@@ -43,6 +42,19 @@ public class DialManager {
         return null;
     }
 
+    public int getIndexByCategory(Category targetCategory) {
+        /* 인자로 들어온 카테고리의 index를 반환한다.
+         * 인자로 들어온 카테고리와 같은 카테고리가 없다면 0을 반환한다.
+         */
+
+        for (int i = 0; i < categories.size(); i++) {
+            Category category = categories.get(i);
+            if (category.equals(targetCategory)) return i;
+        }
+
+        return -1;
+    }
+
     public boolean addCategory(Category category) {
         /* 이미 동일한 카테고리가 있으면 추가하지 않는다.
          * 이미 동일한 카테고리가 있는 경우 false, 없는 경우 true를 반환한다.
@@ -55,7 +67,6 @@ public class DialManager {
         }
 
         categories.add(category);
-        saveContent();
         return true;
     }
 
@@ -71,8 +82,8 @@ public class DialManager {
         return categories.remove(category);
     }
 
-    public ArrayList<Dial> getUrgentDials(long urgentBound) {
-        ArrayList<Pair<Long, Dial>> urgentDials = new ArrayList<>();
+    public ArrayList<AlertDial> getUrgentDials(long urgentBound) {
+        ArrayList<Pair<Long, AlertDial>> urgentDials = new ArrayList<>();
 
         DialManager dm = DialManager.getInstance();
         int categoryCount = dm.getCategoryCount();
@@ -82,29 +93,25 @@ public class DialManager {
             int dialCount = category.getDialCount();
 
             for (int j = 0; j < dialCount; ++j) {
-                Dial dial = category.getDialByIndex(j);
+                AlertDial alertDial = (AlertDial) category.getDialByIndex(j);
 
                 // 남은 시간 구하기
-                long leftTime = dial.getLeftTimeInMillis();
+                long leftTime = alertDial.getLeftTimeInMillis();
 
-                if (0 <= leftTime && leftTime < urgentBound) {
-                    urgentDials.add(new Pair<>(leftTime, dial));
+                if (0 <= leftTime && leftTime < urgentBound && !alertDial.isDisabled()) {
+                    urgentDials.add(new Pair<>(leftTime, alertDial));
                 }
             }
         }
 
         urgentDials.sort(Comparator.comparing(lhs -> lhs.first));
 
-        ArrayList<Dial> result = new ArrayList<>();
+        ArrayList<AlertDial> result = new ArrayList<>();
 
         for (int i = 0; i < urgentDials.size(); ++i) {
             result.add(urgentDials.get(i).second);
         }
 
         return result;
-    }
-
-    private static void saveContent() {
-        // 현재 정보를 로컬 DB에 저장하도록 구현해야 함.
     }
 }

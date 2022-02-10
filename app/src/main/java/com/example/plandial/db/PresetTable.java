@@ -16,12 +16,12 @@ public class PresetTable {
 
     private String presetTimeUnit; //프리셋의 시간단위 저장
 
-    private String presetTime; //프리셋의 기간을 저장
+    private int presetTime; //프리셋의 기간을 저장
 
-    private String presetIcon; // 아이콘의 아이디를 저장함. (아이디의 자료형은 아직 미정)
+    private String presetIcon; // 아이콘의 아이디를 저장함.
 
     // 인스턴스 생성할 때 값도 같이 입력
-    public PresetTable(String presetName, String templateId, String presetTimeUnit, String presetTime, String presetIcon) {
+    public PresetTable(String presetName, String templateId, String presetTimeUnit, int presetTime, String presetIcon) {
         this.presetName = presetName;
         this.templateId = templateId;
         this.presetTimeUnit = presetTimeUnit;
@@ -62,11 +62,11 @@ public class PresetTable {
         this.presetTimeUnit = presetTimeUnit;
     }
 
-    public String getPresetTime() {
+    public int getPresetTime() {
         return presetTime;
     }
 
-    public void setPresetTime(String presetTime) {
+    public void setPresetTime(int presetTime) {
         this.presetTime = presetTime;
     }
 

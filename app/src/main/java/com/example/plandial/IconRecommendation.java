@@ -1,6 +1,8 @@
 package com.example.plandial;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import com.opencsv.CSVReader;
 
@@ -19,11 +21,11 @@ import java.util.HashMap;
 
 /*
 사용법
-Context ctx = getApplicationContext();
-IconRecommendation IconRecommendation = new IconRecommendation(ctx);
-if(IconRecommendation.getIsReady()) int result = IconRecommendation.getIconByName(ctx, kword);
+IconRecommendation iconRecommendation = new IconRecommendation();
+if(iconRecommendation.getIsReady()) int result = iconRecommendation.getIconByName(context, kword);
  */
 
+// 추후 싱글톤으로 변경 가능성 있음
 public class IconRecommendation {
     private static boolean isReady = false;
     private static final HashMap<String, ArrayList<String>> wordVectors = new HashMap<>();
@@ -32,17 +34,16 @@ public class IconRecommendation {
 
     private static final String WORD_VECTOR_FILE = "datas/word_vectors.csv";
     private static final String ICON_VECTOR_FILE = "datas/icon_vectors.json";
-    private static final int UNKNOWN_IMAGE = R.drawable.baseline_question_mark_black;
+    public static final int UNKNOWN_IMAGE = R.drawable.baseline_question_mark_black;
     private static final String IMAGE_EXTENSION = ""; // 예비용
 
     private static final String JSON_ENTIRE_KEY = "data";
     private static final String JSON_ICON_KEY = "icon";
     private static final String JSON_VECTOR_KEY = "vector";
 
-
-    public IconRecommendation(Context context) {
-        // 최초 1회 -> 파일 준비
-        if (!isReady && getIconVectors(context) && getWordVectors(context)) isReady = true;
+    public void roadIconData(Context context) {
+        RoadDataTask roadDataTask = new RoadDataTask(context);
+        roadDataTask.execute();
     }
 
     private boolean getWordVectors(Context context) {
@@ -128,30 +129,58 @@ public class IconRecommendation {
     }
 
     public int getIconByName(Context context, String keyword) {
-        try {
-            ArrayList<String> wordVector = wordVectors.get(keyword);
-            int targetIndex = -1;
-            double targetValue = -1;
-
-            for (int i = 0; i < iconVectors.size(); i++) {
-                ArrayList<Double> iconVector = iconVectors.get(i);
-                double value = dotOperation(wordVector, iconVector) / (Math.sqrt(normOperationString(wordVector)) * Math.sqrt(normOperation(iconVector)));
-
-                if (value > targetValue) {
-                    targetValue = value;
-                    targetIndex = i;
-                }
-            }
-
-            String iconName = iconFileNames.get(targetIndex);
-            return context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
-
-        } catch (Exception e) {
+        if (!isReady) {
             return UNKNOWN_IMAGE;
         }
+
+        int targetIndex = -1;
+        double targetValue = -1;
+
+        for (String word : keyword.split(" ")) {
+            try {
+                ArrayList<String> wordVector = wordVectors.get(word);
+                for (int i = 0; i < iconVectors.size(); i++) {
+                    ArrayList<Double> iconVector = iconVectors.get(i);
+                    double value = dotOperation(wordVector, iconVector) / (Math.sqrt(normOperationString(wordVector)) * Math.sqrt(normOperation(iconVector)));
+
+                    if (value > targetValue) {
+                        targetValue = value;
+                        targetIndex = i;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (targetIndex == -1) {
+            return UNKNOWN_IMAGE;
+        }
+
+        String iconName = iconFileNames.get(targetIndex);
+        return context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
     }
 
     public boolean getIsReady() {
         return isReady;
+    }
+
+    public int getUnknownImage() {
+        return UNKNOWN_IMAGE;
+    }
+
+    private class RoadDataTask extends AsyncTask<Boolean, Boolean, Boolean> {
+        private final Context context;
+
+        public RoadDataTask(Context context) {
+            super();
+            this.context = context;
+        }
+
+        @Override
+        protected Boolean doInBackground(Boolean... booleans) {
+            boolean completed = getIconVectors(context) && getWordVectors(context);
+            return isReady = completed;
+        }
     }
 }
