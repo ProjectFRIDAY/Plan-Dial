@@ -22,11 +22,11 @@ public class PushReceiver extends BroadcastReceiver {
         // 다이얼 이름 받음
         String dialName = intent.getStringExtra("dial");
 
-        if(dialName != null) {
+        if (dialName != null) {
             // 푸쉬알림에 대한 내용
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(
-                    new NotificationChannel("push", "push-alarm", NotificationManager.IMPORTANCE_HIGH)
+                    new NotificationChannel("push", "다이얼 알림", NotificationManager.IMPORTANCE_HIGH)
             );
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "push");
 
@@ -52,7 +52,7 @@ public class PushReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
 
-                ComponentName receiver = new ComponentName(context,ReBootReceiver.class);
+                ComponentName receiver = new ComponentName(context, ReBootReceiver.class);
                 PackageManager pm = context.getPackageManager();
 
                 pm.setComponentEnabledSetting(receiver,
