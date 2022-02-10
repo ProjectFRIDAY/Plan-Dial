@@ -34,7 +34,7 @@ public class PushReceiver extends BroadcastReceiver {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 999, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
 
             builder.setContentTitle(dialName);
-            builder.setContentText("지금은 " + dialName + "을(를) 시작할 시간입니다.");
+            builder.setContentText("\uD83D\uDCE2 지금은 " + dialName + "을(를) 시작할 시간입니다.");
             builder.setSmallIcon(R.drawable.ic_logo);
             builder.setAutoCancel(true);
 

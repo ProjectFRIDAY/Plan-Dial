@@ -97,6 +97,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("정말로 " + dial.getName() + " 다이얼을 삭제하시겠습니까?")
                         .setPositiveButton("예", (dialogInterface, i) -> {
+                            dial.disable(this);
                             category.removeDialByObject(dial);
                             WorkDatabase.getInstance().delDial(dial);
                             this.finish();
