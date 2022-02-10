@@ -80,6 +80,7 @@ public class WorkDatabase {
                 OffsetDateTime startDateTime = OffsetDateTime.of(LocalDateTime.parse(dialTable.getDialStart(), formatter), OffsetDateTime.now().getOffset());
 
                 AlertDial dial = new AlertDial(context, dialTable.getDialName(), period, startDateTime, Integer.parseInt(dialTable.getDialIcon()));
+                if (dialTable.getDialDisabled()) dial.disable(context);
                 Objects.requireNonNull(idToCategory.get(dialTable.getDialToCategory())).addDial(dial);
             }
 
