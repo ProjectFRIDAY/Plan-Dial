@@ -26,8 +26,8 @@ public class PlanDialWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.plan_dial_widget);
         views.setTextViewText(R.id.appwidget_text, widgetText);
 
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pe = PendingIntent.getActivity(context, 0, intent, 0);
+        Intent intent = new Intent(context, SplashActivity.class);
+        PendingIntent pe = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.appwidget_layout, pe);
 
         int num = 1, visibleItemCnt = 0;

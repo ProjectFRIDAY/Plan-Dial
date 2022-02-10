@@ -16,7 +16,7 @@ public class AlertDial extends Dial {
     private static final IconRecommendation iconRecommendation = new IconRecommendation();
 
     private boolean disable = false;
-    private static int id = 0;
+    private static int id = 1;
     private PendingIntent pushIntent;
     private OffsetDateTime startDateTime;
 
