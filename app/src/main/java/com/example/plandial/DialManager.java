@@ -6,6 +6,8 @@ import java.util.Comparator;
 import android.util.Pair;
 
 public class DialManager {
+    public static final int URGENT_BOUND = 60 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND;
+
     private static final DialManager dialManager = new DialManager();
     private static final ArrayList<Category> categories = new ArrayList<>();
 
