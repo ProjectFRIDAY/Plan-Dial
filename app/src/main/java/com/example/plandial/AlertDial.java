@@ -106,6 +106,7 @@ public class AlertDial extends Dial {
         disable = true;
         if (pushIntent != null) {
             AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            pushIntent.cancel();
             alarmMgr.cancel(pushIntent);
             pushIntent = null;
         }
