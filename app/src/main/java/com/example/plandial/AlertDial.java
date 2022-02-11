@@ -23,10 +23,7 @@ public class AlertDial extends Dial {
     // 다이얼 첫 생성시 -> 아이콘 추천
     @RequiresApi(api = Build.VERSION_CODES.S)
     public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime) {
-        super(name, iconRecommendation.getIconByName(context, name), period);
-        this.startDateTime = startDateTime;
-        this.id = name.hashCode();
-        makeAlarm(context);
+        this(context, name, period, startDateTime, iconRecommendation.getIconByName(context, name));
     }
 
     // 다이얼 DB에서 가져올 시 -> 아이콘 불러오기
@@ -34,9 +31,8 @@ public class AlertDial extends Dial {
     public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime, int icon) {
         super(name, icon, period);
         this.startDateTime = startDateTime;
-        this.id = name.hashCode();
+        this.id = hashCode();
         makeAlarm(context);
-        id++;
     }
 
     // for test
@@ -120,5 +116,10 @@ public class AlertDial extends Dial {
         disable = false;
         // this.startDateTime = OffsetDateTime.now(); // 논의 필요
         makeAlarm(context);
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
     }
 }
