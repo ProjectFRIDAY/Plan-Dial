@@ -1,41 +1,49 @@
 package com.example.plandial;
 
+import java.util.ArrayList;
+
 public class TemplateManager {
     private static final TemplateManager templateManager = new TemplateManager();
+    private static final ArrayList<Template> templates = new ArrayList<>();
 
     private TemplateManager() {
     }
 
     public static TemplateManager getInstance() {
-        return TemplateManager.templateManager;
-    }
-
-    public int getPresetCount() {
-        // 전체 프리셋 개수 가져오기
-        return 0;
-    }
-
-    public Dial getPresetByIndex(int index) {
-        // index번째 프리셋 가져오기
-        return null;
-    }
-
-    public Dial getPresetByName(String name) {
-        // 이름이 name인 프리셋 가져오기
-        return null;
+        return templateManager;
     }
 
     public int getTemplateCount() {
-        // 전체 템플릿 개수 가져오기
-        return DialManager.getInstance().getCategoryCount();
+        return templates.size();
     }
 
-    public Category getTemplateByIndex(int index) {
-        return DialManager.getInstance().getCategoryByIndex(index);
+    public ArrayList<Template> getAllTemplates() {
+        return templates;
     }
 
-    public Category getTemplateByName(String name) {
-        // 이름이 name인 템플릿 가져오기
+    public Template getTemplateByIndex(int index) {
+        try {
+            return templates.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
+    public Template getTemplateByName(String name) {
+        /* 인자로 들어온 문자열과 같은 이름의 카테고리들 중 인덱스가 가장 작은 카테고리를 반환한다.
+         * 인자로 들어온 문자열과 같은 이름의 카테고리가 없다면 null을 반환한다.
+         */
+
+        for (Template template : templates) {
+            if (template.getName().equals(name)) {
+                return template;
+            }
+        }
+
         return null;
+    }
+
+    public void addTemplate(Template template) {
+        templates.add(template);
     }
 }

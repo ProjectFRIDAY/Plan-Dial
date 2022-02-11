@@ -11,4 +11,16 @@
     <color name="category_color_8">#FFFF0000</color>
     <color name="category_color_9">#FF0FF000</color>
     <color name="empty_color">#FF303030</color>
+
+    <color name="category_bg_color_0">#DDC1FF</color>
+    <color name="category_bg_color_1">#AE81F0</color>
+    <color name="category_bg_color_2">#8468C3</color>
+    <color name="category_bg_color_3">#6DDACF</color>
+    <color name="category_bg_color_4">#4D9595</color>
+    <color name="category_bg_color_5">#7DFB7D</color>
+    <color name="category_bg_color_6">#E67FE6</color>
+    <color name="category_bg_color_7">#8990F6</color>
+    <color name="category_bg_color_8">#FF8787</color>
+    <color name="category_bg_color_9">#7DD378</color>
+    <color name="empty_bg_color">#DDDDDD</color>
 </resources>

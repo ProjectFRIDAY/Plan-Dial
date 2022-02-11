@@ -30,7 +30,7 @@ public class PushReceiver extends BroadcastReceiver {
             );
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "push");
 
-            Intent goMainIntent = new Intent(context, MainActivity.class);
+            Intent goMainIntent = new Intent(context, SplashActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 999, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
 
             builder.setContentTitle(dialName);

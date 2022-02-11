@@ -12,12 +12,13 @@ public class CategoryTable {
 
     private String categoryName;   // 카테고리의 이름을 저장
 
-    private String categoryToTemplate;    // ❗️각 카테고리가 어디 템플릿에 연결되어있는지 확인 데이터베이스 연결 조사후 수정
+    private String categoryToTemplate;    // 템플릿 아이디 저장인데... 왜 만들었는지 모르겠음. 필요없으면 제거예정
 
     private String categoryColor;  //카테고리 color code 저장
 
     // 인스턴스 생성할 때 값도 같이 입력
     public CategoryTable(String categoryName, String categoryToTemplate, String categoryColor) {
+        this.id = id;
         this.categoryName = categoryName;
         this.categoryToTemplate = categoryToTemplate;
         this.categoryColor = categoryColor;

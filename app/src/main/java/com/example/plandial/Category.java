@@ -13,7 +13,6 @@ public class Category {
 
     public Category(final String name, final ArrayList<Dial> dials) {
         this.name = name;
-
         this.addDials(dials);
     }
 
@@ -46,6 +45,10 @@ public class Category {
         }
 
         return null;
+    }
+
+    public ArrayList<Dial> getAllDials() {
+        return dials;
     }
 
     public boolean addDial(Dial dialToAdd) {

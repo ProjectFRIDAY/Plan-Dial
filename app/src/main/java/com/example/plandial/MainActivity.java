@@ -1,75 +1,69 @@
 package com.example.plandial;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.view.View;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import com.example.plandial.db.ICategoryDao;
-import com.example.plandial.db.IDialDao;
-import com.example.plandial.db.IPresetDao;
-import com.example.plandial.db.PlanDatabase;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int SYNCING_URGENT_PERIOD = 1 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND; // 단위: ms
+    private static final int SYNCING_URGENT_PERIOD = 5 * UnitOfTime.MILLIS_PER_SECOND; // 단위: ms
 
-    SpinnableDialView mainDialSlider;
-    ConstraintLayout mainDialLayout;
-    RecyclerView urgentDialView;
-    RecyclerView categoryDialView;
-    StatusDisplayLayout statusDisplayLayout;
-    ImageButton plusButton;
+    private SpinnableDialView mainDialSlider;
+    private ConstraintLayout mainDialLayout;
+    private RecyclerView urgentDialView;
+    private RecyclerView categoryDialView;
+    private StatusDisplayLayout statusDisplayLayout;
+    private ImageButton add_button;
 
-
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        PlanDialWidget.WakeUp(this); // widget 미작동시 깨우기
+
         //region test code
-        Dial dial1 = new Dial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Category category1 = new Category("나는 바보다");
-        category1.addDial(dial1);
-        category1.addDial(dial2);
-        category1.addDial(dial3);
-        Category category2 = new Category("나는 바보다2");
-        category2.addDial(dial1);
-        category2.addDial(dial4);
-        DialManager.getInstance().addCategory(category1);
-        DialManager.getInstance().addCategory(category2);
+//        AlertDial alertDial1 = new AlertDial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial2 = new AlertDial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial3 = new AlertDial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial4 = new AlertDial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
+//        Category category1 = new Category("나는 바보다");
+//        category1.addDial(alertDial1);
+//        category1.addDial(alertDial2);
+//        category1.addDial(alertDial3);
+//        Category category2 = new Category("나는 바보다2");
+//        category2.addDial(alertDial1);
+//        category2.addDial(alertDial4);
+//        DialManager.getInstance().addCategory(category1);
+//        DialManager.getInstance().addCategory(category2);
         //endregion
 
+        add_button = findViewById(R.id.add_button);
         urgentDialView = findViewById(R.id.urgent_dials);
         categoryDialView = findViewById(R.id.category_dials);
         mainDialSlider = findViewById(R.id.main_dial_slider);
         mainDialLayout = findViewById(R.id.main_dial_layout);
         statusDisplayLayout = findViewById(R.id.status_display_layout);
 
-        {
-            // 카테고리 추가 버튼 설정
-            plusButton = findViewById(R.id.add_button);
-            plusButton.setOnClickListener(view -> {
-                Intent intent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
-                startActivity(intent);
-            });
-        }
+        add_button.setOnClickListener(view -> {
+            Intent templateIntent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
+            startActivity(templateIntent);
+        });
 
         {
             // 메인다이얼 슬라이더 설정 (객체 내부에서 ImageView 등록하도록 개선 필요)
@@ -86,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
             circles.add(findViewById(R.id.category_circle_9));
             mainDialSlider.setCircles(this, circles);
             mainDialSlider.setCategoryNameView(findViewById(R.id.category_name));
+
+            //ConstraintLayout mainDialLayout = findViewById(R.id.main_dial_layout);
+            mainDialSlider.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    mainDialSlider.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    mainDialSlider.arrangeCircles();
+                }
+            });
         }
 
         {
@@ -110,22 +113,18 @@ public class MainActivity extends AppCompatActivity {
             TimerTask syncUrgentTask = new TimerTask() {
                 @Override
                 public void run() {
-                    adapter.syncDials();
+                    runOnUiThread(adapter::syncDials);
                 }
             };
             Timer timer = new Timer();
             timer.schedule(syncUrgentTask, 0, SYNCING_URGENT_PERIOD);
         }
 
-        PlanDatabase database = Room.databaseBuilder(getApplicationContext(), PlanDatabase.class, "PlanDial")
-                .fallbackToDestructiveMigration()   // 스키마 (database) 버전 변경가능
-                .allowMainThreadQueries()           // Main Thread에서 DB에 IO(입출력) 가능
-                .build();
+    }
 
-        // 멤버변수 선언
-        IDialDao iDialDao = database.iDialDao(); //인터페이스 객체 할당
-        ICategoryDao iCategoryDao = database.iCategoryDao(); //인터페이스 객체 할당
-        IPresetDao iPresetDao = database.iPresetDao(); // 인터페이스 객체 할당
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.categoryDialView.getAdapter().notifyDataSetChanged();
     }
 }

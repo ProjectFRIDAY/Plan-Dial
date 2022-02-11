@@ -1,7 +1,5 @@
 package com.example.plandial;
 
-import androidx.room.Room;
-
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
@@ -13,21 +11,21 @@ public class CategoryTest {
     public void When_CreateCategory_Expect_ReturnValidInstance() {
         Category category;
 
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial1 = new AlertDial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial2 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial3 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
 
-        ArrayList<Dial> dials1 = new ArrayList<Dial>() {
+        ArrayList<AlertDial> dials1 = new ArrayList<AlertDial>() {
             {
-                add(dial1);
-                add(dial2);
+                add(alertDial1);
+                add(alertDial2);
             }
         };
 
-        ArrayList<Dial> dials2 = new ArrayList<Dial>() {
+        ArrayList<AlertDial> dials2 = new ArrayList<AlertDial>() {
             {
-                add(dial2);
-                add(dial3);
+                add(alertDial2);
+                add(alertDial3);
             }
         };
 
@@ -38,13 +36,13 @@ public class CategoryTest {
         category = new Category("집안일", new ArrayList<>(dials1));
         assert category.getName().equals("집안일");
         assert category.getDialCount() == 2;
-        assert category.getDialByIndex(0).equals(dial1);
-        assert category.getDialByIndex(1).equals(dial2);
+        assert category.getDialByIndex(0).equals(alertDial1);
+        assert category.getDialByIndex(1).equals(alertDial2);
 
         category = new Category("집밖일", new ArrayList<>(dials2));
         assert category.getName().equals("집밖일");
         assert category.getDialCount() == 1;
-        assert category.getDialByIndex(0).equals(dial3);
+        assert category.getDialByIndex(0).equals(alertDial3);
     }
 
 
@@ -54,31 +52,31 @@ public class CategoryTest {
         Category category2;
         Category category3;
 
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial1 = new AlertDial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial2 = new AlertDial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial3 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial4 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
 
         ArrayList<Dial> dials1 = new ArrayList<Dial>() {
             {
-                add(dial1);
-                add(dial3);
+                add(alertDial1);
+                add(alertDial3);
             }
         };
 
         ArrayList<Dial> dials2 = new ArrayList<Dial>() {
             {
-                add(dial2);
-                add(dial4);
+                add(alertDial2);
+                add(alertDial4);
             }
         };
 
         ArrayList<Dial> dials3 = new ArrayList<Dial>() {
             {
-                add(dial1);
-                add(dial2);
-                add(dial3);
-                add(dial4);
+                add(alertDial1);
+                add(alertDial2);
+                add(alertDial3);
+                add(alertDial4);
             }
         };
 
@@ -101,28 +99,28 @@ public class CategoryTest {
         Category category2;
         Category category3;
 
-        Dial dial1 = new Dial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial1 = new AlertDial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial2 = new AlertDial("빨래", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial3 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial4 = new AlertDial("청소", new Period(UnitOfTime.DAY, 2), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
 
         ArrayList<Dial> dials1 = new ArrayList<Dial>() {
             {
-                add(dial1);
-                add(dial3);
+                add(alertDial1);
+                add(alertDial3);
             }
         };
 
         ArrayList<Dial> dials2 = new ArrayList<Dial>() {
             {
-                add(dial2);
-                add(dial4);
+                add(alertDial2);
+                add(alertDial4);
             }
         };
 
         ArrayList<Dial> dials3 = new ArrayList<Dial>() {
             {
-                add(dial2);
+                add(alertDial2);
             }
         };
 
@@ -145,29 +143,29 @@ public class CategoryTest {
         Category category3;
         Category category4;
 
-        Dial dial1 = new Dial("도서 대출 연장", new Period(UnitOfTime.WEEK, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial2 = new Dial("도서 대출 연장", new Period(UnitOfTime.WEEK, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial3 = new Dial("산책", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial4 = new Dial("산책", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
-        Dial dial5 = new Dial("판책", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial1 = new AlertDial("도서 대출 연장", new Period(UnitOfTime.WEEK, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial2 = new AlertDial("도서 대출 연장", new Period(UnitOfTime.WEEK, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial3 = new AlertDial("산책", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial4 = new AlertDial("산책", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
+        AlertDial alertDial5 = new AlertDial("판책", new Period(UnitOfTime.DAY, 3), OffsetDateTime.of(2021, 12, 28, 12, 36, 43, 0, ZoneOffset.ofHours(9)));
 
         ArrayList<Dial> dials1 = new ArrayList<Dial>() {
             {
-                add(dial1);
-                add(dial3);
+                add(alertDial1);
+                add(alertDial3);
             }
         };
 
         ArrayList<Dial> dials2 = new ArrayList<Dial>() {
             {
-                add(dial2);
-                add(dial4);
+                add(alertDial2);
+                add(alertDial4);
             }
         };
 
         ArrayList<Dial> dials3 = new ArrayList<Dial>() {
             {
-                add(dial2);
+                add(alertDial2);
             }
         };
 
@@ -176,24 +174,24 @@ public class CategoryTest {
         category3 = new Category("카테고리", dials3);
         category4 = new Category("category", dials2);
 
-        assert !category1.addDial(dial2);
+        assert !category1.addDial(alertDial2);
         assert category1.equals(category2);
 
         assert category1.addDials(dials2) == 0;
         assert category1.equals(category2);
 
-        assert category1.removeDialByIndex(1) == dial3;
+        assert category1.removeDialByIndex(1) == alertDial3;
         assert category1.getDialCount() == 1;
         assert category1.equals(category3);
 
-        assert category1.addDial(dial3);
+        assert category1.addDial(alertDial3);
         assert category1.getDialCount() == 2;
         assert category1.equals(category2);
 
-        assert !category1.removeDialByObject(dial5);
+        assert !category1.removeDialByObject(alertDial5);
         assert category1.equals(category2);
 
-        assert category1.removeDialByObject(dial4);
+        assert category1.removeDialByObject(alertDial4);
         assert category1.equals(category3);
         assert category1.getDialCount() == 1;
 

@@ -25,7 +25,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_plus_category"
+        android:src="@drawable/ic_plus"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/plus"
@@ -64,7 +64,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/main_dial_layout"
-            app:srcCompat="@drawable/main_dial" />
+            app:srcCompat="@drawable/main_dial_no_circle" />
 
         <com.example.plandial.StatusDisplayLayout
             android:id="@+id/status_display_layout"
@@ -215,8 +215,13 @@
 
     <TextView
         android:id="@+id/category_name"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:background="@drawable/category_background_ripple"
+        android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/category_dials"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
