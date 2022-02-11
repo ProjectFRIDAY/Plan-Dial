@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,41 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.ItemViewHolder> {
     private Template template;
+    private final boolean isSelectable;
+    private ArrayList<Boolean> isSelected;
 
     public PresetListAdapter(Template template) {
+        // 프리셋을 선택할 수 없는 리스트 생성
+        this(template, false);
+    }
+
+    public PresetListAdapter(Template template, boolean isSelectable) {
         this.template = template;
+        this.isSelectable = isSelectable;
+
+        if (isSelectable) {
+            isSelected = new ArrayList<>(8);
+
+            for (int i = 0; i < template.getDialCount(); ++i) {
+                isSelected.add(false);
+            }
+        }
+    }
+
+    public ArrayList<Preset> getSelectedPresets() {
+        ArrayList<Preset> selectedPresets = new ArrayList<>(8);
+
+        for (int i = 0; i < isSelected.size(); ++i) {
+            if (isSelected.get(i)) {
+                selectedPresets.add((Preset) template.getDialByIndex(i));
+            }
+        }
+
+        return selectedPresets;
     }
 
     @NonNull
@@ -53,6 +84,24 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
 
             presetIcon = itemView.findViewById(R.id.preset_icon);
             presetName = itemView.findViewById(R.id.preset_name);
+
+            if (isSelectable) {
+                itemView.setOnClickListener(view -> {
+                    int pos = getAdapterPosition();
+
+                    if (isSelected.get(pos)) {
+                        // 선택 해제 효과
+                        itemView.setBackgroundColor(Color.parseColor("#777777"));
+                    } else {
+                        // 선택 효과
+                        itemView.setBackgroundColor(Color.parseColor("#242424"));
+                    }
+
+
+                    // 선택 반전
+                    isSelected.set(pos, !isSelected.get(pos));
+                });
+            }
         }
 
         void onBind(Dial preset) {

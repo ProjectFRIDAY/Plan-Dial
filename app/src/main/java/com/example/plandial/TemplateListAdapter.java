@@ -1,6 +1,7 @@
 package com.example.plandial;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,13 @@ public class TemplateListAdapter extends BaseAdapter {
         Template template = getItem(position);
         title.setText(template.getName());
         subtitle.setText(template.getDescription());
+
+        // 생성 화면으로 넘어가기
+        nextButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), CategoryCreateActivity.class);
+            intent.putExtra("templateIndex", position);
+            v.getContext().startActivity(intent);
+        });
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,7 @@
 package com.example.plandial;
 
+import java.time.OffsetDateTime;
+
 public class Dial {
     private String name;
     private int icon;
@@ -37,6 +39,10 @@ public class Dial {
 
     public void setPeriod(Period period) {
         this.period = period;
+    }
+
+    public AlertDial toAlertDial() {
+        return new AlertDial(name, period, OffsetDateTime.now());
     }
 
     @Override
