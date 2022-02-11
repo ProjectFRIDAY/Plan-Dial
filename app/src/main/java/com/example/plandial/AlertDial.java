@@ -31,7 +31,7 @@ public class AlertDial extends Dial {
     public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime, int icon) {
         super(name, icon, period);
         this.startDateTime = startDateTime;
-        this.id = hashCode();
+        this.id = name.hashCode(); // id를 name의 해시코드로 지정 (추후 수정 필요)
         makeAlarm(context);
     }
 
@@ -120,6 +120,23 @@ public class AlertDial extends Dial {
 
     @Override
     public int hashCode() {
-        return getName().hashCode();
+        int result = super.hashCode();
+        result = 31 * result + startDateTime.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof AlertDial) || this.hashCode() != obj.hashCode()) {
+            return false;
+        }
+
+        AlertDial other = (AlertDial) obj;
+        return super.equals(obj)
+                && this.startDateTime.equals(other.getStartDateTime());
     }
 }
