@@ -33,7 +33,7 @@ public class TemplateListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Category getItem(int position) {
+    public Template getItem(int position) {
         return templateManager.getTemplateByIndex(position);
     }
 
@@ -47,8 +47,9 @@ public class TemplateListAdapter extends BaseAdapter {
         RecyclerView presetList = view.findViewById(R.id.preset_list);
         Button nextButton = view.findViewById(R.id.complete_button);
 
-        Category template = getItem(position);
+        Template template = getItem(position);
         title.setText(template.getName());
+        subtitle.setText(template.getDescription());
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

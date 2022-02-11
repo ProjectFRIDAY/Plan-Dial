@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.ItemViewHolder> {
-    private Category template;
+    private Template template;
 
-    public PresetListAdapter(Category template) {
+    public PresetListAdapter(Template template) {
         this.template = template;
     }
 
@@ -38,7 +38,7 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
     }
 
     //카테고리 받는 메서드 선언
-    public void setCategory(Category template) {
+    public void setCategory(Template template) {
         this.template = template;
         this.notifyDataSetChanged();
     }
