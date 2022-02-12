@@ -83,6 +83,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ChoiceImage" />
 
+    <CheckBox
+        android:id="@+id/Icon_Checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginTop="10dp"
+        android:buttonTint="@color/gray"
+        android:checked="true"
+        android:text="@string/ChangeIcon"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/Input_DialName"
+        app:layout_constraintRight_toRightOf="@+id/Input_DialName" />
+
     <EditText
         android:id="@+id/Input_DialName"
         android:layout_width="304dp"
@@ -116,10 +129,10 @@
         android:layout_height="30dp"
         android:layout_marginStart="250dp"
         android:background="@drawable/ic_iconfinder_back_arrow_211686"
-        android:rotation="90"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/DialTime_Period"/>
+        android:rotation="90"
+        app:layout_constraintBottom_toTopOf="@id/DialTime_Period"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/DialTime_Period"
@@ -139,21 +152,21 @@
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:layout_marginStart="250dp"
-        android:rotation="270"
-        android:gravity="center"
         android:background="@drawable/ic_iconfinder_back_arrow_211686"
+        android:gravity="center"
+        android:rotation="270"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/DialTime_Period"/>
+        app:layout_constraintTop_toBottomOf="@id/DialTime_Period" />
 
     <ImageButton
         android:id="@+id/UnitOfTime_Up"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:rotation="90"
-        android:gravity="center"
         android:background="@drawable/ic_iconfinder_back_arrow_211686"
-        app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime"
-        app:layout_constraintBottom_toTopOf="@id/DialTime_UnitOfTime"/>
+        android:gravity="center"
+        android:rotation="90"
+        app:layout_constraintBottom_toTopOf="@id/DialTime_UnitOfTime"
+        app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime" />
 
     <TextView
         android:id="@+id/DialTime_UnitOfTime"
@@ -172,11 +185,11 @@
         android:id="@+id/UnitOfTime_Down"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:rotation="270"
-        android:gravity="center"
         android:background="@drawable/ic_iconfinder_back_arrow_211686"
+        android:gravity="center"
+        android:rotation="270"
         app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime"
-        app:layout_constraintTop_toBottomOf="@id/DialTime_UnitOfTime"/>
+        app:layout_constraintTop_toBottomOf="@id/DialTime_UnitOfTime" />
 
     <TextView
         android:id="@+id/InactivateDial"
@@ -186,7 +199,7 @@
         android:layout_marginTop="60dp"
         android:text="@string/InactivateDial"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DialTime_Period" />
 
