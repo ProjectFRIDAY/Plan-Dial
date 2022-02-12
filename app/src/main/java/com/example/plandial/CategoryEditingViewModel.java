@@ -49,7 +49,7 @@ public class CategoryEditingViewModel implements ISettingViewModel {
                 builder.setMessage("카테고리 이름은 1자 이상 16자 미만이어야 합니다.");
                 builder.show();
                 return false;
-            } else if (!categoryValidator.sameName(dialManager,categoryNameData, category)) {
+            } else if (!categoryValidator.sameName(dialManager, categoryNameData, category)) {
                 builder.setMessage("동일한 이름의 카테고리가 있습니다.");
                 builder.show();
                 return false;
@@ -70,7 +70,7 @@ public class CategoryEditingViewModel implements ISettingViewModel {
         // 검증 과정까지 마친 후 세팅을 마무리하는 함수임
         save();
         Intent intent = new Intent(fragment.getContext(), MainActivity.class);
-        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         fragment.getActivity().startActivity(intent);
     }
 
