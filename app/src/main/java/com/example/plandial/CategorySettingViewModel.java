@@ -1,6 +1,7 @@
 package com.example.plandial;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
@@ -55,8 +56,9 @@ public class CategorySettingViewModel implements ISettingViewModel {
     @Override
     public void finish() {
         save();
-        
-        activity.finish();
+        Intent intent = new Intent(activity, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
     }
 
     @Override
