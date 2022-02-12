@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.plandial.db.WorkDatabase;
+
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
@@ -55,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         AlertDial alertDial2 = new AlertDial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
         AlertDial alertDial3 = new AlertDial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
         AlertDial alertDial4 = new AlertDial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Category category1 = new Category("나는 바보다");
+        Category category1 = new Category("건강한 출퇴근 생활");
         category1.addDial(alertDial1);
         category1.addDial(alertDial2);
         category1.addDial(alertDial3);
-        Category category2 = new Category("나는 바보다2");
+        Category category2 = new Category("건강한 출퇴근 생");
         category2.addDial(alertDial1);
         category2.addDial(alertDial4);
         DialManager.getInstance().addCategory(category1);
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 if(!categoryNameView.getText().equals("빈 카테고리")){
-                    CategoryEditFragment categoryEditFragment = new CategoryEditFragment(getApplicationContext());
+                    CategoryEditFragment categoryEditFragment = new CategoryEditFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("categoryName", (String) categoryNameView.getText());
                     categoryEditFragment.setArguments(bundle);

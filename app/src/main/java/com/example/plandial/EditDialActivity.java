@@ -171,10 +171,8 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
     private final Runnable runnable_up = new Runnable() {
         @Override
         public void run() {
-            // Print out your letter here...
             countForPeriod++;
             setPeriod();
-            // Call the runnable again
             handler_up.postDelayed(this, 100);
             vibrator.vibrate(VibrationEffect.createOneShot(VIBRATE_STRENGTH, VibrationEffect.DEFAULT_AMPLITUDE));
         }
@@ -184,7 +182,6 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
     private final Runnable runnable_down = new Runnable() {
         @Override
         public void run() {
-            // Print out your letter here...
             countForPeriod--;
             setPeriod();
             // Call the runnable again

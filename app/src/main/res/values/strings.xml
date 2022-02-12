@@ -28,6 +28,6 @@
     <string name="app_widget_description">This is an app widget description</string>
     <string name="edit_category_name">카테고리 이름 변경</string>
     <string name="remove_category">카테고리 삭제</string>
-    <string name="remove_category_sub">주의: 삭제하면 되돌릴 수 없습니다.</string>
+    <string name="remove_category_sub">주의: 삭제 시 되돌릴 수 없습니다.</string>
     <string name="Remove">삭제</string>
 </resources>

@@ -2,8 +2,6 @@ package com.example.plandial;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -12,11 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.example.plandial.db.WorkDatabase;
-import com.example.plandial.policy.BasicDialValidator;
 import com.example.plandial.policy.EditDialValidator;
-import com.example.plandial.policy.IDialValidator;
-
-import java.time.OffsetDateTime;
 
 public class DialEditingViewModel implements ISettingViewModel {
     private static final String FORMAT_STRING = "선택하신 내용대로 %s 다이얼을 수정할게요!";

@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +11,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.plandial.db.WorkDatabase;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class CategoryEditFragment extends BottomSheetDialogFragment {
-    Context context;
+    private final DialManager dialManager = DialManager.getInstance();
+    private Category category;
+    private CategoryEditingViewModel categoryEditingViewModel;
 
     private EditText InputCategoryName;
-    private Button RemoveCategory;
+    private Button RemoveCategory, SaveCategory;
 
-    public CategoryEditFragment(Context context) {
-        this.context = context;
+    public CategoryEditFragment() {
     }
     @Nullable
     @Override
@@ -32,15 +36,37 @@ public class CategoryEditFragment extends BottomSheetDialogFragment {
 
         InputCategoryName = view.findViewById(R.id.Input_CategoryName);
         RemoveCategory = view.findViewById(R.id.CategoryRemove_Button);
+        SaveCategory = view.findViewById(R.id.CategorySave_Button);
 
+        category = dialManager.getCategoryByName(getArguments().getString("categoryName"));
         String categoryName = getArguments().getString("categoryName");
         InputCategoryName.setText(categoryName);
 
+        //저장
+        categoryEditingViewModel = new CategoryEditingViewModel(view, this, category);
+
+        //카테고리 이름 수정
+        SaveCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoryEditingViewModel.complete();
+            }
+        });
+
+        //카테고리 삭제
         RemoveCategory.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "확인", Toast.LENGTH_SHORT).show();
-                dismiss();
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("정말로 카테고리를 삭제하시겠습니까?")
+                        .setPositiveButton("예", (dialogInterface, i) -> {
+                            WorkDatabase.getInstance().delCategory(category);
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            fragmentManager.beginTransaction().remove(CategoryEditFragment.this).commit();
+                        })
+                        .setNegativeButton("아니오", (dialogInterface, i) -> {
+                        });
+                builder.show();
             }
         });
 
