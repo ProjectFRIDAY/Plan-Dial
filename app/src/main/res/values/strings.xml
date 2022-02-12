@@ -30,4 +30,5 @@
     <string name="remove_category">카테고리 삭제</string>
     <string name="remove_category_sub">주의: 삭제 시 되돌릴 수 없습니다.</string>
     <string name="Remove">삭제</string>
+    <string name="ChangeIcon">아이콘 변경</string>
 </resources>

@@ -31,15 +31,18 @@ public class IconRecommendation {
     private static final HashMap<String, ArrayList<String>> wordVectors = new HashMap<>();
     private static final ArrayList<String> iconFileNames = new ArrayList<>();
     private static final ArrayList<ArrayList<Double>> iconVectors = new ArrayList<>();
+    private static final HashMap<String, String> taggedWords = new HashMap<>();
 
     private static final String WORD_VECTOR_FILE = "datas/word_vectors.csv";
     private static final String ICON_VECTOR_FILE = "datas/icon_vectors.json";
+    private static final String WORD_TAGGING_FILE = "datas/tag.json";
     public static final int UNKNOWN_IMAGE = R.drawable.baseline_question_mark_black;
     private static final String IMAGE_EXTENSION = ""; // 예비용
 
     private static final String JSON_ENTIRE_KEY = "data";
     private static final String JSON_ICON_KEY = "icon";
     private static final String JSON_VECTOR_KEY = "vector";
+    private static final String JSON_TAG_KEY = "tag";
 
     public void roadIconData(Context context) {
         RoadDataTask roadDataTask = new RoadDataTask(context);
@@ -100,6 +103,38 @@ public class IconRecommendation {
         return true;
     }
 
+    private boolean getTaggedWords(Context context) {
+        // 사전 태깅된 단어는 바로 사용해서 추천
+        try {
+            InputStream inputStream = context.getAssets().open(WORD_TAGGING_FILE);
+            int fileSize = inputStream.available();
+
+            byte[] buffer = new byte[fileSize];
+            inputStream.read(buffer);
+            inputStream.close();
+
+            String json = new String(buffer, StandardCharsets.UTF_8);
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray jsonArray = jsonObject.getJSONArray(JSON_ENTIRE_KEY);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject tagObject = jsonArray.getJSONObject(i);
+                String fileName = tagObject.getString(JSON_ICON_KEY) + IMAGE_EXTENSION;
+
+                for (String tag : tagObject.getString(JSON_TAG_KEY).split("/")) {
+                    if (!"".equals(tag) && !taggedWords.containsKey(tag)) {
+                        taggedWords.put(tag, fileName);
+                    }
+                }
+            }
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     private double dotOperation(final ArrayList<String> wordVector, final ArrayList<Double> iconVector) {
         // 내적
         double result = 0.0d;
@@ -132,11 +167,18 @@ public class IconRecommendation {
         if (!isReady) {
             return UNKNOWN_IMAGE;
         }
+        if (taggedWords.containsKey(keyword)) {
+            return getResource(context, taggedWords.get(keyword));
+        }
 
         int targetIndex = -1;
         double targetValue = -1;
 
         for (String word : keyword.split(" ")) {
+            if (taggedWords.containsKey(word)) {
+                return getResource(context, taggedWords.get(word));
+            }
+
             try {
                 ArrayList<String> wordVector = wordVectors.get(word);
                 for (int i = 0; i < iconVectors.size(); i++) {
@@ -157,7 +199,11 @@ public class IconRecommendation {
             return UNKNOWN_IMAGE;
         }
 
-        String iconName = iconFileNames.get(targetIndex);
+        return getResource(context, iconFileNames.get(targetIndex));
+    }
+
+    private int getResource(Context context, String iconName) {
+        Log.i("IconRecommendation", iconName);
         return context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
     }
 
@@ -179,7 +225,7 @@ public class IconRecommendation {
 
         @Override
         protected Boolean doInBackground(Boolean... booleans) {
-            boolean completed = getIconVectors(context) && getWordVectors(context);
+            boolean completed = getIconVectors(context) && getWordVectors(context) && getTaggedWords(context);
             return isReady = completed;
         }
     }

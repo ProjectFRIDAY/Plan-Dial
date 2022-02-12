@@ -3,6 +3,7 @@ package com.example.plandial;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Build;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class DialEditingViewModel implements ISettingViewModel {
     private final TextView period, unitOfTime;
     private final EditText dialNameView;
     private final Switch unableSwitchView;
+    private final CheckBox iconCheckbox;
 
     private String dialNameData;
     private Period periodData;
@@ -37,6 +39,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         this.period = activity.findViewById(R.id.DialTime_Period);
         this.unitOfTime = activity.findViewById(R.id.DialTime_UnitOfTime);
         this.unableSwitchView = activity.findViewById(R.id.switchButton);
+        this.iconCheckbox = activity.findViewById(R.id.Icon_Checkbox);
     }
 
     @Override
@@ -95,7 +98,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         String oldName = dial.getName();
 
         // 다이얼 수정
-        dial.setName(activity.getApplicationContext(), dialNameData);
+        dial.setName(activity.getApplicationContext(), dialNameData, iconCheckbox.isChecked());
         dial.setPeriod(periodData);
 
         if (unableData) {

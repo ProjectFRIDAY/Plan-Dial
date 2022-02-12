@@ -9,6 +9,7 @@ import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,6 +40,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
     private TextView period, unitOfTime;
     private ImageButton periodPlus, periodMinus;
     private ImageButton unitOfTimePlus, unitOfTimeMinus;
+    private CheckBox iconCheckbox;
 
     int countForPeriod = 0;
     private int countForUnitOfTime = 0;
@@ -69,6 +71,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
             unitOfTime = findViewById(R.id.DialTime_UnitOfTime);
             unitOfTimePlus = findViewById(R.id.UnitOfTime_Up);
             unitOfTimeMinus = findViewById(R.id.UnitOfTime_Down);
+            iconCheckbox = findViewById(R.id.Icon_Checkbox);
 
             Input_DialName.setText(dial.getName());
             iconImage.setImageResource(dial.getIcon());
@@ -94,6 +97,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("정말로 " + dial.getName() + " 다이얼을 삭제하시겠습니까?")
                         .setPositiveButton("예", (dialogInterface, i) -> {
+                            dial.disable(this);
                             category.removeDialByObject(dial);
                             WorkDatabase.getInstance().delDial(dial);
                             this.finish();
@@ -165,6 +169,14 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
                 unitOfTime.setText(timeArray.get(countForUnitOfTime));
             }
         });
+
+        iconCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                changeIcon(Input_DialName.getText().toString());
+            } else {
+                iconImage.setImageResource(dial.getIcon());
+            }
+        });
     }
 
     private final Handler handler_up = new Handler();
@@ -203,20 +215,22 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
         }
     }
 
+    public void changeIcon(String text) {
+        if (text.length() == 0) {
+            iconImage.setImageBitmap(null);
+        } else {
+            int imageId = iconRecommendation.getUnknownImage();
+            if (iconRecommendation.getIsReady()) {
+                imageId = iconRecommendation.getIconByName(this, text);
+            }
+            iconImage.setImageResource(imageId);
+        }
+    }
+
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (v.getId() == R.id.Input_DialName && actionId == EditorInfo.IME_ACTION_DONE) {
-            String text = v.getText().toString();
-
-            if (text.length() == 0) {
-                iconImage.setImageBitmap(null);
-            } else {
-                int imageId = iconRecommendation.getUnknownImage();
-                if (iconRecommendation.getIsReady()) {
-                    imageId = iconRecommendation.getIconByName(this, text);
-                }
-                iconImage.setImageResource(imageId);
-            }
+        if (v.getId() == R.id.Input_DialName && actionId == EditorInfo.IME_ACTION_DONE && iconCheckbox.isChecked()) {
+            changeIcon(v.getText().toString());
         }
         return false;
     }

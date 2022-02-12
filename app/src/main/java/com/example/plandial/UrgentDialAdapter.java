@@ -13,13 +13,12 @@ import java.util.ArrayList;
 
 
 public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.ItemViewHolder> {
-    private static final int URGENT_BOUND = 60 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND;
     private ArrayList<AlertDial> urgentAlertDialList;
     private final DialManager dialManager = DialManager.getInstance();
 
     public UrgentDialAdapter() {
 
-        this.urgentAlertDialList = dialManager.getUrgentDials(URGENT_BOUND);
+        this.urgentAlertDialList = dialManager.getUrgentDials(DialManager.URGENT_BOUND);
     }
 
     @NonNull
@@ -42,7 +41,7 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
 
     public void syncDials() {
         // urgentDial을 DialManager와 동기화하는 함수 (개선 필요)
-        this.urgentAlertDialList = dialManager.getUrgentDials(URGENT_BOUND);
+        this.urgentAlertDialList = dialManager.getUrgentDials(DialManager.URGENT_BOUND);
         this.notifyDataSetChanged();
     }
 

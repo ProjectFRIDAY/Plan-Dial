@@ -6,6 +6,8 @@ import java.util.Comparator;
 import android.util.Pair;
 
 public class DialManager {
+    public static final int URGENT_BOUND = 60 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND;
+
     private static final DialManager dialManager = new DialManager();
     private static final ArrayList<Category> categories = new ArrayList<>();
 
@@ -85,15 +87,10 @@ public class DialManager {
     public ArrayList<AlertDial> getUrgentDials(long urgentBound) {
         ArrayList<Pair<Long, AlertDial>> urgentDials = new ArrayList<>();
 
-        DialManager dm = DialManager.getInstance();
-        int categoryCount = dm.getCategoryCount();
+        for (Category category : categories) {
 
-        for (int i = 0; i < categoryCount; ++i) {
-            Category category = dm.getCategoryByIndex(i);
-            int dialCount = category.getDialCount();
-
-            for (int j = 0; j < dialCount; ++j) {
-                AlertDial alertDial = (AlertDial) category.getDialByIndex(j);
+            for (Dial dial : category.getAllDials()) {
+                AlertDial alertDial = (AlertDial) dial;
 
                 // 남은 시간 구하기
                 long leftTime = alertDial.getLeftTimeInMillis();
