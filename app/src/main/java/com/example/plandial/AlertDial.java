@@ -18,13 +18,19 @@ public class AlertDial extends Dial {
     private PendingIntent pushIntent;
     private OffsetDateTime startDateTime;
 
-    // 다이얼 첫 생성시 -> 아이콘 추천
+    // 다이얼 첫 생성시 -> 아이콘 추천, id 할당
     @RequiresApi(api = Build.VERSION_CODES.S)
     public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime) {
         this(context, DialManager.getInstance().getNextDialId(), name, period, startDateTime, iconRecommendation.getIconByName(context, name));
     }
 
-    // 다이얼 DB에서 가져올 시 -> 아이콘 불러오기
+    // 프리셋에서 다이얼로 변환시 -> 아이콘 불러오기, id 할당
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime, int icon) {
+        this(context, DialManager.getInstance().getNextDialId(), name, period, startDateTime, icon);
+    }
+
+    // DB에서 다이얼을 가져올 시 -> 아이콘 및 id 불러오기
     @RequiresApi(api = Build.VERSION_CODES.S)
     public AlertDial(final Context context, int id, final String name, final Period period, final OffsetDateTime startDateTime, int icon) {
         super(name, icon, period);
