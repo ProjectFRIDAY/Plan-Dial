@@ -12,7 +12,4 @@ public abstract class PlanDatabase extends RoomDatabase {
 
     public abstract IPresetDao iPresetDao();
 
-
-
 }
-

@@ -1,12 +1,8 @@
 package com.example.plandial;
 
-import android.app.FragmentTransaction;
-import android.appwidget.AppWidgetManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.view.ViewTreeObserver;
@@ -20,10 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plandial.db.WorkDatabase;
-
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -49,19 +42,19 @@ public class MainActivity extends AppCompatActivity {
         PlanDialWidget.WakeUp(this); // widget 미작동시 깨우기
 
         //startregion
-        AlertDial alertDial1 = new AlertDial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
-        AlertDial alertDial2 = new AlertDial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
-        AlertDial alertDial3 = new AlertDial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
-        AlertDial alertDial4 = new AlertDial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-        Category category1 = new Category("건강한 출퇴근 생활");
-        category1.addDial(alertDial1);
-        category1.addDial(alertDial2);
-        category1.addDial(alertDial3);
-        Category category2 = new Category("건강한 출퇴근 생");
-        category2.addDial(alertDial1);
-        category2.addDial(alertDial4);
-        DialManager.getInstance().addCategory(category1);
-        DialManager.getInstance().addCategory(category2);
+//        AlertDial alertDial1 = new AlertDial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial2 = new AlertDial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial3 = new AlertDial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
+//        AlertDial alertDial4 = new AlertDial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
+//        Category category1 = new Category("건강한 출퇴근 생활");
+//        category1.addDial(alertDial1);
+//        category1.addDial(alertDial2);
+//        category1.addDial(alertDial3);
+//        Category category2 = new Category("건강한 출퇴근 생");
+//        category2.addDial(alertDial1);
+//        category2.addDial(alertDial4);
+//        DialManager.getInstance().addCategory(category1);
+//        DialManager.getInstance().addCategory(category2);
         //endregion
 
         add_button = findViewById(R.id.add_button);
