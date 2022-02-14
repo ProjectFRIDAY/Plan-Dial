@@ -42,7 +42,7 @@ public class CategoryCreateActivity extends AppCompatActivity {
             presetList.setAdapter(presetAdapter);
 
             // 뷰 모델 설정
-            CategorySettingViewModel categorySettingViewModel = new CategorySettingViewModel(this,presetAdapter);
+            CategorySettingViewModel categorySettingViewModel = new CategorySettingViewModel(this, presetAdapter);
 
             // 완료 버튼 설정
             ImageButton completeButton = findViewById(R.id.DialPlus_Button);

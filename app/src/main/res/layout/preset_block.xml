@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:textSize="17sp"
-        android:gravity="bottom" />
+        android:gravity="center_vertical"
+        android:layout_marginStart="3dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
