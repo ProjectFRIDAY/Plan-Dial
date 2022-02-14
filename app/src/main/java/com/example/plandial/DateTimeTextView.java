@@ -4,9 +4,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.IllegalFormatException;
+import java.util.Locale;
 
-public class DateTimeTextView extends FormatTextView implements IOffsetDateTimeRequester{
+public class DateTimeTextView extends FormatTextView implements IOffsetDateTimeRequester {
 
     private OffsetDateTime dateTime;
 
@@ -27,10 +29,14 @@ public class DateTimeTextView extends FormatTextView implements IOffsetDateTimeR
         int hour = offsetDateTime.getHour();
         int minute = offsetDateTime.getMinute();
 
+        String weekOfDay = offsetDateTime.format(DateTimeFormatter.ofPattern("E"));
+        int hour12 = hour == 12 ? 12 : hour % 12;
+        String amPm = offsetDateTime.getHour() < 12 ? "오전" : "오후";
+
         try {
-            this.setText(String.format(formatString, year, month, day, hour, minute));
+            this.setText(String.format(formatString, year, month, day, weekOfDay, amPm, hour12, minute));
         } catch (IllegalFormatException | NullPointerException exception) {
-            this.setText(String.format("%d %d %d %d %d", year, month, day, hour, minute));
+            this.setText(String.format(Locale.KOREA, "%d %d %d %d %d", year, month, day, hour, minute));
             assert (false);
             return false;
         }
