@@ -49,6 +49,7 @@ public class TemplateListAdapter extends BaseAdapter {
         Button nextButton = view.findViewById(R.id.complete_button);
 
         Template template = getItem(position);
+        templateIcon.setImageResource(template.getIcon());
         title.setText(template.getName());
         subtitle.setText(template.getDescription());
 

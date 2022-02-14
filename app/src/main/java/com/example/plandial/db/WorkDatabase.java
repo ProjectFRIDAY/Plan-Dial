@@ -132,7 +132,8 @@ public class WorkDatabase {
 
             while ((record = read.readNext()) != null) {
                 if (record[0].equals(TEMPLATE)) {
-                    idToTemplate.put(record[2], new Template(record[1], record[6]));
+                    int templateIcon = context.getResources().getIdentifier(record[5], "drawable", context.getPackageName());
+                    idToTemplate.put(record[2], new Template(record[1], record[6], templateIcon));
                 } else if (record[0].equals(PRESET)) {
                     int presetIcon = context.getResources().getIdentifier(record[5], "drawable", context.getPackageName());
                     Period presetPeriod = new Period(Objects.requireNonNull(UnitOfTime.EnglishNameToUnit.get(record[3])), Integer.parseInt(record[4]));

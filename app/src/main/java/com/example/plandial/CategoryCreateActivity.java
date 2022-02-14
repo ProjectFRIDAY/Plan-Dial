@@ -2,9 +2,9 @@ package com.example.plandial;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,9 +28,11 @@ public class CategoryCreateActivity extends AppCompatActivity {
             int templateIndex = getIntent().getExtras().getInt("templateIndex");
             Template selectedTemplate = TemplateManager.getInstance().getTemplateByIndex(templateIndex);
 
-            // 카테고리 이름 기본값 설정
+            // 카테고리 이름 및 아이콘 기본값 설정
             EditText categoryNameEditView = findViewById(R.id.set_ct_name);
+            ImageView categoryIconImageView = findViewById(R.id.Category_Image_Inner);
             categoryNameEditView.setText(selectedTemplate.getName());
+            categoryIconImageView.setImageResource(selectedTemplate.getIcon());
 
             // 프리셋 리스트 표시
             RecyclerView presetList = findViewById(R.id.preset_list);

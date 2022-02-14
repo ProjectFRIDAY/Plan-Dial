@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class TemplateManager {
     private static final TemplateManager templateManager = new TemplateManager();
-    private static final ArrayList<Template> templates = new ArrayList<>(Collections.singletonList(new Template("빈 템플릿", "비어있는 템플릿입니다.")));
+    private static final ArrayList<Template> templates = new ArrayList<>(Collections.singletonList(new Template("빈 템플릿", "비어있는 템플릿입니다.", R.drawable.outline_assignment_black)));
 
     private TemplateManager() {
     }
