@@ -13,7 +13,6 @@ import androidx.annotation.RequiresApi;
 import com.example.plandial.db.WorkDatabase;
 import com.example.plandial.policy.EditDialValidator;
 
-
 public class DialEditingViewModel implements ISettingViewModel {
     private static final String FORMAT_STRING = "선택하신 내용대로 %s 다이얼을 수정할게요!";
     private static final EditDialValidator dialValidator = new EditDialValidator();

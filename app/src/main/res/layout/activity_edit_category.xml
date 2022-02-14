@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/CategoryName_Setting"
+        android:layout_width="200dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="20dp"
+        android:gravity="left"
+        android:text="@string/edit_category_name"
+        android:textColor="@color/gray"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Input_CategoryName"
+        android:layout_width="304dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_namebox"
+        android:gravity="center"
+        android:hint="@string/DialNameHint"
+        android:inputType="text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CategoryName_Setting" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/CategorySave_Button"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/greenbutton"
+        android:text="@string/Done"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Input_CategoryName" />
+
+    <View
+        android:id="@+id/Divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/CategorySave_Button" />
+
+    <TextView
+        android:id="@+id/Category_Remove"
+        android:layout_width="200dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left"
+        android:text="@string/remove_category"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Divider" />
+
+    <TextView
+        android:id="@+id/Category_Remove_Sub"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="4dp"
+        android:gravity="left"
+        android:text="@string/remove_category_sub"
+        android:textColor="@color/gray"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Category_Remove" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/CategoryRemove_Button"
+        android:layout_width="75dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/redbutton"
+        android:text="@string/Remove"
+        app:layout_constraintStart_toEndOf="@id/Category_Remove"
+        app:layout_constraintTop_toBottomOf="@id/Divider" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
