@@ -143,8 +143,10 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="0dp"
         android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/DialPlus_box"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Choice_dial2">
@@ -152,7 +154,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/preset_list"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 

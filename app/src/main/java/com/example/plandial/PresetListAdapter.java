@@ -91,7 +91,7 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
 
                     if (isSelected.get(pos)) {
                         // 선택 해제 효과
-                        itemView.setBackgroundColor(Color.parseColor("#777777"));
+                        itemView.setBackgroundColor(Color.parseColor("#00000000"));
                     } else {
                         // 선택 효과
                         itemView.setBackgroundColor(Color.parseColor("#242424"));
