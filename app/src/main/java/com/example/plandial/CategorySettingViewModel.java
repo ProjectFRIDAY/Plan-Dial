@@ -2,10 +2,13 @@ package com.example.plandial;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.widget.EditText;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.plandial.db.WorkDatabase;
 import com.example.plandial.policy.BasicCategoryValidator;
 
 import java.util.ArrayList;
@@ -40,7 +43,13 @@ public class CategorySettingViewModel implements ISettingViewModel {
             BasicCategoryValidator categoryValidator = new BasicCategoryValidator();
 
             if (!categoryValidator.validateName(categoryNameData)) {
-                builder.setMessage("다이얼 이름은 1자 이상 10자 미만이어야 합니다.");
+                builder.setMessage("카테고리 이름은 1자 이상 10자 미만이어야 합니다.");
+                builder.show();
+                return false;
+            }
+
+            if (!categoryValidator.validateName(categoryNameData, DialManager.getInstance())) {
+                builder.setMessage("동일한 이름의 카테고리가 있습니다.");
                 builder.show();
                 return false;
             }
@@ -53,6 +62,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void finish() {
         save();
@@ -61,6 +71,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
         activity.startActivity(intent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void save() {
         Category category = new Category(dialNameView.getText().toString());
@@ -68,9 +79,10 @@ public class CategorySettingViewModel implements ISettingViewModel {
         ArrayList<Preset> selectedPresets = presetListAdapter.getSelectedPresets();
 
         for (Preset preset : selectedPresets) {
-            category.addDial(preset.toAlertDial());
+            category.addDial(preset.toAlertDial(activity));
         }
 
         DialManager.getInstance().addCategory(category);
+        WorkDatabase.getInstance().makeCategoryWithDials(category);
     }
 }

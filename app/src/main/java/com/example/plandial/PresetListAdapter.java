@@ -94,7 +94,7 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
                         itemView.setBackgroundColor(Color.parseColor("#00000000"));
                     } else {
                         // 선택 효과
-                        itemView.setBackgroundColor(Color.parseColor("#242424"));
+                        itemView.setBackgroundColor(Color.parseColor("#306200EE"));
                     }
 
 
@@ -105,7 +105,7 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
         }
 
         void onBind(Dial preset) {
-            presetIcon.setImageResource(R.drawable.ic_launcher_foreground);
+            presetIcon.setImageResource(preset.getIcon());
             presetName.setText(preset.getName());
         }
     }

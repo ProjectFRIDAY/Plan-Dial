@@ -153,7 +153,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/preset_list"
-            android:layout_width="300dp"
+            android:layout_width="330dp"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
     </androidx.appcompat.widget.LinearLayoutCompat>

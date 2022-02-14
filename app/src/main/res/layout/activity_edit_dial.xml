@@ -33,21 +33,21 @@
         android:id="@+id/RemoveButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="270dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="3dp"
         android:background="@drawable/ic_remove_button"
-        app:layout_constraintStart_toStartOf="@id/BackButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/BackButton"
+        app:layout_constraintRight_toLeftOf="@id/SaveButton"
+         />
 
     <ImageButton
         android:id="@+id/SaveButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="33dp"
         android:background="@drawable/ic_save_button"
-        app:layout_constraintStart_toStartOf="@id/RemoveButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/BackButton"
+        app:layout_constraintRight_toRightOf="parent"
+         />
 
     <ImageButton
         android:id="@+id/ChoiceImage"
@@ -181,7 +181,7 @@
     <TextView
         android:id="@+id/InactivateDial"
         android:layout_width="140dp"
-        android:layout_height="23dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="53dp"
         android:layout_marginTop="60dp"
         android:text="@string/InactivateDial"
