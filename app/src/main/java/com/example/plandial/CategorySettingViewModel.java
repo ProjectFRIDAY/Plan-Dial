@@ -17,6 +17,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
     private static final String FORMAT_STRING = "선택하신 내용대로 %s 카테고리를 생성할게요!";
 
     private final Activity activity;
+    private Category category;
 
     private final EditText dialNameView;
     private final PresetListAdapter presetListAdapter;
@@ -26,6 +27,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
 
         this.dialNameView = activity.findViewById(R.id.set_ct_name);
         this.presetListAdapter = presetListAdapter;
+        this.category = new Category(dialNameView.getText().toString());
     }
 
     @Override
@@ -48,7 +50,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
                 return false;
             }
 
-            if (!categoryValidator.validateName(categoryNameData, DialManager.getInstance())) {
+            if (!categoryValidator.sameName(DialManager.getInstance(), categoryNameData, category)) {
                 builder.setMessage("동일한 이름의 카테고리가 있습니다.");
                 builder.show();
                 return false;
@@ -74,7 +76,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void save() {
-        Category category = new Category(dialNameView.getText().toString());
+        category.setName(dialNameView.getText().toString());
 
         ArrayList<Preset> selectedPresets = presetListAdapter.getSelectedPresets();
 
