@@ -69,6 +69,7 @@
         android:background="@drawable/bg_namebox"
         android:gravity="center"
         android:hint="@string/name_category2"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ct_name" />

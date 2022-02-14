@@ -22,9 +22,7 @@ public class CategoryCreateActivity extends AppCompatActivity {
         {
             // 뒤로가기 버튼 설정
             ImageButton backButton = findViewById(R.id.BackButton);
-            Intent intent = new Intent(this, TemplateChoiceActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            backButton.setOnClickListener(view -> startActivity(intent));
+            backButton.setOnClickListener(view -> finish());
         }
 
         {

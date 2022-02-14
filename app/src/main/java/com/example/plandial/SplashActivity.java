@@ -24,6 +24,7 @@ public class SplashActivity extends AppCompatActivity {
             iconRecommendation.roadIconData(this);
 
             // DB 준비
+            DialManager.getInstance().resetAll();
             WorkDatabase workDatabase = WorkDatabase.getInstance();
             workDatabase.ready(this);
 

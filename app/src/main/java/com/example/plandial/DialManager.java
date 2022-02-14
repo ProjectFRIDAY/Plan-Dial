@@ -116,4 +116,8 @@ public class DialManager {
 
         return result;
     }
+
+    public void resetAll() {
+        categories.clear();
+    }
 }
