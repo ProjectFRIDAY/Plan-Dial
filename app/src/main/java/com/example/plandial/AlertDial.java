@@ -77,7 +77,7 @@ public class AlertDial extends Dial {
             int times = (int) (minus / getPeriod().getPeriodInMillis()) + 1;
             return getPeriod().getPeriodInMillis() * times - minus;
         } else {
-            return startInMillis;
+            return startInMillis - nowInMillis;
         }
     }
 
