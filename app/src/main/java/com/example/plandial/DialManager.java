@@ -5,11 +5,14 @@ import java.util.Comparator;
 
 import android.util.Pair;
 
+import com.example.plandial.db.WorkDatabase;
+
 public class DialManager {
     public static final int URGENT_BOUND = 60 * UnitOfTime.SECONDS_PER_MINUTE * UnitOfTime.MILLIS_PER_SECOND;
 
     private static final DialManager dialManager = new DialManager();
     private static final ArrayList<Category> categories = new ArrayList<>();
+    private static int dialId = -1;
 
     private DialManager() {
     }
@@ -110,5 +113,10 @@ public class DialManager {
         }
 
         return result;
+    }
+
+    public int getNextDialId() {
+        if (dialId < 0) dialId = WorkDatabase.getInstance().getNextDialId();
+        return dialId++;
     }
 }

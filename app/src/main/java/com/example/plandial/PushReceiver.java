@@ -31,7 +31,7 @@ public class PushReceiver extends BroadcastReceiver {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "push");
 
             Intent goMainIntent = new Intent(context, SplashActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 999, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, -1, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
 
             builder.setContentTitle(dialName);
             builder.setContentText("\uD83D\uDCE2 지금은 " + dialName + "을(를) 시작할 시간입니다.");
@@ -46,7 +46,7 @@ public class PushReceiver extends BroadcastReceiver {
     }
 
     // 재부팅 대응 필요
-    public class ReBootReceiver extends BroadcastReceiver {
+    public static class ReBootReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {

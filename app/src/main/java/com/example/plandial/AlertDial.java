@@ -10,28 +10,32 @@ import androidx.annotation.RequiresApi;
 
 import java.time.OffsetDateTime;
 
-// 주의: setName(String name) 사용시 오류 발생!!!
-//       setName(final Context context, final String name, final boolean changeIcon)을 사용해야 함.
 public class AlertDial extends Dial {
     private static final IconRecommendation iconRecommendation = new IconRecommendation();
 
     private boolean disable = false;
-    private int id;
+    public int id;
     private PendingIntent pushIntent;
     private OffsetDateTime startDateTime;
 
-    // 다이얼 첫 생성시 -> 아이콘 추천
+    // 다이얼 첫 생성시 -> 아이콘 추천, id 할당
     @RequiresApi(api = Build.VERSION_CODES.S)
     public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime) {
-        this(context, name, period, startDateTime, iconRecommendation.getIconByName(context, name));
+        this(context, DialManager.getInstance().getNextDialId(), name, period, startDateTime, iconRecommendation.getIconByName(context, name));
     }
 
-    // 다이얼 DB에서 가져올 시 -> 아이콘 불러오기
+    // 프리셋에서 다이얼로 변환시 -> 아이콘 불러오기, id 할당
     @RequiresApi(api = Build.VERSION_CODES.S)
     public AlertDial(final Context context, final String name, final Period period, final OffsetDateTime startDateTime, int icon) {
+        this(context, DialManager.getInstance().getNextDialId(), name, period, startDateTime, icon);
+    }
+
+    // DB에서 다이얼을 가져올 시 -> 아이콘 및 id 불러오기
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    public AlertDial(final Context context, int id, final String name, final Period period, final OffsetDateTime startDateTime, int icon) {
         super(name, icon, period);
         this.startDateTime = startDateTime;
-        this.id = name.hashCode(); // id를 name의 해시코드로 지정 (추후 수정 필요)
+        this.id = id;
         makeAlarm(context);
     }
 
@@ -41,19 +45,10 @@ public class AlertDial extends Dial {
         this.startDateTime = startDateTime;
     }
 
-    @Override
-    public void setName(final String name) {
-        // context 없는 setName 사용시 푸시 알림을 재설정할 수 없으므로 오류 생성.
-        throw new RuntimeException();
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.S)
-    public void setName(final Context context, final String name, final boolean changeIcon) {
-        if (changeIcon) {
-            setIcon(iconRecommendation.getIconByName(context, name));
-        }
+    public void setName(final Context context, final String name) {
+        setIcon(iconRecommendation.getIconByName(context, name));
         super.setName(name);
-        id = name.hashCode();
     }
 
     public OffsetDateTime getStartDateTime() {
@@ -114,7 +109,6 @@ public class AlertDial extends Dial {
             disable(context);
         }
         disable = false;
-        // this.startDateTime = OffsetDateTime.now(); // 논의 필요
         makeAlarm(context);
     }
 

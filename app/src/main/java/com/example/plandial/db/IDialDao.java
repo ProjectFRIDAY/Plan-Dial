@@ -41,9 +41,11 @@ public interface IDialDao {
     @Query("DELETE FROM DialTable")
     void delDialAll();
 
+    // 다이얼 테이블의 다음 id값 반환
+    @Query("SELECT MAX(id) FROM DialTable")
+    int getLastId();
 
     // 특정 카테고리 아이디를 가지고 있는 다이얼 데이터 쿼리
-
 
 }
 

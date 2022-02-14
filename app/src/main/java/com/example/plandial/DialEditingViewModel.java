@@ -98,7 +98,12 @@ public class DialEditingViewModel implements ISettingViewModel {
         String oldName = dial.getName();
 
         // 다이얼 수정
-        dial.setName(activity.getApplicationContext(), dialNameData, iconCheckbox.isChecked());
+        if(iconCheckbox.isChecked()) {
+            dial.setName(activity.getApplicationContext(), dialNameData);
+        } else {
+            dial.setName(dialNameData);
+        }
+
         dial.setPeriod(periodData);
 
         if (unableData) {
