@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,7 +22,9 @@ public class CategoryCreateActivity extends AppCompatActivity {
         {
             // 뒤로가기 버튼 설정
             ImageButton backButton = findViewById(R.id.BackButton);
-            backButton.setOnClickListener(view -> finish());
+            Intent intent = new Intent(this, TemplateChoiceActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            backButton.setOnClickListener(view -> startActivity(intent));
         }
 
         {
