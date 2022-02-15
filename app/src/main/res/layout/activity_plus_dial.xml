@@ -1,188 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/BackButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/ic_iconfinder_back_arrow_211686"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/SettingText"
-        android:layout_width="95dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="@string/SettingText"
-        android:textColor="@color/black"
-        android:textSize="23sp"
-        app:layout_constraintStart_toEndOf="@id/BackButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/ChoiceImage"
-        android:layout_width="252dp"
-        android:layout_height="252dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_imagechoice"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SettingText" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/DialImage_Recommend"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@id/ChoiceImage"
-        app:layout_constraintEnd_toEndOf="@id/ChoiceImage"
-        app:layout_constraintStart_toStartOf="@id/ChoiceImage"
-        app:layout_constraintTop_toTopOf="@id/ChoiceImage" />
+                <ImageButton
+                    android:id="@+id/BackButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/ic_iconfinder_back_arrow_211686"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/DialName_Setting"
-        android:layout_width="100dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/DialName"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ChoiceImage" />
+                <TextView
+                    android:id="@+id/SettingText"
+                    android:layout_width="95dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:text="@string/SettingText"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toEndOf="@id/BackButton"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/Input_DialName"
-        android:layout_width="304dp"
-        android:layout_height="42dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bg_namebox"
-        android:gravity="center"
-        android:hint="@string/DialNameHint"
-        android:inputType="text"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DialName_Setting" />
+                <ImageButton
+                    android:id="@+id/ChoiceImage"
+                    android:layout_width="252dp"
+                    android:layout_height="252dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_imagechoice"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/SettingText" />
 
-    <TextView
-        android:id="@+id/DialTime_Setting"
-        android:layout_width="50dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/DialTime"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Input_DialName" />
+                <ImageView
+                    android:id="@+id/DialImage_Recommend"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/ChoiceImage"
+                    app:layout_constraintEnd_toEndOf="@id/ChoiceImage"
+                    app:layout_constraintStart_toStartOf="@id/ChoiceImage"
+                    app:layout_constraintTop_toTopOf="@id/ChoiceImage" />
 
-    <ImageButton
-        android:id="@+id/Period_Up"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="250dp"
-        android:background="@drawable/ic_iconfinder_back_arrow_211686"
-        android:rotation="90"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/DialTime_Period"/>
+                <TextView
+                    android:id="@+id/DialName_Setting"
+                    android:layout_width="100dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="@string/DialName"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ChoiceImage" />
 
-    <TextView
-        android:id="@+id/DialTime_Period"
-        android:layout_width="40dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="1"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DialTime_Setting" />
+                <EditText
+                    android:id="@+id/Input_DialName"
+                    android:layout_width="304dp"
+                    android:layout_height="42dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_namebox"
+                    android:gravity="center"
+                    android:hint="@string/DialNameHint"
+                    android:inputType="text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/DialName_Setting" />
 
-    <ImageButton
-        android:id="@+id/Period_Down"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="250dp"
-        android:rotation="270"
-        android:gravity="center"
-        android:background="@drawable/ic_iconfinder_back_arrow_211686"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/DialTime_Period"/>
+                <TextView
+                    android:id="@+id/DialTime_Setting"
+                    android:layout_width="50dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/DialTime"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Input_DialName" />
 
-    <ImageButton
-        android:id="@+id/UnitOfTime_Up"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:rotation="90"
-        android:gravity="center"
-        android:background="@drawable/ic_iconfinder_back_arrow_211686"
-        app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime"
-        app:layout_constraintBottom_toTopOf="@id/DialTime_UnitOfTime"/>
+                <ImageButton
+                    android:id="@+id/Period_Up"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="250dp"
+                    android:background="@drawable/ic_iconfinder_back_arrow_211686"
+                    android:gravity="center"
+                    android:rotation="90"
+                    app:layout_constraintBottom_toTopOf="@id/DialTime_Period"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/DialTime_UnitOfTime"
-        android:layout_width="40dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="분"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/DialTime_Period"
-        app:layout_constraintTop_toBottomOf="@+id/DialTime_Setting" />
+                <TextView
+                    android:id="@+id/DialTime_Period"
+                    android:layout_width="40dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="250dp"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/DialTime_Setting" />
 
-    <ImageButton
-        android:id="@+id/UnitOfTime_Down"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:rotation="270"
-        android:gravity="center"
-        android:background="@drawable/ic_iconfinder_back_arrow_211686"
-        app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime"
-        app:layout_constraintTop_toBottomOf="@id/DialTime_UnitOfTime"/>
+                <ImageButton
+                    android:id="@+id/Period_Down"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="250dp"
+                    android:background="@drawable/ic_iconfinder_back_arrow_211686"
+                    android:gravity="center"
+                    android:rotation="270"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/DialTime_Period" />
 
-    <TextView
-        android:id="@+id/StartDay"
-        android:layout_width="70dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="3dp"
-        android:text="@string/Startday"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Period_Down" />
+                <ImageButton
+                    android:id="@+id/UnitOfTime_Up"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_iconfinder_back_arrow_211686"
+                    android:gravity="center"
+                    android:rotation="90"
+                    app:layout_constraintBottom_toTopOf="@id/DialTime_UnitOfTime"
+                    app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime" />
 
-    <com.example.plandial.DateTimeTextView
-        android:id="@+id/Input_Startday"
-        android:layout_width="304dp"
-        android:layout_height="42dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bg_namebox"
-        android:textSize="20sp"
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/StartDay"
-        custom:formatString="%d.%d.%d(%s) %s %02d:%02d" />
+                <TextView
+                    android:id="@+id/DialTime_UnitOfTime"
+                    android:layout_width="40dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:text="분"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/DialTime_Period"
+                    app:layout_constraintTop_toBottomOf="@+id/DialTime_Setting" />
+
+                <ImageButton
+                    android:id="@+id/UnitOfTime_Down"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_iconfinder_back_arrow_211686"
+                    android:gravity="center"
+                    android:rotation="270"
+                    app:layout_constraintStart_toStartOf="@id/DialTime_UnitOfTime"
+                    app:layout_constraintTop_toBottomOf="@id/DialTime_UnitOfTime" />
+
+                <TextView
+                    android:id="@+id/StartDay"
+                    android:layout_width="70dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="53dp"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/Startday"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/Period_Down" />
+
+                <com.example.plandial.DateTimeTextView
+                    android:id="@+id/Input_Startday"
+                    android:layout_width="304dp"
+                    android:layout_height="42dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="120dp"
+                    android:background="@drawable/bg_namebox"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/StartDay"
+                    custom:formatString="%d.%d.%d(%s) %s %02d:%02d" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/DialPlus_box"
