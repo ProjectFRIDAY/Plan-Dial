@@ -19,21 +19,23 @@ public class CategorySettingViewModel implements ISettingViewModel {
     private final Activity activity;
     private Category category;
 
-    private final EditText dialNameView;
+    private final EditText categoryNameView;
     private final PresetListAdapter presetListAdapter;
 
     public CategorySettingViewModel(Activity activity, PresetListAdapter presetListAdapter) {
         this.activity = activity;
 
-        this.dialNameView = activity.findViewById(R.id.set_ct_name);
+        this.categoryNameView = activity.findViewById(R.id.set_ct_name);
         this.presetListAdapter = presetListAdapter;
-        this.category = new Category(dialNameView.getText().toString());
+        this.category = new Category(categoryNameView.getText().toString());
     }
 
     @Override
     public boolean complete() {
         //값 불러오기
-        final String categoryNameData = dialNameView.getText().toString();
+        final String categoryNameData = this.categoryNameView.getText().toString().trim();
+        this.categoryNameView.setText(categoryNameData);
+
 
         //region 값이 유효한 지 판단함
         {
@@ -45,7 +47,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
             BasicCategoryValidator categoryValidator = new BasicCategoryValidator();
 
             if (!categoryValidator.validateName(categoryNameData)) {
-                builder.setMessage("카테고리 이름은 1자 이상 10자 미만이어야 합니다.");
+                builder.setMessage("카테고리 이름은 1자 이상 16자 미만이어야 합니다.");
                 builder.show();
                 return false;
             }
@@ -76,7 +78,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void save() {
-        category.setName(dialNameView.getText().toString());
+        category.setName(categoryNameView.getText().toString());
 
         ArrayList<Preset> selectedPresets = presetListAdapter.getSelectedPresets();
 

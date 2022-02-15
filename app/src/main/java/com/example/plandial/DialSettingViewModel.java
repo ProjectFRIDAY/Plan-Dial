@@ -45,7 +45,8 @@ public class DialSettingViewModel implements ISettingViewModel {
         assert unit != null;
 
         //region 뷰로부터 값 불러오기
-        this.dialNameData = dialNameView.getText().toString();
+        this.dialNameData = dialNameView.getText().toString().trim();
+        this.dialNameView.setText(this.dialNameData);
         this.periodData = new Period(unit, Integer.parseInt(period.getText().toString()));
         this.startDayData = startDayView.getDateTime();
         //endregion
