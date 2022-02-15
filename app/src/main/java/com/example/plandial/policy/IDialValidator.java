@@ -12,8 +12,6 @@ public interface IDialValidator {
 
     boolean validateName(String name);
 
-    boolean sameName(String name, Category category, Dial dial);
-
     boolean validatePeriod(Period period);
 
     boolean validateStartDay(OffsetDateTime startDay);
