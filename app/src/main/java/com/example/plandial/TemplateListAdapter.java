@@ -73,8 +73,14 @@ public class TemplateListAdapter extends BaseAdapter {
             for (int i = 0; i < parent.getChildCount(); ++i) {
                 View child = parent.getChildAt(i);
                 if (child.equals(view1)) {
-                    presetList.setVisibility(View.VISIBLE);
-                    nextButton.setVisibility(View.VISIBLE);
+                    if (presetList.getVisibility() == View.VISIBLE) {
+                        presetList.setVisibility(View.GONE);
+                        nextButton.setVisibility(View.GONE);
+                    } else {
+                        presetList.setVisibility(View.VISIBLE);
+                        nextButton.setVisibility(View.VISIBLE);
+                    }
+
                 } else {
                     child.findViewById(R.id.preset_list).setVisibility(View.GONE);
                     child.findViewById(R.id.complete_button).setVisibility(View.GONE);
