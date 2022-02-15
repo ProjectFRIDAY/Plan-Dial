@@ -115,8 +115,13 @@ public class DialManager {
         return result;
     }
 
+    public void resetAll() {
+        categories.clear();
+    }
+  
     public int getNextDialId() {
         if (dialId < 0) dialId = WorkDatabase.getInstance().getNextDialId();
         return dialId++;
+
     }
 }

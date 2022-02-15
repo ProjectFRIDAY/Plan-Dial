@@ -1,10 +1,11 @@
 package com.example.plandial;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TemplateManager {
     private static final TemplateManager templateManager = new TemplateManager();
-    private static final ArrayList<Template> templates = new ArrayList<>();
+    private static final ArrayList<Template> templates = new ArrayList<>(Collections.singletonList(new Template("빈 템플릿", "비어있는 템플릿입니다.", R.drawable.outline_assignment_black)));
 
     private TemplateManager() {
     }
@@ -45,5 +46,10 @@ public class TemplateManager {
 
     public void addTemplate(Template template) {
         templates.add(template);
+    }
+
+    public void resetAll() {
+        templates.clear();
+        templates.add(new Template("빈 템플릿", "비어있는 템플릿입니다.", R.drawable.outline_assignment_black));
     }
 }

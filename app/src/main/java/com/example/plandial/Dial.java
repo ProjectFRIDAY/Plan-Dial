@@ -1,5 +1,12 @@
 package com.example.plandial;
 
+import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.time.OffsetDateTime;
+
 public class Dial {
     private String name;
     private int icon;
@@ -37,6 +44,11 @@ public class Dial {
 
     public void setPeriod(Period period) {
         this.period = period;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    public AlertDial toAlertDial(Context context) {
+        return new AlertDial(context, name, period, OffsetDateTime.now(), icon);
     }
 
     @Override

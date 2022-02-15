@@ -36,7 +36,8 @@ public class CategoryEditingViewModel implements ISettingViewModel {
     public boolean complete() {
 
         //region 뷰로부터 값 불러오기
-        this.categoryNameData = categoryNameView.getText().toString();
+        this.categoryNameData = categoryNameView.getText().toString().trim();
+        this.categoryNameView.setText(this.categoryNameData);
         //endregion
 
         //region 값이 유효한 지 판단함

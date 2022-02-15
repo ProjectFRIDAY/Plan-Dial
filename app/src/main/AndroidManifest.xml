@@ -43,6 +43,7 @@
         <activity android:name=".PlusDialActivity" />
         <activity android:name=".EditDialActivity" />
         <activity android:name=".TemplateChoiceActivity" />
+        <activity android:name=".CategoryCreateActivity" />
 
         <receiver
             android:name=".PushReceiver"
