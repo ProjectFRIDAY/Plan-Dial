@@ -27,13 +27,10 @@ public class DateTimePickerDialog {
             }
         };
 
-        TimePickerDialog.OnTimeSetListener timePickerCallbackMethod = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                selectedDateTime = selectedDateTime.withHour(hour).withMinute(minute);
+        TimePickerDialog.OnTimeSetListener timePickerCallbackMethod = (timePicker, hour, minute) -> {
+            selectedDateTime = selectedDateTime.withHour(hour).withMinute(minute);
 
-                offsetDateTimeRequester.setByOffsetDateTime(selectedDateTime);
-            }
+            offsetDateTimeRequester.setByOffsetDateTime(selectedDateTime);
         };
 
         datePickerDialog = new DatePickerDialog(

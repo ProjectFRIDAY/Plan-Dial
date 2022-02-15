@@ -17,7 +17,7 @@ public class CategorySettingViewModel implements ISettingViewModel {
     private static final String FORMAT_STRING = "선택하신 내용대로 %s 카테고리를 생성할게요!";
 
     private final Activity activity;
-    private Category category;
+    private final Category category;
 
     private final EditText categoryNameView;
     private final PresetListAdapter presetListAdapter;

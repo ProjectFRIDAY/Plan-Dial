@@ -46,30 +46,22 @@ public class CategoryEditFragment extends BottomSheetDialogFragment {
         categoryEditingViewModel = new CategoryEditingViewModel(view, this, category);
 
         //카테고리 이름 수정
-        SaveCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                categoryEditingViewModel.complete();
-            }
-        });
+        SaveCategory.setOnClickListener(view1 -> categoryEditingViewModel.complete());
 
         //카테고리 삭제
-        RemoveCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("정말로 카테고리를 삭제하시겠습니까?")
-                        .setPositiveButton("예", (dialogInterface, i) -> {
-                            dialManager.removeCategoryByObject(category);
-                            WorkDatabase.getInstance().delCategory(category);
-                            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                            fragmentManager.beginTransaction().remove(CategoryEditFragment.this).commit();
-                            requireActivity().recreate();
-                        })
-                        .setNegativeButton("아니오", (dialogInterface, i) -> {
-                        });
-                builder.show();
-            }
+        RemoveCategory.setOnClickListener(view12 -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage("정말로 카테고리를 삭제하시겠습니까?")
+                    .setPositiveButton("예", (dialogInterface, i) -> {
+                        dialManager.removeCategoryByObject(category);
+                        WorkDatabase.getInstance().delCategory(category);
+                        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().remove(CategoryEditFragment.this).commit();
+                        requireActivity().recreate();
+                    })
+                    .setNegativeButton("아니오", (dialogInterface, i) -> {
+                    });
+            builder.show();
         });
 
         return view;

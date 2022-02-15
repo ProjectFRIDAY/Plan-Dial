@@ -29,8 +29,8 @@ public class PolicyTest {
         Dial dial = new Dial("다이얼", 0, new Period(UnitOfTime.DAY, 1));
         category.addDial(dial);
 
-        assert basicDialValidator.validateName("쇼핑", category);
-        assert !basicDialValidator.validateName("다이얼", category);
+        assert basicDialValidator.sameName("쇼핑", category);
+        assert !basicDialValidator.sameName("다이얼", category);
     }
 
     @Test

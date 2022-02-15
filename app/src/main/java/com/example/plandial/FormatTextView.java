@@ -3,10 +3,6 @@ package com.example.plandial;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import java.time.OffsetDateTime;
-import java.util.IllegalFormatException;
-
-import androidx.annotation.Nullable;
 
 public class FormatTextView extends androidx.appcompat.widget.AppCompatTextView {
     protected final String formatString;

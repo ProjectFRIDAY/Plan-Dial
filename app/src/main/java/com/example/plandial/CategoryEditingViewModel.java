@@ -1,16 +1,13 @@
 package com.example.plandial;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.plandial.db.WorkDatabase;
 import com.example.plandial.policy.EditCategoryValidator;
@@ -19,7 +16,7 @@ public class CategoryEditingViewModel implements ISettingViewModel {
     private static final String FORMAT_STRING = "변경하신 이름대로 %s 카테고리를 수정할게요!";
     private static final EditCategoryValidator categoryValidator = new EditCategoryValidator();
 
-    private Fragment fragment;
+    private final Fragment fragment;
     private final Category category;
     private final DialManager dialManager = DialManager.getInstance();
 

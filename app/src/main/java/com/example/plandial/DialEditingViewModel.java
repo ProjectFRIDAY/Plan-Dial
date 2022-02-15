@@ -72,7 +72,7 @@ public class DialEditingViewModel implements ISettingViewModel {
                 builder.setMessage("다이얼 이름은 1자 이상 10자 미만이어야 합니다.");
                 builder.show();
                 return false;
-            } else if (!dialValidator.validateName(dialNameData, category, dial)) {
+            } else if (!dialValidator.sameName(dialNameData, category, dial)) {
                 builder.setMessage("카테고리에 동일한 이름의 다이얼이 있습니다.");
                 builder.show();
                 return false;
@@ -87,7 +87,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         }
         //endregion
 
-        // 다이얼을 정말 수정할 지 사용자에게 확인함
+        // 다이얼을 정말 수정할 지 사용자에게 확인
         ConfirmDialogPresenter confirmDialogPresenter = new ConfirmDialogPresenter(this, this.activity, String.format(FORMAT_STRING, dialNameData));
         confirmDialogPresenter.show();
 
@@ -97,7 +97,7 @@ public class DialEditingViewModel implements ISettingViewModel {
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void finish() {
-        // 검증 과정까지 마친 후 세팅을 마무리하는 함수임
+        // 검증 과정까지 마친 후 세팅을 마무리하는 함수
         save();
         activity.finish();
     }
@@ -108,7 +108,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         String oldName = dial.getName();
 
         // 다이얼 수정
-        if(iconCheckbox.isChecked()) {
+        if (iconCheckbox.isChecked()) {
             dial.setName(activity.getApplicationContext(), dialNameData);
         } else {
             dial.setName(dialNameData);

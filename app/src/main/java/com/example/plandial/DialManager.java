@@ -34,8 +34,8 @@ public class DialManager {
     }
 
     public Category getCategoryByName(String name) {
-        /* 인자로 들어온 문자열과 같은 이름의 카테고리들 중 인덱스가 가장 작은 카테고리를 반환한다.
-         * 인자로 들어온 문자열과 같은 이름의 카테고리가 없다면 null을 반환한다.
+        /* 인자로 들어온 문자열과 같은 이름의 카테고리들 중 인덱스가 가장 작은 카테고리를 반환함.
+         * 인자로 들어온 문자열과 같은 이름의 카테고리가 없다면 null을 반환함.
          */
 
         for (Category category : categories) {
@@ -48,8 +48,8 @@ public class DialManager {
     }
 
     public int getIndexByCategory(Category targetCategory) {
-        /* 인자로 들어온 카테고리의 index를 반환한다.
-         * 인자로 들어온 카테고리와 같은 카테고리가 없다면 0을 반환한다.
+        /* 인자로 들어온 카테고리의 index를 반환함.
+         * 인자로 들어온 카테고리와 같은 카테고리가 없다면 0을 반환함.
          */
 
         for (int i = 0; i < categories.size(); i++) {
@@ -61,8 +61,8 @@ public class DialManager {
     }
 
     public boolean addCategory(Category category) {
-        /* 이미 동일한 카테고리가 있으면 추가하지 않는다.
-         * 이미 동일한 카테고리가 있는 경우 false, 없는 경우 true를 반환한다.
+        /* 이미 동일한 카테고리가 있으면 추가하지 않음.
+         * 이미 동일한 카테고리가 있는 경우 false, 없는 경우 true를 반환함.
          */
 
         for (Category addedCategory : categories) {
@@ -118,7 +118,7 @@ public class DialManager {
     public void resetAll() {
         categories.clear();
     }
-  
+
     public int getNextDialId() {
         if (dialId < 0) dialId = WorkDatabase.getInstance().getNextDialId();
         return dialId++;

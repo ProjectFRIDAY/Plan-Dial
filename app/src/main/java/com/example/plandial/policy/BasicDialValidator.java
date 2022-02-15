@@ -1,6 +1,7 @@
 package com.example.plandial.policy;
 
 import com.example.plandial.Category;
+import com.example.plandial.Dial;
 import com.example.plandial.Period;
 
 import java.time.OffsetDateTime;
@@ -11,7 +12,7 @@ public class BasicDialValidator implements IDialValidator {
         return name != null && NAME_MIN_LENGTH <= name.length() && name.length() <= NAME_MAX_LENGTH;
     }
 
-    public boolean validateName(String name, Category category) {
+    public boolean sameName(String name, Category category) {
         return category.getDialByName(name) == null;
     }
 
