@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TemplateListAdapter extends BaseAdapter {
     private final TemplateManager templateManager;
     private final LayoutInflater layoutInflater;
-    private int preClickedPos = -1;
 
     public TemplateListAdapter(Context context) {
         templateManager = TemplateManager.getInstance();
@@ -40,7 +39,7 @@ public class TemplateListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View converView, ViewGroup parent) {
-        View view = layoutInflater.inflate(R.layout.template_row, null);
+        View view = layoutInflater.inflate(R.layout.template_row, parent, false);
 
         ImageView templateIcon = view.findViewById(R.id.template_icon);
         TextView title = view.findViewById(R.id.title);
@@ -60,42 +59,26 @@ public class TemplateListAdapter extends BaseAdapter {
             v.getContext().startActivity(intent);
         });
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (position == preClickedPos) {
-                    // 클릭한 항목 열고 접기
-                    if (presetList.getVisibility() == View.GONE) {
-                        presetList.setVisibility(View.VISIBLE);
-                        nextButton.setVisibility(View.VISIBLE);
-                    } else {
-                        presetList.setVisibility(View.GONE);
-                        nextButton.setVisibility(View.GONE);
-                    }
-                } else {
-                    // 이전에 클릭한 항목 접기
-                    if (preClickedPos != -1) {
-                        RecyclerView preClickedView = parent.getChildAt(preClickedPos).findViewById(R.id.preset_list);
-                        Button preClickedViewButton = parent.getChildAt(preClickedPos).findViewById(R.id.complete_button);
-                        preClickedView.setVisibility(View.GONE);
-                        preClickedViewButton.setVisibility(View.GONE);
-                    }
+        GridLayoutManager gridlayoutManager = new GridLayoutManager(view.getContext(), 2);
+        presetList.setLayoutManager(gridlayoutManager);
 
-                    // 클릭한 항목 열기
-                    if (presetList.getVisibility() == View.GONE) {
-                        presetList.setVisibility(View.VISIBLE);
-                    } else {
-                        GridLayoutManager gridlayoutManager = new GridLayoutManager(view.getContext(), 2);
-                        presetList.setLayoutManager(gridlayoutManager);
+        PresetListAdapter presetAdapter = new PresetListAdapter(templateManager.getTemplateByIndex(position));
+        presetList.setAdapter(presetAdapter);
 
-                        PresetListAdapter presetAdapter = new PresetListAdapter(templateManager.getTemplateByIndex(position));
-                        presetList.setAdapter(presetAdapter);
-                    }
+        presetList.setVisibility(View.GONE);
+        nextButton.setVisibility(View.GONE);
 
+        view.setOnClickListener(view1 -> {
+            // 수정 필요
+            for (int i = 0; i < parent.getChildCount(); ++i) {
+                View child = parent.getChildAt(i);
+                if (child.equals(view1)) {
+                    presetList.setVisibility(View.VISIBLE);
                     nextButton.setVisibility(View.VISIBLE);
+                } else {
+                    child.findViewById(R.id.preset_list).setVisibility(View.GONE);
+                    child.findViewById(R.id.complete_button).setVisibility(View.GONE);
                 }
-
-                preClickedPos = position;
             }
         });
 

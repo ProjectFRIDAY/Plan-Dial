@@ -42,6 +42,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:overScrollMode="never"
         android:id="@+id/preset_list"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
