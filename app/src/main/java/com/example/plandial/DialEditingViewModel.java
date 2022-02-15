@@ -13,6 +13,8 @@ import androidx.annotation.RequiresApi;
 import com.example.plandial.db.WorkDatabase;
 import com.example.plandial.policy.EditDialValidator;
 
+import java.time.OffsetDateTime;
+
 public class DialEditingViewModel implements ISettingViewModel {
     private static final String FORMAT_STRING = "선택하신 내용대로 %s 다이얼을 수정할게요!";
     private static final EditDialValidator dialValidator = new EditDialValidator();
@@ -25,10 +27,12 @@ public class DialEditingViewModel implements ISettingViewModel {
     private final EditText dialNameView;
     private final Switch unableSwitchView;
     private final CheckBox iconCheckbox;
+    private final DateTimeTextView startDayView;
 
     private String dialNameData;
     private Period periodData;
     private boolean unableData;
+    private OffsetDateTime startDayData;
 
     public DialEditingViewModel(Activity activity, AlertDial dial, Category category) {
         this.activity = activity;
@@ -40,6 +44,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         this.unitOfTime = activity.findViewById(R.id.DialTime_UnitOfTime);
         this.unableSwitchView = activity.findViewById(R.id.switchButton);
         this.iconCheckbox = activity.findViewById(R.id.Icon_Checkbox);
+        this.startDayView = activity.findViewById(R.id.Input_Startday);
     }
 
     @Override
@@ -52,6 +57,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         this.dialNameData = dialNameView.getText().toString();
         this.periodData = new Period(unit, Integer.parseInt(period.getText().toString()));
         this.unableData = unableSwitchView.isChecked();
+        this.startDayData = startDayView.getDateTime();
         //endregion
 
         //region 값이 유효한 지 판단함
@@ -73,6 +79,9 @@ public class DialEditingViewModel implements ISettingViewModel {
                 builder.setMessage("주기는 0보다 커야 합니다.");
                 builder.show();
                 return false;
+            } else if (!dialValidator.validateStartDay(startDayData)) {
+                builder.setMessage("시작일이 유효하지 않습니다.");
+                builder.show();
             }
         }
         //endregion
@@ -105,6 +114,7 @@ public class DialEditingViewModel implements ISettingViewModel {
         }
 
         dial.setPeriod(periodData);
+        dial.setStartDateTime(startDayData);
 
         if (unableData) {
             dial.disable(activity.getApplicationContext());

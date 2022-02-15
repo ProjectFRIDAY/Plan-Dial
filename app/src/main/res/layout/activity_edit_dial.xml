@@ -192,26 +192,52 @@
         app:layout_constraintTop_toBottomOf="@id/DialTime_UnitOfTime" />
 
     <TextView
+        android:id="@+id/StartDay"
+        android:layout_width="70dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="3dp"
+        android:text="@string/Startday"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Period_Down" />
+
+    <com.example.plandial.DateTimeTextView
+        android:id="@+id/Input_Startday"
+        android:layout_width="304dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_namebox"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/StartDay"
+        custom:formatString="%d.%d.%d(%s) %s %02d:%02d" />
+
+    <TextView
         android:id="@+id/InactivateDial"
         android:layout_width="140dp"
         android:layout_height="23dp"
         android:layout_marginStart="53dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:text="@string/InactivateDial"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DialTime_Period" />
+        app:layout_constraintTop_toBottomOf="@+id/Input_Startday" />
 
     <Switch
         android:id="@+id/switchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:thumb="@drawable/switch_thumb_selector"
         android:track="@drawable/switch_track_selector"
         app:layout_constraintLeft_toRightOf="@id/InactivateDial"
-        app:layout_constraintTop_toBottomOf="@+id/DialTime_Period" />
+        app:layout_constraintTop_toBottomOf="@+id/Input_Startday" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

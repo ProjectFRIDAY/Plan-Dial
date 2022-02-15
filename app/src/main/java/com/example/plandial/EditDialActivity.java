@@ -34,6 +34,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
     private Category category;
     private AlertDial dial;
 
+    private DateTimeTextView startDayInput;
     private EditText Input_DialName;
     private ImageButton backButton;
     private ImageButton removeButton;
@@ -74,7 +75,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
             iconCheckbox = findViewById(R.id.Icon_Checkbox);
 
             Input_DialName.setText(dial.getName());
-            iconImage.setImageResource(dial.getIcon());
+            iconImage.setImageResource(new IconRecommendation().getIconByName(this, dial.getName()));
 
             countForPeriod = dial.getPeriod().getTimes();
             countForUnitOfTime = (int) UnitOfTime.unitToIndex.get(dial.getPeriod().getUnit());
@@ -120,6 +121,15 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
             completeButton.setOnClickListener(view -> dialEditingViewModel.complete());
         }
         //endregion
+
+        {
+            startDayInput = findViewById(R.id.Input_Startday);
+            startDayInput.setByOffsetDateTime(dial.getStartDateTime());
+            startDayInput.setOnClickListener(view -> {
+                DateTimePickerDialog dateTimePickerDialog = new DateTimePickerDialog(this, startDayInput, dial.getStartDateTime());
+                dateTimePickerDialog.show();
+            });
+        }
 
 
         periodPlus.setOnLongClickListener(v -> {

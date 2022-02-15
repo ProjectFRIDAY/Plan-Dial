@@ -2,7 +2,6 @@ package com.example.plandial;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import androidx.annotation.RequiresApi;
 
 import com.example.plandial.db.WorkDatabase;
 import com.example.plandial.policy.BasicDialValidator;
-import com.example.plandial.policy.IDialValidator;
 
 import java.time.OffsetDateTime;
 
@@ -73,7 +71,6 @@ public class DialSettingViewModel implements ISettingViewModel {
                 builder.show();
                 return false;
             } else if (!dialValidator.validateStartDay(startDayData)) {
-                // 시작일이 과거면 현재로 강제 이동
                 this.startDayData = OffsetDateTime.now();
                 startDayView.setByOffsetDateTime(startDayData);
             }

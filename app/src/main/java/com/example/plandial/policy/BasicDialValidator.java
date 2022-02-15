@@ -25,6 +25,6 @@ public class BasicDialValidator implements IDialValidator {
 
     @Override
     public boolean validateStartDay(OffsetDateTime startDay) {
-        return startDay != null && startDay.isAfter(OffsetDateTime.now());
+        return startDay != null;
     }
 }
