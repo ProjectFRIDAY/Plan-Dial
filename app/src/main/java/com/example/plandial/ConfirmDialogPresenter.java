@@ -18,17 +18,9 @@ public class ConfirmDialogPresenter {
         // 빌더 생성
         builder = new AlertDialog.Builder(activity);
         builder.setMessage(message)
-                .setPositiveButton(POSITIVE_WORD, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        settingViewModel.finish();
-                    }
-                })
-                .setNegativeButton(NEGATIVE_WORD, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // nothing
-                    }
+                .setPositiveButton(POSITIVE_WORD, (dialogInterface, i) -> settingViewModel.finish())
+                .setNegativeButton(NEGATIVE_WORD, (dialogInterface, i) -> {
+                    // nothing
                 });
     }
 

@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,8 +48,10 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
     private int countForUnitOfTime = 0;
     private final ArrayList<String> timeArray = UnitOfTime.unitNames;
     private ImageView iconImage;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch unableSwitch;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

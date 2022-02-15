@@ -1,8 +1,6 @@
 package com.example.plandial;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -49,12 +47,7 @@ public class CategoryCreateActivity extends AppCompatActivity {
 
             // 완료 버튼 설정
             ImageButton completeButton = findViewById(R.id.DialPlus_Button);
-            completeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    categorySettingViewModel.complete();
-                }
-            });
+            completeButton.setOnClickListener(view -> categorySettingViewModel.complete());
         }
     }
 }

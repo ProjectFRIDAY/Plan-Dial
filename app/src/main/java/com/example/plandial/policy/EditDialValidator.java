@@ -12,7 +12,7 @@ public class EditDialValidator implements IDialValidator {
         return name != null && NAME_MIN_LENGTH <= name.length() && name.length() <= NAME_MAX_LENGTH;
     }
 
-    public boolean validateName(String name, Category category, Dial dial) {
+    public boolean sameName(String name, Category category, Dial dial) {
         Dial sameNamedDial = category.getDialByName(name);
         return sameNamedDial == null | sameNamedDial == dial;
     }

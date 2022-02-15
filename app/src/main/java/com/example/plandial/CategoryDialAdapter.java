@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
+        // Item을 하나씩 보여주는(bind) 함수
 
         if (position == category.getDialCount()) {
             // 다이얼 추가 버튼 생성
@@ -53,6 +54,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
     }
 
     //카테고리 받는 메서드 선언
+    @SuppressLint("NotifyDataSetChanged")
     public void setCategory(Category category) {
         this.category = category;
         this.notifyDataSetChanged();
