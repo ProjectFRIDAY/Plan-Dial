@@ -1,19 +1,16 @@
 package com.example.plandial;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.plandial.db.WorkDatabase;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -40,6 +37,7 @@ public class CategoryEditFragment extends BottomSheetDialogFragment {
         RemoveCategory = view.findViewById(R.id.CategoryRemove_Button);
         SaveCategory = view.findViewById(R.id.CategorySave_Button);
 
+        assert getArguments() != null;
         category = dialManager.getCategoryByName(getArguments().getString("categoryName"));
         String categoryName = getArguments().getString("categoryName");
         InputCategoryName.setText(categoryName);
@@ -62,9 +60,11 @@ public class CategoryEditFragment extends BottomSheetDialogFragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("정말로 카테고리를 삭제하시겠습니까?")
                         .setPositiveButton("예", (dialogInterface, i) -> {
+                            dialManager.removeCategoryByObject(category);
                             WorkDatabase.getInstance().delCategory(category);
-                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                             fragmentManager.beginTransaction().remove(CategoryEditFragment.this).commit();
+                            requireActivity().recreate();
                         })
                         .setNegativeButton("아니오", (dialogInterface, i) -> {
                         });
