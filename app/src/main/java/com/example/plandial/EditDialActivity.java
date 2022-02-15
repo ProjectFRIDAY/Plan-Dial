@@ -75,7 +75,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
             iconCheckbox = findViewById(R.id.Icon_Checkbox);
 
             Input_DialName.setText(dial.getName());
-            iconImage.setImageResource(dial.getIcon());
+            iconImage.setImageResource(new IconRecommendation().getIconByName(this, dial.getName()));
 
             countForPeriod = dial.getPeriod().getTimes();
             countForUnitOfTime = (int) UnitOfTime.unitToIndex.get(dial.getPeriod().getUnit());
