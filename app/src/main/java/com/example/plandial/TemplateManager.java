@@ -50,5 +50,6 @@ public class TemplateManager {
 
     public void resetAll() {
         templates.clear();
+        templates.add(new Template("빈 템플릿", "비어있는 템플릿입니다.", R.drawable.outline_assignment_black));
     }
 }
