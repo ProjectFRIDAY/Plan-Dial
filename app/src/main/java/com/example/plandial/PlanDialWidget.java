@@ -12,18 +12,14 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class PlanDialWidget extends AppWidgetProvider {
     public static final int PI_ID = -2;
 
     private static final String TAG = "WIDGET";
 
     private static final int MAX_ITEM_CNT = 5;
-    private static final int WIDGET_UPDATE_INTERVAL = 10 * UnitOfTime.MILLIS_PER_SECOND; // 단위: ms
+    private static final int WIDGET_UPDATE_INTERVAL = (int) (10 * UnitOfTime.MINUTE.getMillis()); // 단위: ms
     private static final String ITEM_SEPARATOR = ",";
     private static final String FIELD_SEPARATOR = ":";
 
@@ -49,7 +45,7 @@ public class PlanDialWidget extends AppWidgetProvider {
         int num = 1, visibleItemCnt = 0;
         if (mItemList != null) {
             String[] items = mItemList.split(ITEM_SEPARATOR);
-            int cnt = (items.length < MAX_ITEM_CNT) ? items.length : MAX_ITEM_CNT;
+            int cnt = Math.min(items.length, MAX_ITEM_CNT);
             for (; num <= cnt; num++) {
                 if (setItem(context, views, num, items[num - 1])) visibleItemCnt++;
             }
@@ -114,16 +110,16 @@ public class PlanDialWidget extends AppWidgetProvider {
     private String getUrgentDialList() {
         DialManager dialManager = DialManager.getInstance();
         ArrayList<AlertDial> urgentDialList = dialManager.getUrgentDials(DialManager.URGENT_BOUND);
-        String strItemList = "";
+        StringBuilder strItemList = new StringBuilder();
         int cnt = 0;
 
         for (Dial dial : urgentDialList) {
-            if (strItemList.length() > 0) strItemList += ITEM_SEPARATOR;
-            strItemList += dial.getName() + FIELD_SEPARATOR + dial.getIcon();
+            if (strItemList.length() > 0) strItemList.append(ITEM_SEPARATOR);
+            strItemList.append(dial.getName()).append(FIELD_SEPARATOR).append(dial.getIcon());
             if (++cnt >= MAX_ITEM_CNT) break;
         }
 
-        return strItemList;
+        return strItemList.toString();
     }
 
     private int[] getWidgetId(Context context) {

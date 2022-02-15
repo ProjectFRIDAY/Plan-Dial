@@ -12,7 +12,7 @@ import com.example.plandial.db.WorkDatabase;
 
 // 추후 안드로이드 12에 추가된 SplashScreen API로 변경해야 함.
 public class SplashActivity extends AppCompatActivity {
-    private final int minLoadingTime = 100; // Splash 화면을 보여줄 최소 시간
+    private final int minLoadingTime = 100; // Splash 화면을 보여줄 최소 시간 (단위: ms)
 
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override

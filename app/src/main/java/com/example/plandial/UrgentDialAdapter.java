@@ -45,7 +45,7 @@ public class UrgentDialAdapter extends RecyclerView.Adapter<UrgentDialAdapter.It
         this.notifyDataSetChanged();
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+    static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageButton dialIcon;
         private final TextView dialName;

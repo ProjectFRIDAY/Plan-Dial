@@ -64,8 +64,8 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
 
     protected void rotate(final float fromDegree, final float toDegree, final long duration) {
         final RotateAnimation rotateAnimation = new RotateAnimation(
-                (float) fromDegree,
-                (float) toDegree,
+                fromDegree,
+                toDegree,
                 Animation.RELATIVE_TO_SELF,
                 0.5f,
                 Animation.RELATIVE_TO_SELF,

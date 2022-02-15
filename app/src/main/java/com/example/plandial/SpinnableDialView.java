@@ -1,10 +1,7 @@
 package com.example.plandial;
 
-import static android.media.MediaCodec.MetricsConstants.MODE;
-
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.VibrationEffect;
@@ -12,7 +9,6 @@ import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 

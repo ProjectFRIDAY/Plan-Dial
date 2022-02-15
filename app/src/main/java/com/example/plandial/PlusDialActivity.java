@@ -7,7 +7,6 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,14 +80,8 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
 
         //region 완료 버튼 설정
         {
-            Activity activity = this;
             Button completeButton = findViewById(R.id.DialPlus_Button);
-            completeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialSettingViewModel.complete();
-                }
-            });
+            completeButton.setOnClickListener(view -> dialSettingViewModel.complete());
         }
         //endregion
 
