@@ -57,6 +57,12 @@ public class CategorySettingViewModel implements ISettingViewModel {
                 builder.show();
                 return false;
             }
+
+            if (!categoryValidator.numCategoryLimit(DialManager.getInstance())) {
+                builder.setMessage("카테고리는 10개 이하여야 합니다.");
+                builder.show();
+                return false;
+            }
         }
 
         // 카테고리를 정말 생성할 지 사용자에게 확인함

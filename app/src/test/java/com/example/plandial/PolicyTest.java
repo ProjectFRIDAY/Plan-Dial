@@ -54,9 +54,9 @@ public class PolicyTest {
         category.addDial(dial);
         category.addDial(target_dial);
 
-        assert editDialValidator.validateName("쇼핑", category, target_dial);
-        assert !editDialValidator.validateName("다이얼", category, target_dial);
-        assert editDialValidator.validateName("아침 식사", category, target_dial);
+        assert editDialValidator.sameName("쇼핑", category, target_dial);
+        assert !editDialValidator.sameName("다이얼", category, target_dial);
+        assert editDialValidator.sameName("아침 식사", category, target_dial);
     }
 
     @Test
