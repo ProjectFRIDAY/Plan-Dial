@@ -108,6 +108,7 @@ public class CategoryDialAdapter extends RecyclerView.Adapter<CategoryDialAdapte
         }
 
         void setAsAddButton() {
+            dialIcon.setBackgroundResource(R.drawable.dial_background_ripple);
             dialIcon.setImageResource(R.drawable.ic_plus);
             dialName.setText("다이얼 추가");
         }

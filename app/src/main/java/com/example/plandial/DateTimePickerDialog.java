@@ -1,5 +1,6 @@
 package com.example.plandial;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -9,17 +10,17 @@ import android.widget.TimePicker;
 import java.time.OffsetDateTime;
 
 public class DateTimePickerDialog {
-    private OffsetDateTime selectedDateTime = OffsetDateTime.now();
+    private OffsetDateTime selectedDateTime;
 
     private final DatePickerDialog datePickerDialog;
     private final TimePickerDialog timePickerDialog;
 
-    public DateTimePickerDialog(Context context, IOffsetDateTimeRequester offsetDateTimeRequester) {
+    public DateTimePickerDialog(Context context, IOffsetDateTimeRequester offsetDateTimeRequester, OffsetDateTime originalDateTime) {
 
         DatePickerDialog.OnDateSetListener datePickerCallbackMethod = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                selectedDateTime = selectedDateTime.withYear(year).withMonth(month + 1).withDayOfMonth(dayOfMonth);
+                selectedDateTime = originalDateTime.withYear(year).withMonth(month + 1).withDayOfMonth(dayOfMonth);
 
                 // TimePickerDialog를 연달아 호출함
                 timePickerDialog.show();
@@ -47,7 +48,11 @@ public class DateTimePickerDialog {
                 timePickerCallbackMethod,
                 OffsetDateTime.now().getHour(),
                 OffsetDateTime.now().getMinute(),
-                true);
+                false);
+    }
+
+    public DateTimePickerDialog(Activity activity, DateTimeTextView startDayInput) {
+        this(activity, startDayInput, OffsetDateTime.now());
     }
 
     public void show() {

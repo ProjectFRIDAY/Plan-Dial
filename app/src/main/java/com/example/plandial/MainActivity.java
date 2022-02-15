@@ -1,12 +1,13 @@
 package com.example.plandial;
 
-import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView categoryDialView;
     private StatusDisplayLayout statusDisplayLayout;
     private ImageButton add_button;
+    private TextView categoryNameView;
+    private CategoryEditFragment categoryEditFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
@@ -37,16 +41,16 @@ public class MainActivity extends AppCompatActivity {
 
         PlanDialWidget.WakeUp(this); // widget 미작동시 깨우기
 
-        //region test code
+        //startregion
 //        AlertDial alertDial1 = new AlertDial(this, "빨래", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 26, 0, 0, ZoneOffset.ofHours(9)));
 //        AlertDial alertDial2 = new AlertDial(this, "청소", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 27, 0, 0, ZoneOffset.ofHours(9)));
 //        AlertDial alertDial3 = new AlertDial(this, "공부", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 28, 0, 0, ZoneOffset.ofHours(9)));
 //        AlertDial alertDial4 = new AlertDial(this, "코딩", new Period(UnitOfTime.DAY, 1), OffsetDateTime.of(2022, 1, 24, 19, 29, 0, 0, ZoneOffset.ofHours(9)));
-//        Category category1 = new Category("나는 바보다");
+//        Category category1 = new Category("건강한 출퇴근 생활");
 //        category1.addDial(alertDial1);
 //        category1.addDial(alertDial2);
 //        category1.addDial(alertDial3);
-//        Category category2 = new Category("나는 바보다2");
+//        Category category2 = new Category("건강한 출퇴근 생");
 //        category2.addDial(alertDial1);
 //        category2.addDial(alertDial4);
 //        DialManager.getInstance().addCategory(category1);
@@ -59,11 +63,27 @@ public class MainActivity extends AppCompatActivity {
         mainDialSlider = findViewById(R.id.main_dial_slider);
         mainDialLayout = findViewById(R.id.main_dial_layout);
         statusDisplayLayout = findViewById(R.id.status_display_layout);
+        categoryNameView = findViewById(R.id.category_name);
 
         add_button.setOnClickListener(view -> {
             Intent templateIntent = new Intent(getApplicationContext(), TemplateChoiceActivity.class);
             startActivity(templateIntent);
         });
+
+        categoryNameView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(!categoryNameView.getText().equals("빈 카테고리")){
+                    CategoryEditFragment categoryEditFragment = new CategoryEditFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("categoryName", (String) categoryNameView.getText());
+                    categoryEditFragment.setArguments(bundle);
+                    categoryEditFragment.show(getSupportFragmentManager(), categoryEditFragment.getTag());
+                }
+                return false;
+            }
+        });
+
 
         {
             // 메인다이얼 슬라이더 설정 (객체 내부에서 ImageView 등록하도록 개선 필요)

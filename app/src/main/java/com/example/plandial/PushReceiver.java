@@ -22,19 +22,19 @@ public class PushReceiver extends BroadcastReceiver {
         // 다이얼 이름 받음
         String dialName = intent.getStringExtra("dial");
 
-        if(dialName != null) {
+        if (dialName != null) {
             // 푸쉬알림에 대한 내용
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(
-                    new NotificationChannel("push", "push-alarm", NotificationManager.IMPORTANCE_HIGH)
+                    new NotificationChannel("push", "다이얼 알림", NotificationManager.IMPORTANCE_HIGH)
             );
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "push");
 
             Intent goMainIntent = new Intent(context, SplashActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 999, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, -1, goMainIntent, PendingIntent.FLAG_IMMUTABLE);
 
             builder.setContentTitle(dialName);
-            builder.setContentText("지금은 " + dialName + "을(를) 시작할 시간입니다.");
+            builder.setContentText("\uD83D\uDCE2 지금은 " + dialName + "을(를) 시작할 시간입니다.");
             builder.setSmallIcon(R.drawable.ic_logo);
             builder.setAutoCancel(true);
 
@@ -46,13 +46,13 @@ public class PushReceiver extends BroadcastReceiver {
     }
 
     // 재부팅 대응 필요
-    public class ReBootReceiver extends BroadcastReceiver {
+    public static class ReBootReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
 
-                ComponentName receiver = new ComponentName(context,ReBootReceiver.class);
+                ComponentName receiver = new ComponentName(context, ReBootReceiver.class);
                 PackageManager pm = context.getPackageManager();
 
                 pm.setComponentEnabledSetting(receiver,

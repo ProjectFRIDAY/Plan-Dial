@@ -76,10 +76,12 @@ public class WorkDatabase {
             }
 
             for (DialTable dialTable : iDialDao.getDialAll()) {
+                int id = dialTable.getId();
                 Period period = new Period(Objects.requireNonNull(UnitOfTime.EnglishNameToUnit.get(dialTable.getDialTimeUnit())), dialTable.getDialTime());
                 OffsetDateTime startDateTime = OffsetDateTime.of(LocalDateTime.parse(dialTable.getDialStart(), formatter), OffsetDateTime.now().getOffset());
 
-                AlertDial dial = new AlertDial(context, dialTable.getDialName(), period, startDateTime, Integer.parseInt(dialTable.getDialIcon()));
+                AlertDial dial = new AlertDial(context, id, dialTable.getDialName(), period, startDateTime, Integer.parseInt(dialTable.getDialIcon()));
+
                 if (dialTable.getDialDisabled()) dial.disable(context);
                 Objects.requireNonNull(idToCategory.get(dialTable.getDialToCategory())).addDial(dial);
             }
@@ -424,8 +426,11 @@ public class WorkDatabase {
 //            break;
 //    }
 
+    public int getNextDialId() {
+        return iDialDao.getLastId() + 1;
+    }
+
     private String getErrorMessage(String exception, String process, String target) {
         return exception + " while " + process + " " + target;
     }
 }
-
