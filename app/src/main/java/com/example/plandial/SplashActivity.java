@@ -25,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
             // DB 준비
             DialManager.getInstance().resetAll();
+            TemplateManager.getInstance().resetAll();
             WorkDatabase workDatabase = WorkDatabase.getInstance();
             workDatabase.ready(this);
 

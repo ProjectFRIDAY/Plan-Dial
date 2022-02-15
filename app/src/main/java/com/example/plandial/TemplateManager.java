@@ -47,4 +47,8 @@ public class TemplateManager {
     public void addTemplate(Template template) {
         templates.add(template);
     }
+
+    public void resetAll() {
+        templates.clear();
+    }
 }
