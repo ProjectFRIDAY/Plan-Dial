@@ -4,11 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
-
-import com.example.plandial.Category;
-import com.example.plandial.db.CategoryTable;
 
 import java.util.List;
 
@@ -23,10 +19,6 @@ public interface ICategoryDao {
 
     @Delete
     void deleteCategory(CategoryTable category);   // 카테고리 삭제
-
-    //쿼리 명령어 : 일단 나중에 / 필요에 따른 쿼리 명령문 작성할 예정
-    // 카테고리 개수 가져오는 쿼리
-    // 카테고리 정보 가져오는 쿼리
 
     // 정보 전부 가져오기
     @Query("SELECT * FROM CategoryTable")

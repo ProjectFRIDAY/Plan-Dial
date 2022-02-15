@@ -20,11 +20,6 @@ public interface IDialDao {
     @Delete
     void deleteDial(DialTable dial);    // 다이얼 삭제
 
-    //쿼리 명령어 : 일단 나중에 / 필요에 따른 쿼리 명령문 작성할 예정
-    // 다이얼의 개수 가져오는 쿼리
-    // 다이얼 모든 정보를 가져오는 쿼리
-    // 특정 열의 정보를 가져오는 쿼리
-
     // 모든 다이얼 데티어 쿼리
     @Query("SELECT * FROM DialTable")
     List<DialTable> getDialAll();
@@ -44,9 +39,6 @@ public interface IDialDao {
     // 다이얼 테이블의 다음 id값 반환
     @Query("SELECT MAX(id) FROM DialTable")
     int getLastId();
-
-    // 특정 카테고리 아이디를 가지고 있는 다이얼 데이터 쿼리
-
 }
 
 

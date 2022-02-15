@@ -56,48 +56,24 @@ public class DialTable {
         return dialTimeUnit;
     }
 
-    public void setDialTimeUnit(String dialTimeUnit) {
-        this.dialTimeUnit = dialTimeUnit;
-    }
-
     public int getDialTime() {
         return dialTime;
-    }
-
-    public void setDialTime(int dialTime) {
-        this.dialTime = dialTime;
     }
 
     public int getDialToCategory() {
         return dialToCategory;
     }
 
-    public void setDialToCategory(int dialToCategory) {
-        this.dialToCategory = dialToCategory;
-    }
-
     public String getDialIcon() {
         return dialIcon;
-    }
-
-    public void setDialIcon(String dialIcon) {
-        this.dialIcon = dialIcon;
     }
 
     public Boolean getDialDisabled() {
         return dialDisabled;
     }
 
-    public void setDialDisabled(Boolean dialDisabled) {
-        this.dialDisabled = dialDisabled;
-    }
-
     public String getDialStart() {
         return dialStart;
-    }
-
-    public void setDialStart(String dialStart) {
-        this.dialStart = dialStart;
     }
 
     // 인스턴스 생성할 때 값도 같이 입력
