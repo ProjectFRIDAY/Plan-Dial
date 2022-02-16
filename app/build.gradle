@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.plandial"
+        applicationId "com.friday.plandial"
         minSdk 26
         targetSdk 31
         versionCode 1

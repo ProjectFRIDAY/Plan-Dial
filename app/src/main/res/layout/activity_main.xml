@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.friday.plandial.MainActivity">
 
     <ImageView
         android:id="@+id/logo"
@@ -55,7 +55,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/urgent_dials">
 
-        <com.example.plandial.SpinnableDialView
+        <com.friday.plandial.SpinnableDialView
             android:id="@+id/main_dial_slider"
             android:layout_width="205dp"
             android:layout_height="205dp"
@@ -66,7 +66,7 @@
             app:layout_constraintTop_toTopOf="@+id/main_dial_layout"
             app:srcCompat="@drawable/main_dial_no_circle" />
 
-        <com.example.plandial.StatusDisplayLayout
+        <com.friday.plandial.StatusDisplayLayout
             android:id="@+id/status_display_layout"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="" />
 
-        </com.example.plandial.StatusDisplayLayout>
+        </com.friday.plandial.StatusDisplayLayout>
 
         <ImageView
             android:id="@+id/category_circle_0"

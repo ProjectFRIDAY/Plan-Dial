@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanDial">
         <receiver
-            android:name=".PlanDialWidget"
+            android:name="com.friday.plandial.PlanDialWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -29,7 +29,7 @@
         </receiver>
 
         <activity
-            android:name=".SplashActivity"
+            android:name="com.friday.plandial.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -38,15 +38,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.friday.plandial.MainActivity" />
 
-        <activity android:name=".PlusDialActivity" />
-        <activity android:name=".EditDialActivity" />
-        <activity android:name=".TemplateChoiceActivity" />
-        <activity android:name=".CategoryCreateActivity" />
+        <activity android:name="com.friday.plandial.PlusDialActivity" />
+        <activity android:name="com.friday.plandial.EditDialActivity" />
+        <activity android:name="com.friday.plandial.TemplateChoiceActivity" />
+        <activity android:name="com.friday.plandial.CategoryCreateActivity" />
 
         <receiver
-            android:name=".PushReceiver"
+            android:name="com.friday.plandial.PushReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -55,7 +55,7 @@
         </receiver>
 
         <receiver
-            android:name=".PushReceiver$ReBootReceiver"
+            android:name="com.friday.plandial.PushReceiver$ReBootReceiver"
             android:enabled="true"
             android:exported="false"
             tools:ignore="Instantiatable">
