@@ -15,6 +15,7 @@
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanDial">
+
         <receiver
             android:name="com.friday.plandial.PlanDialWidget"
             android:exported="true">
@@ -38,12 +39,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.friday.plandial.MainActivity" />
+        <activity
+            android:name="com.friday.plandial.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name="com.friday.plandial.PlusDialActivity" />
-        <activity android:name="com.friday.plandial.EditDialActivity" />
+        <activity
+            android:name="com.friday.plandial.PlusDialActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.friday.plandial.EditDialActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.friday.plandial.TemplateChoiceActivity" />
-        <activity android:name="com.friday.plandial.CategoryCreateActivity" />
+        <activity
+            android:name="com.friday.plandial.CategoryCreateActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.friday.plandial.TutorialMainActivity"
