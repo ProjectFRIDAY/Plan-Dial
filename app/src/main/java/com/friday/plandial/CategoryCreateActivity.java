@@ -41,7 +41,7 @@ public class CategoryCreateActivity extends AppCompatActivity {
             GridLayoutManager gridlayoutManager = new GridLayoutManager(this, 2);
             presetList.setLayoutManager(gridlayoutManager);
 
-            PresetListAdapter presetAdapter = new PresetListAdapter(selectedTemplate, true);
+            PresetListAdapter presetAdapter = new PresetListAdapter(selectedTemplate, true, true);
             presetList.setAdapter(presetAdapter);
 
             // 뷰 모델 설정

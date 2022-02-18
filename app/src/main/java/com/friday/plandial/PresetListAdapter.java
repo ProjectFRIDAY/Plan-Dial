@@ -17,22 +17,24 @@ import java.util.ArrayList;
 public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.ItemViewHolder> {
     private Template template;
     private final boolean isSelectable;
+    private final boolean selectAll;
     private ArrayList<Boolean> isSelected;
 
     public PresetListAdapter(Template template) {
         // 프리셋을 선택할 수 없는 리스트 생성
-        this(template, false);
+        this(template, false, false);
     }
 
-    public PresetListAdapter(Template template, boolean isSelectable) {
+    public PresetListAdapter(Template template, boolean isSelectable, boolean selectAll) {
         this.template = template;
         this.isSelectable = isSelectable;
+        this.selectAll = selectAll;
 
         if (isSelectable) {
             isSelected = new ArrayList<>(8);
 
             for (int i = 0; i < template.getDialCount(); ++i) {
-                isSelected.add(false);
+                isSelected.add(selectAll);
             }
         }
     }
@@ -70,7 +72,7 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
         return template.getDialCount();
     }
 
-    //카테고리 받는 메서드 선언
+    // 카테고리 받는 메서드 선언
     public void setCategory(Template template) {
         this.template = template;
         this.notifyDataSetChanged();
@@ -90,18 +92,8 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
             if (isSelectable) {
                 itemView.setOnClickListener(view -> {
                     int pos = getAdapterPosition();
-
-                    if (isSelected.get(pos)) {
-                        // 선택 해제 효과
-                        itemView.setBackgroundColor(Color.parseColor("#00000000"));
-                    } else {
-                        // 선택 효과
-                        itemView.setBackgroundColor(Color.parseColor("#306200EE"));
-                    }
-
-
-                    // 선택 반전
-                    isSelected.set(pos, !isSelected.get(pos));
+                    isSelected.set(pos, !isSelected.get(pos)); // 선택 반전
+                    changeBackgroundColor(isSelected.get(pos), itemView);
                 });
             }
         }
@@ -109,6 +101,17 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
         void onBind(Dial preset) {
             presetIcon.setImageResource(preset.getIcon());
             presetName.setText(preset.getName());
+            changeBackgroundColor(selectAll, itemView);
+        }
+
+        void changeBackgroundColor(boolean select, View itemView) {
+            if (select) {
+                // 선택 효과
+                itemView.setBackgroundColor(Color.parseColor("#306200EE"));
+            } else {
+                // 선택 해제 효과
+                itemView.setBackgroundColor(Color.parseColor("#00000000"));
+            }
         }
     }
 }
