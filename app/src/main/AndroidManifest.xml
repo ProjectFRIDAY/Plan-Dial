@@ -45,6 +45,13 @@
         <activity android:name="com.friday.plandial.TemplateChoiceActivity" />
         <activity android:name="com.friday.plandial.CategoryCreateActivity" />
 
+        <activity
+            android:name="com.friday.plandial.TutorialMainActivity"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name="com.friday.plandial.TutorialEditActivity"
+            android:theme="@style/Theme.Transparent" />
+
         <receiver
             android:name="com.friday.plandial.PushReceiver"
             android:exported="true">
