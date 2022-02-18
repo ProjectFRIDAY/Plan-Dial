@@ -5,6 +5,19 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="84dp"
+        android:layout_marginTop="95dp"
+        android:gravity="center_vertical"
+        android:text="@string/urgent_dial_tutorial"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Space
         android:id="@+id/main_dial_space"
         android:layout_width="match_parent"

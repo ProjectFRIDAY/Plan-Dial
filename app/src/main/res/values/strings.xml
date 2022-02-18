@@ -39,4 +39,5 @@
     <string name="icon">icon</string>
     <string name="up">Up</string>
     <string name="use_template">이 템플릿 사용하기</string>
+    <string name="urgent_dial_tutorial">여기에는 임박한 다이얼만 표시됩니다.</string>
 </resources>
