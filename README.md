@@ -3,4 +3,4 @@
 
 ## 🌿 Branches
 + master : default 브랜치입니다.    
-  + feature/category-create-page : part3 작업들에 대한 브랜치입니다. 템플릿 선택과 카테고리 생성 화면에 대한 기능을 다룹니다.
+  + release/first-version : 첫 출시를 위한 작업들에 대한 브랜치입니다. (To do: [#30](https://github.com/ProjectFRIDAY/Plan-Dial/issues/30))
