@@ -61,7 +61,7 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
-        holder.onBind(template.getDialByIndex(position));
+        holder.onBind((Preset) template.getDialByIndex(position));
     }
 
     @Override
@@ -82,12 +82,14 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
 
         private final ImageView presetIcon;
         private final TextView presetName;
+        private final TextView presetDesc;
 
         ItemViewHolder(View itemView) {
             super(itemView);
 
             presetIcon = itemView.findViewById(R.id.preset_icon);
             presetName = itemView.findViewById(R.id.preset_name);
+            presetDesc = itemView.findViewById(R.id.preset_desc);
 
             if (isSelectable) {
                 itemView.setOnClickListener(view -> {
@@ -98,9 +100,10 @@ public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.It
             }
         }
 
-        void onBind(Dial preset) {
+        void onBind(Preset preset) {
             presetIcon.setImageResource(preset.getIcon());
             presetName.setText(preset.getName());
+            presetDesc.setText(preset.getDescription());
             changeBackgroundColor(selectAll, itemView);
         }
 
