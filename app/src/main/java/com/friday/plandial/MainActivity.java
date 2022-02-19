@@ -1,6 +1,8 @@
 package com.friday.plandial;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
@@ -116,6 +118,21 @@ public class MainActivity extends AppCompatActivity {
             timer.schedule(syncUrgentTask, 0, SYNCING_URGENT_PERIOD);
         }
 
+        // 튜토리얼 체킹
+        if (DialManager.getInstance().getCategoryCount() == 0) {
+            Intent templateIntent = new Intent(getApplicationContext(), TutorialMainActivity.class);
+            startActivity(templateIntent);
+        } else {
+            SharedPreferences pref = getSharedPreferences("Tutorial", Activity.MODE_PRIVATE);
+            if (pref.getBoolean("isFirst", true)) {
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("isFirst", false);
+                editor.apply();
+
+                Intent templateIntent = new Intent(getApplicationContext(), TutorialEditActivity.class);
+                startActivity(templateIntent);
+            }
+        }
     }
 
     @Override

@@ -54,6 +54,10 @@ public class CategoryEditFragment extends BottomSheetDialogFragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setMessage("정말로 카테고리를 삭제하시겠습니까?")
                     .setPositiveButton("예", (dialogInterface, i) -> {
+                        for (Dial dial : category.getAllDials()) {
+                            AlertDial alertDial = (AlertDial) dial;
+                            alertDial.disable(getContext());
+                        }
                         dialManager.removeCategoryByObject(category);
                         WorkDatabase.getInstance().delCategory(category);
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();

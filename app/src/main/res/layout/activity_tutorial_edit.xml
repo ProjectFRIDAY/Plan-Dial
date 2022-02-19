@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="84dp"
+        android:layout_marginTop="95dp"
+        android:gravity="center_vertical"
+        android:text="@string/urgent_dial_tutorial"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/main_dial_space"
+        android:layout_width="match_parent"
+        android:layout_height="205dp"
+        android:layout_marginTop="179dp"
+        app:layout_constraintBottom_toTopOf="@id/category_dial_space"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/category_dial_space"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_dial_space" />
+
+    <Space
+        android:id="@+id/category_name_space"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/category_dial_space"
+        app:layout_constraintTop_toBottomOf="@+id/main_dial_space" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:gravity="center_vertical"
+        android:text="@string/category_edit_tutorial"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/category_name_space" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginBottom="3dp"
+        android:gravity="center_vertical"
+        android:text="@string/dial_edit_tutorial"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/category_dial_space"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

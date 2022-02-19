@@ -1,6 +1,7 @@
 package com.friday.plandial;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,14 +42,14 @@ public class CategoryCreateActivity extends AppCompatActivity {
             GridLayoutManager gridlayoutManager = new GridLayoutManager(this, 2);
             presetList.setLayoutManager(gridlayoutManager);
 
-            PresetListAdapter presetAdapter = new PresetListAdapter(selectedTemplate, true);
+            PresetListAdapter presetAdapter = new PresetListAdapter(selectedTemplate, true, true);
             presetList.setAdapter(presetAdapter);
 
             // 뷰 모델 설정
             CategorySettingViewModel categorySettingViewModel = new CategorySettingViewModel(this, presetAdapter);
 
             // 완료 버튼 설정
-            ImageButton completeButton = findViewById(R.id.DialPlus_Button);
+            Button completeButton = findViewById(R.id.CategoryPlus_Button);
             completeButton.setOnClickListener(view -> categorySettingViewModel.complete());
         }
     }

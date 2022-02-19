@@ -3,13 +3,9 @@
 
     <item>
         <shape>
-            <stroke android:color="@color/black" android:width="3dp"/>
+            <stroke android:width="3dp" android:color="@color/black" />
 
-            <corners
-                android:bottomLeftRadius="10dp"
-                android:bottomRightRadius="10dp"
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp"/>
+            <corners android:bottomLeftRadius="10dp" android:bottomRightRadius="10dp" android:topLeftRadius="10dp" android:topRightRadius="10dp" />
         </shape>
     </item>
 </selector>

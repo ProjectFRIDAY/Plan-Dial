@@ -38,7 +38,9 @@ public class SpinnableImageView extends androidx.appcompat.widget.AppCompatImage
 
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
             // 벡터의 내적을 구해 각도를 판정함.
-            float theta = (float) Math.toDegrees(Math.acos((lastX * x + lastY * y) / (Math.sqrt(x * x + y * y) * Math.sqrt(lastX * lastX + lastY * lastY))));
+            double innerProduct = (lastX * x + lastY * y) / (Math.sqrt(x * x + y * y) * Math.sqrt(lastX * lastX + lastY * lastY));
+            innerProduct = Math.min(Math.max(innerProduct, -1), 1); // acos의 정의역을 벗어나지 않도록
+            float theta = (float) Math.toDegrees(Math.acos(innerProduct));
 
             // 벡터의 외적을 구해 회전 방향을 판정함.
             int direction = (lastX * y - lastY * x > 0) ? -1 : 1;
