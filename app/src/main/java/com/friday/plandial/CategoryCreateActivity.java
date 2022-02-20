@@ -1,5 +1,7 @@
 package com.friday.plandial;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +14,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.plandial.R;
+import com.google.android.material.snackbar.Snackbar;
 
 public class CategoryCreateActivity extends AppCompatActivity {
+
+    private static final String TUTORIAL_MESSAGE = "각 다이얼의 시작 시간은 카테고리를 생성한 후에 수정해야 합니다.";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +56,18 @@ public class CategoryCreateActivity extends AppCompatActivity {
             // 완료 버튼 설정
             Button completeButton = findViewById(R.id.CategoryPlus_Button);
             completeButton.setOnClickListener(view -> categorySettingViewModel.complete());
+
+            // 튜토리얼 체킹
+            SharedPreferences pref = getSharedPreferences("Tutorial", Activity.MODE_PRIVATE);
+            if (!TemplateManager.getInstance().getEmptyTemplate().equals(selectedTemplate)
+                    && pref.getBoolean("isFirstTemplate", true)) {
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("isFirstTemplate", false);
+                editor.apply();
+                Snackbar.make(findViewById(android.R.id.content), TUTORIAL_MESSAGE, Snackbar.LENGTH_INDEFINITE)
+                        .setAction("확인", view -> {
+                        }).show();
+            }
         }
     }
 }
