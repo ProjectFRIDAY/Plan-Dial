@@ -63,6 +63,7 @@ public class CategoryEditFragment extends BottomSheetDialogFragment {
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().remove(CategoryEditFragment.this).commit();
                         requireActivity().recreate();
+						PlanDialWidget.Update(requireActivity()); // widget update
                     })
                     .setNegativeButton("아니오", (dialogInterface, i) -> {
                     });

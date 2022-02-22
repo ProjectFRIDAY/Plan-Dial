@@ -105,6 +105,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
                             dial.disable(this);
                             category.removeDialByObject(dial);
                             WorkDatabase.getInstance().delDial(dial);
+							PlanDialWidget.Update(this); // widget update
                             this.finish();
                         })
                         .setNegativeButton("아니오", (dialogInterface, i) -> {

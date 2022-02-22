@@ -28,6 +28,7 @@ public class PlanDialWidget extends AppWidgetProvider {
     private static String mItemList = "";
     private static AlarmManager mAlarmManager = null;
     private static PendingIntent mPendingIntent = null;
+    private static int mWidgetCount = 0;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -127,7 +128,13 @@ public class PlanDialWidget extends AppWidgetProvider {
     private int[] getWidgetId(Context context) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName widget = new ComponentName(context.getPackageName(), PlanDialWidget.class.getName());
-        return appWidgetManager.getAppWidgetIds(widget);
+        int[] widgetIds = appWidgetManager.getAppWidgetIds(widget);
+        if (widgetIds == null || widgetIds.length == 0) { // widget이 없는 경우
+            mWidgetCount = 0;
+            return null; // widget이 없는 경우 무조건 null return
+        }
+        mWidgetCount = widgetIds.length;
+        return widgetIds;
     }
 
     private void alarmCancel() {
@@ -157,9 +164,16 @@ public class PlanDialWidget extends AppWidgetProvider {
         return in;
     }
 
-    public static void WakeUp(Context context) {
+    public static void WakeUp(Context context) { // 무조건 onReceive() 실행됨
         Log.d(TAG, "PlanDialWidget.WakeUp()");
         context.sendBroadcast(getForceUpdateIntent(context));
+    }
+
+    public static void Update(Context context) { // widget이 있는 경우에만 onReceive() 실행됨
+        Log.d(TAG, "PlanDialWidget.Update()");
+        if (mWidgetCount > 0) {
+            context.sendBroadcast(getForceUpdateIntent(context));
+        }
     }
 
     @Override
@@ -178,7 +192,7 @@ public class PlanDialWidget extends AppWidgetProvider {
             alarmCancel(); // 기존 알람 취소
 
             int[] widgetIds = getWidgetId(context);
-            if (widgetIds == null || widgetIds.length == 0) { // widget 이 존재하지 않을 때
+            if (widgetIds == null) { // widget 이 존재하지 않을 때
                 mItemList = ""; // item list 초기화
             } else { // widget이 존재할 때만 실행
                 String strItemList = getUrgentDialList();
@@ -205,7 +219,7 @@ public class PlanDialWidget extends AppWidgetProvider {
             Log.d(TAG, "PlanDialWidget.onReceive() : BOOT_COMPLETED");
 
             int[] widgetIds = getWidgetId(context);
-            if (widgetIds != null && widgetIds.length > 0) { // widget이 존재할 때만 실행
+            if (widgetIds != null) { // widget이 존재할 때만 실행
                 WakeUp(context); // 부팅 완료후 update
             }
         }

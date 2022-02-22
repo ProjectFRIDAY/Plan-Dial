@@ -92,6 +92,7 @@ public class DialSettingViewModel implements ISettingViewModel {
         // 검증 과정까지 마친 후 세팅을 마무리하는 함수임
 
         save();
+		PlanDialWidget.Update(activity); // widget update
         activity.finish();
 
     }
