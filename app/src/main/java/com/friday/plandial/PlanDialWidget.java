@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.example.plandial.R;
-
 import java.util.ArrayList;
 
 public class PlanDialWidget extends AppWidgetProvider {

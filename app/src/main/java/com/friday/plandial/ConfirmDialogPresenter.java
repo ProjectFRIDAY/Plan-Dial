@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.widget.EditText;
 
-import com.example.plandial.R;
-
 public class ConfirmDialogPresenter {
     public static final String POSITIVE_WORD = "완료";
     public static final String NEGATIVE_WORD = "취소";

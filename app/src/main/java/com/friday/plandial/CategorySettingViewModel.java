@@ -8,7 +8,6 @@ import android.widget.EditText;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.plandial.R;
 import com.friday.plandial.db.WorkDatabase;
 import com.friday.plandial.policy.BasicCategoryValidator;
 

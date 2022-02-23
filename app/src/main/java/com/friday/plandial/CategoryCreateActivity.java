@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plandial.R;
 import com.google.android.material.snackbar.Snackbar;
 
 public class CategoryCreateActivity extends AppCompatActivity {

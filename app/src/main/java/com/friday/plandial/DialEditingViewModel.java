@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.plandial.R;
 import com.friday.plandial.db.WorkDatabase;
 import com.friday.plandial.policy.EditDialValidator;
 
@@ -100,7 +99,7 @@ public class DialEditingViewModel implements ISettingViewModel {
     public void finish() {
         // 검증 과정까지 마친 후 세팅을 마무리하는 함수
         save();
-		PlanDialWidget.Update(activity); // widget update
+        PlanDialWidget.Update(activity); // widget update
         activity.finish();
     }
 

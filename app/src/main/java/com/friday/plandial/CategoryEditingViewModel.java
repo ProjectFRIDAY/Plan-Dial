@@ -9,7 +9,6 @@ import android.widget.EditText;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.example.plandial.R;
 import com.friday.plandial.db.WorkDatabase;
 import com.friday.plandial.policy.EditCategoryValidator;
 

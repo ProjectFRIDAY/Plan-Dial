@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.plandial.R;
 import com.friday.plandial.db.WorkDatabase;
 
 import java.util.ArrayList;
@@ -105,7 +104,7 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
                             dial.disable(this);
                             category.removeDialByObject(dial);
                             WorkDatabase.getInstance().delDial(dial);
-							PlanDialWidget.Update(this); // widget update
+                            PlanDialWidget.Update(this); // widget update
                             this.finish();
                         })
                         .setNegativeButton("아니오", (dialogInterface, i) -> {

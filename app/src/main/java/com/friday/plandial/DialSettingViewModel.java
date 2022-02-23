@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.plandial.R;
 import com.friday.plandial.db.WorkDatabase;
 import com.friday.plandial.policy.BasicDialValidator;
 
@@ -92,7 +91,7 @@ public class DialSettingViewModel implements ISettingViewModel {
         // 검증 과정까지 마친 후 세팅을 마무리하는 함수임
 
         save();
-		PlanDialWidget.Update(activity); // widget update
+        PlanDialWidget.Update(activity); // widget update
         activity.finish();
 
     }

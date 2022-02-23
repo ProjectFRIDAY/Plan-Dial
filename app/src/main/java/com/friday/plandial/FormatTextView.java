@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
-import com.example.plandial.R;
-
 public class FormatTextView extends androidx.appcompat.widget.AppCompatTextView {
     protected final String formatString;
 

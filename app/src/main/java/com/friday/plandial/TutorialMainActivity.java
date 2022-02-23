@@ -6,8 +6,6 @@ import android.view.MotionEvent;
 
 import androidx.annotation.Nullable;
 
-import com.example.plandial.R;
-
 public class TutorialMainActivity extends Activity {
 
     @Override

@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.example.plandial.R;
-
 import java.util.Locale;
 
 public class StatusDisplayLayout extends LinearLayout {

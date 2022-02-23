@@ -16,8 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.example.plandial.R;
-
 import java.util.ArrayList;
 
 public class SpinnableDialView extends SpinnableImageView {

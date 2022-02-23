@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plandial.R;
-
 import java.util.ArrayList;
 
 public class PresetListAdapter extends RecyclerView.Adapter<PresetListAdapter.ItemViewHolder> {

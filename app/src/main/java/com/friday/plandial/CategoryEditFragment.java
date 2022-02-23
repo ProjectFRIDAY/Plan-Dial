@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.plandial.R;
 import com.friday.plandial.db.WorkDatabase;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -63,7 +62,7 @@ public class CategoryEditFragment extends BottomSheetDialogFragment {
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().remove(CategoryEditFragment.this).commit();
                         requireActivity().recreate();
-						PlanDialWidget.Update(requireActivity()); // widget update
+                        PlanDialWidget.Update(requireActivity()); // widget update
                     })
                     .setNegativeButton("아니오", (dialogInterface, i) -> {
                     });

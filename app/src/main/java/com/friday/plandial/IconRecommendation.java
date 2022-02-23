@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.plandial.R;
 import com.opencsv.CSVReader;
 
 import org.json.JSONArray;

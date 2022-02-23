@@ -17,8 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.plandial.R;
-
 import java.util.ArrayList;
 
 public class PlusDialActivity extends AppCompatActivity implements TextView.OnEditorActionListener {

@@ -7,8 +7,6 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.plandial.R;
-
 public class TemplateChoiceActivity extends AppCompatActivity {
     private ImageButton backButton;
 

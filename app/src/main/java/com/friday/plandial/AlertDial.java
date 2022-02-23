@@ -8,8 +8,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.plandial.R;
-
 import java.time.OffsetDateTime;
 
 public class AlertDial extends Dial {

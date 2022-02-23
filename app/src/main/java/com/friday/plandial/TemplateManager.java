@@ -1,7 +1,5 @@
 package com.friday.plandial;
 
-import com.example.plandial.R;
-
 import java.util.ArrayList;
 import java.util.Collections;
 

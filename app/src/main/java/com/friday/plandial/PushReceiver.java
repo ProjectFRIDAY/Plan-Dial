@@ -13,8 +13,6 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.plandial.R;
-
 public class PushReceiver extends BroadcastReceiver {
 
     @SuppressLint("UnsafeProtectedBroadcastReceiver")

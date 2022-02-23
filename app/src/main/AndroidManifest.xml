@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.plandial">
+    package="com.friday.plandial">
 
+    <!-- Permission -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -16,53 +17,57 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanDial">
 
+        <!-- Activity -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".PlusDialActivity"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".EditDialActivity"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity android:name=".TemplateChoiceActivity" />
+
+        <activity
+            android:name=".CategoryCreateActivity"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".TutorialMainActivity"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".TutorialEditActivity"
+            android:theme="@style/Theme.Transparent" />
+
+        <!-- Receiver -->
         <receiver
-            android:name="com.friday.plandial.PlanDialWidget"
+            android:name=".PlanDialWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/plan_dial_widget_info" />
         </receiver>
 
-        <activity
-            android:name="com.friday.plandial.SplashActivity"
-            android:exported="true"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.friday.plandial.MainActivity"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.friday.plandial.PlusDialActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.friday.plandial.EditDialActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.friday.plandial.TemplateChoiceActivity" />
-        <activity
-            android:name="com.friday.plandial.CategoryCreateActivity"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.friday.plandial.TutorialMainActivity"
-            android:theme="@style/Theme.Transparent" />
-        <activity
-            android:name="com.friday.plandial.TutorialEditActivity"
-            android:theme="@style/Theme.Transparent" />
-
         <receiver
-            android:name="com.friday.plandial.PushReceiver"
+            android:name=".PushReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -71,7 +76,7 @@
         </receiver>
 
         <receiver
-            android:name="com.friday.plandial.PushReceiver$ReBootReceiver"
+            android:name=".PushReceiver$ReBootReceiver"
             android:enabled="true"
             android:exported="false"
             tools:ignore="Instantiatable">
