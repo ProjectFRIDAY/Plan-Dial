@@ -1,5 +1,6 @@
 package com.friday.plandial;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class TemplateListAdapter extends BaseAdapter {
+    private static final int ANIMATION_DURATION = 800;
     private final TemplateManager templateManager;
     private final LayoutInflater layoutInflater;
 
@@ -46,6 +48,7 @@ public class TemplateListAdapter extends BaseAdapter {
         TextView subtitle = view.findViewById(R.id.subtitle);
         RecyclerView presetList = view.findViewById(R.id.preset_list);
         Button nextButton = view.findViewById(R.id.complete_button);
+        ViewGroup container = view.findViewById(R.id.template_container);
 
         Template template = getItem(position);
         templateIcon.setImageResource(template.getIcon());
@@ -65,29 +68,39 @@ public class TemplateListAdapter extends BaseAdapter {
         PresetListAdapter presetAdapter = new PresetListAdapter(templateManager.getTemplateByIndex(position));
         presetList.setAdapter(presetAdapter);
 
-        presetList.setVisibility(View.GONE);
-        nextButton.setVisibility(View.GONE);
+        animate(container, false, false);
 
         view.setOnClickListener(view1 -> {
             // 수정 필요
             for (int i = 0; i < parent.getChildCount(); ++i) {
                 View child = parent.getChildAt(i);
-                if (child.equals(view1)) {
-                    if (presetList.getVisibility() == View.VISIBLE) {
-                        presetList.setVisibility(View.GONE);
-                        nextButton.setVisibility(View.GONE);
-                    } else {
-                        presetList.setVisibility(View.VISIBLE);
-                        nextButton.setVisibility(View.VISIBLE);
-                    }
+                ViewGroup template_container = child.findViewById(R.id.template_container);
+                boolean opened = (template_container.getHeight() > 0);
 
+                if (child.equals(view1)) {
+                    animate(container, !opened, true);
                 } else {
-                    child.findViewById(R.id.preset_list).setVisibility(View.GONE);
-                    child.findViewById(R.id.complete_button).setVisibility(View.GONE);
+                    animate(child.findViewById(R.id.template_container), false, opened);
                 }
             }
         });
 
         return view;
+    }
+
+    private void animate(ViewGroup container, boolean open, boolean animation) {
+        container.measure(0, 0);
+        int height = container.getMeasuredHeight();
+
+        ValueAnimator heightAnimation = ValueAnimator.ofInt(0, height);
+
+        heightAnimation.addUpdateListener(valueAnimator -> {
+            int val = (Integer) valueAnimator.getAnimatedValue();
+            ViewGroup.LayoutParams layoutParams = container.getLayoutParams();
+            layoutParams.height = open ? val : height - val;
+            container.setLayoutParams(layoutParams);
+        });
+        heightAnimation.setDuration(animation ? ANIMATION_DURATION : 0);
+        heightAnimation.start();
     }
 }
