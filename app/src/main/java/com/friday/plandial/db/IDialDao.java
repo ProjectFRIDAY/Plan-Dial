@@ -36,8 +36,8 @@ public interface IDialDao {
     @Query("DELETE FROM DialTable")
     void delDialAll();
 
-    // 다이얼 테이블의 다음 id값 반환
-    @Query("SELECT MAX(id) FROM DialTable")
+    // 다이얼 테이블의 마지막 id값 반환
+    @Query("SELECT COALESCE(MAX(id), 0) FROM DialTable")
     int getLastId();
 }
 
