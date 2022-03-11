@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.flarelane.FlareLane;
 import com.friday.plandial.db.WorkDatabase;
 
 // 추후 안드로이드 12에 추가된 SplashScreen API로 변경해야 함.
@@ -30,6 +31,8 @@ public class SplashActivity extends AppCompatActivity {
             TemplateManager.getInstance().resetAll();
             WorkDatabase workDatabase = WorkDatabase.getInstance();
             ready = workDatabase.ready(this);
+
+            FlareLane.initWithContext(this, "1081a92b-243c-4c3d-84dc-c5cdcd265f3c");
 
             Thread.sleep(minLoadingTime);
         } catch (InterruptedException e) {
