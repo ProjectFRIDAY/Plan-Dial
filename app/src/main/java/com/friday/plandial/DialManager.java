@@ -12,7 +12,6 @@ public class DialManager {
 
     private static final DialManager dialManager = new DialManager();
     private static final ArrayList<Category> categories = new ArrayList<>();
-    private static int dialId = -1;
 
     private DialManager() {
     }
@@ -120,8 +119,6 @@ public class DialManager {
     }
 
     public int getNextDialId() {
-        if (dialId < 0) dialId = WorkDatabase.getInstance().getNextDialId();
-        return dialId++;
-
+        return WorkDatabase.getInstance().getNextDialId();
     }
 }
