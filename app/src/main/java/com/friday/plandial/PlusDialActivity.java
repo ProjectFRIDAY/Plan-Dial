@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -84,6 +85,15 @@ public class PlusDialActivity extends AppCompatActivity implements TextView.OnEd
             completeButton.setOnClickListener(view -> dialSettingViewModel.complete());
         }
         //endregion
+
+        ScrollView scrollView = findViewById(R.id.ScrollView);
+        scrollView.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) { //뗐을 때 동작
+                handler_up.removeCallbacks(runnable_up);
+                handler_down.removeCallbacks(runnable_down);
+            }
+            return false;
+        });
 
         periodPlus.setOnLongClickListener(v -> {
             handler_up.post(runnable_up);

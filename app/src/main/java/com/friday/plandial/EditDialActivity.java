@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -135,6 +136,15 @@ public class EditDialActivity extends AppCompatActivity implements TextView.OnEd
             });
         }
 
+
+        ScrollView scrollView = findViewById(R.id.ScrollView);
+        scrollView.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) { //뗐을 때 동작
+                handler_up.removeCallbacks(runnable_up);
+                handler_down.removeCallbacks(runnable_down);
+            }
+            return false;
+        });
 
         periodPlus.setOnLongClickListener(v -> {
             handler_up.post(runnable_up);
