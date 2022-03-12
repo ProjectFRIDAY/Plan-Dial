@@ -59,122 +59,137 @@
 
             <LinearLayout
                 android:id="@+id/widget_item1_layout"
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/widget_item1_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/widget_item1_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:autoSizeMinTextSize="5sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="2"
                     android:text=""
-                    android:textColor="#000000"
-                    android:textSize="11sp" />
+                    android:textAlignment="center"
+                    android:textColor="#000000" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/widget_item2_layout"
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="1dp"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/widget_item2_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/widget_item2_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:autoSizeMinTextSize="5sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="2"
                     android:text=""
-                    android:textColor="#000000"
-                    android:textSize="11sp" />
+                    android:textAlignment="center"
+                    android:textColor="#000000" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/widget_item3_layout"
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="1dp"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/widget_item3_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/widget_item3_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:autoSizeMinTextSize="5sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="2"
                     android:text=""
-                    android:textColor="#000000"
-                    android:textSize="11sp" />
+                    android:textAlignment="center"
+                    android:textColor="#000000" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/widget_item4_layout"
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="1dp"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/widget_item4_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/widget_item4_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:autoSizeMinTextSize="5sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="2"
                     android:text=""
-                    android:textColor="#000000"
-                    android:textSize="11sp" />
+                    android:textAlignment="center"
+                    android:textColor="#000000" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/widget_item5_layout"
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="1dp"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/widget_item5_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/widget_item5_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:autoSizeMinTextSize="5sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="2"
                     android:text=""
-                    android:textColor="#000000"
-                    android:textSize="11sp" />
+                    android:textAlignment="center"
+                    android:textColor="#000000" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

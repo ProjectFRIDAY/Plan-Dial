@@ -19,7 +19,7 @@ public class PlanDialWidget extends AppWidgetProvider {
     private static final String TAG = "WIDGET";
 
     private static final int MAX_ITEM_CNT = 5;
-    private static final int WIDGET_UPDATE_INTERVAL = (int) (10 * UnitOfTime.MINUTE.getMillis()); // 단위: ms
+    private static final int WIDGET_UPDATE_INTERVAL = (int) (5 * UnitOfTime.MINUTE.getMillis()); // 단위: ms
     private static final String ITEM_SEPARATOR = ",";
     private static final String FIELD_SEPARATOR = ":";
 
@@ -35,12 +35,7 @@ public class PlanDialWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.plan_dial_widget);
 
         Intent intent = new Intent(context, SplashActivity.class);
-        PendingIntent pe;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            pe = PendingIntent.getActivity(context, PI_ID, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            pe = PendingIntent.getActivity(context, PI_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        PendingIntent pe = PendingIntent.getActivity(context, PI_ID, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.appwidget_layout, pe); // 클릭시 SplashActivity 실행
 
         int num = 1, visibleItemCnt = 0;
@@ -146,11 +141,7 @@ public class PlanDialWidget extends AppWidgetProvider {
 
     private void alarmUpdate(Context context) {
         Intent intent = getForceUpdateIntent(context);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            mPendingIntent = PendingIntent.getBroadcast(context, PI_ID, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            mPendingIntent = PendingIntent.getBroadcast(context, PI_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        mPendingIntent = PendingIntent.getBroadcast(context, PI_ID, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         mAlarmManager.setAndAllowWhileIdle(AlarmManager.RTC, System.currentTimeMillis() + WIDGET_UPDATE_INTERVAL, mPendingIntent);
     }
