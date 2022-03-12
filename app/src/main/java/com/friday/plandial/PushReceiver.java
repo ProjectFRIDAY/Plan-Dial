@@ -42,6 +42,8 @@ public class PushReceiver extends BroadcastReceiver {
 
             Notification notification = builder.build();
             manager.notify(1, notification);
+
+            PlanDialWidget.Update(context); // widget update
         }
     }
 

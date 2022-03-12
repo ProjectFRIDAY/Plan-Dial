@@ -6,6 +6,9 @@
     android:minWidth="180dp"
     android:minHeight="60dp"
     android:previewImage="@drawable/ic_logo"
+    android:previewLayout="@layout/plan_dial_widget"
     android:resizeMode="horizontal"
+    android:targetCellWidth="3"
+    android:targetCellHeight="1"
     android:updatePeriodMillis="300000"
     android:widgetCategory="home_screen" />
